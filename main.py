@@ -5,9 +5,8 @@ import os
 import json
 from typing import Optional
 from fastapi import FastAPI, HTTPException, Query, Request
-from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.responses import HTMLResponse, JSONResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
-from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 
 from app.data_service import (
@@ -30,8 +29,8 @@ app = FastAPI(
 os.makedirs("static", exist_ok=True)
 os.makedirs("templates", exist_ok=True)
 
-app.mount("/static", StaticFiles(directory="static"), name="static")
-templates = Jinja2Templates(directory="templates")
+if os.path.exists("static"):
+    app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Variable to hold public live tunnel URL if active
 PUBLIC_TUNNEL_URL: Optional[str] = None
@@ -41,17 +40,14 @@ class ChatRequest(BaseModel):
     api_key: Optional[str] = None
 
 @app.get("/", response_class=HTMLResponse)
-async def index_page(request: Request):
+async def index_page():
     """
     Serve main application web interface
     """
-    return templates.TemplateResponse(
-        "index.html",
-        {
-            "request": request,
-            "tunnel_url": PUBLIC_TUNNEL_URL or "Đang kết nối..."
-        }
-    )
+    html_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "templates", "index.html")
+    if os.path.exists(html_path):
+        return FileResponse(html_path)
+    return HTMLResponse("<h1>VN-Stock AI Pro</h1>", status_code=200)
 
 @app.get("/api/stocks")
 async def list_stocks():

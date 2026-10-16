@@ -185,15 +185,15 @@ async def stock_chat(symbol: str, req: ChatRequest):
     return {"symbol": symbol, "answer": answer}
 
 @app.get("/api/stock/{symbol}/forecast")
-async def stock_forecast(symbol: str, days: int = Query(10, ge=3, le=20)):
+async def stock_forecast(symbol: str, days: int = Query(10, ge=3, le=20), model: str = Query("ensemble")):
     """
-    Generate AI Daily Price Path Prediction (T+1 to T+10)
+    Generate AI Daily Price Path Prediction (T+1 to T+10) using Deep Learning
     """
     symbol = symbol.upper().strip()
     df = fetch_history(symbol, days=120)
     if df is None or df.empty:
         raise HTTPException(status_code=404, detail="Không có dữ liệu lịch sử")
-    forecast = predict_daily_path(df, days_ahead=days)
+    forecast = predict_daily_path(df, days_ahead=days, model_type=model)
     forecast["symbol"] = symbol
     return forecast
 

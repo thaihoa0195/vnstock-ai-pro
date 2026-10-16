@@ -1,11 +1,18 @@
 """
-AI Daily Price Path Forecasting Engine using Machine Learning & Quantitative Time-Series
+AI Daily Price Path Forecasting Engine using Deep Learning & Quantitative Time-Series
+Supported Architectures:
+- Ensemble Deep AI (Tổ hợp đa mô hình)
+- LSTM Neural Network (Long Short-Term Memory)
+- GRU Gated Network (Gated Recurrent Unit)
+- Transformer Attention (Temporal Multi-Head Attention)
 """
 import datetime
 from datetime import datetime, timedelta
 import numpy as np
 import pandas as pd
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional
+
+from app.deep_models import train_and_predict_deep_models
 
 def get_next_trading_days(start_date_str: str, n_days: int = 10) -> List[str]:
     """
@@ -24,9 +31,9 @@ def get_next_trading_days(start_date_str: str, n_days: int = 10) -> List[str]:
         d += timedelta(days=1)
     return trading_days
 
-def predict_daily_path(df: pd.DataFrame, days_ahead: int = 10) -> Dict[str, Any]:
+def predict_daily_path(df: pd.DataFrame, days_ahead: int = 10, model_type: str = "ensemble") -> Dict[str, Any]:
     """
-    Predict daily price path (T+1 to T+10) using multi-factor momentum, volatility cones, and ML drift
+    Predict daily price path (T+1 to T+10) using Deep Learning models
     """
     if df is None or len(df) < 20:
         return {"error": "Cần ít nhất 20 phiên dữ liệu để dự báo đường giá"}
@@ -39,18 +46,10 @@ def predict_daily_path(df: pd.DataFrame, days_ahead: int = 10) -> Dict[str, Any]
     # Calculate returns & volatility
     df["return"] = df["close"].pct_change()
     returns = df["return"].dropna()
-
-    # Short & medium term momentum
-    ret_5 = float((df["close"].iloc[-1] / df["close"].iloc[-5] - 1)) if len(df) >= 5 else 0.0
-    ret_20 = float((df["close"].iloc[-1] / df["close"].iloc[-20] - 1)) if len(df) >= 20 else 0.0
     daily_vol = float(returns.tail(20).std()) if len(returns) >= 20 else 0.018
-    daily_vol = max(0.008, min(daily_vol, 0.045))  # Clamp volatility
+    daily_vol = max(0.008, min(daily_vol, 0.045))
 
-    # Moving average anchors
-    sma_20 = float(df["close"].tail(20).mean())
-    sma_50 = float(df["close"].tail(50).mean()) if len(df) >= 50 else sma_20
-
-    # RSI & Momentum score
+    # RSI
     delta = df["close"].diff()
     gain = delta.clip(lower=0).ewm(com=13, adjust=False).mean()
     loss = (-delta.clip(upper=0)).ewm(com=13, adjust=False).mean()
@@ -58,20 +57,17 @@ def predict_daily_path(df: pd.DataFrame, days_ahead: int = 10) -> Dict[str, Any]
     rsi = float((100 - (100 / (1 + rs))).iloc[-1])
     rsi = 50.0 if np.isnan(rsi) else rsi
 
-    # Drift factor calculation:
-    # Combines recent momentum, RSI slope, and mean reversion towards MA20
-    drift = (ret_5 * 0.15 + ret_20 * 0.05) / 5.0
-    # Mean reversion component
-    ma_dist = (sma_20 - last_price) / last_price
-    drift += ma_dist * 0.02
+    # Run Deep Learning models suite
+    deep_results = train_and_predict_deep_models(df, days_ahead=days_ahead)
+    if not deep_results:
+        return {"error": "Không thể khởi tạo mô hình Deep Learning"}
 
-    # RSI boundary dampers
-    if rsi > 75:
-        drift -= 0.004  # Overbought pullback tendency
-    elif rsi < 28:
-        drift += 0.005  # Oversold bounce tendency
+    # Selected model
+    model_key = model_type.lower().strip()
+    if model_key not in deep_results:
+        model_key = "ensemble"
+    active_m = deep_results[model_key]
 
-    # Dampen drift per day to avoid exponential explosion
     future_dates = get_next_trading_days(last_date, n_days=days_ahead)
 
     path_base = []
@@ -79,55 +75,51 @@ def predict_daily_path(df: pd.DataFrame, days_ahead: int = 10) -> Dict[str, Any]
     path_bear = []
     daily_details = []
 
-    curr_base = last_price
-    curr_bull = last_price
-    curr_bear = last_price
+    m_base = active_m["path_base"]
+    m_bull = active_m["path_bull"]
+    m_bear = active_m["path_bear"]
+    drift = active_m["drift"]
 
-    # Monte Carlo / Path Simulation with seed tied to ticker + price
-    np.random.seed(int(last_price * 100) % 10000)
-
-    # Probability of uptrend
     win_prob = 50.0 + (drift / daily_vol) * 35.0
-    win_prob = max(25.0, min(85.0, round(win_prob, 1)))
+    win_prob = max(35.0, min(88.0, round(win_prob, 1)))
 
-    trend_forecast = "TĂNG TRƯỞNG" if drift > 0.0015 else ("ĐIỀU CHỈNH GIẢM" if drift < -0.0015 else "TÍCH LŨY ĐI NGANG")
-    trend_color = "#10b981" if drift > 0.0015 else ("#ef4444" if drift < -0.0015 else "#f59e0b")
+    trend_forecast = "TĂNG TRƯỞNG" if drift > 0.001 else ("ĐIỀU CHỈNH GIẢM" if drift < -0.001 else "TÍCH LŨY ĐI NGANG")
+    trend_color = "#10b981" if drift > 0.001 else ("#ef4444" if drift < -0.001 else "#f59e0b")
 
-    for step, f_date in enumerate(future_dates, 1):
-        decay = 1.0 / (1.0 + step * 0.06)
-        step_drift = drift * decay
-        step_vol = daily_vol * np.sqrt(step)
-
-        # Expected price paths
-        curr_base = last_price * (1.0 + step_drift * step)
-        curr_bull = last_price * (1.0 + step_drift * step + 1.645 * step_vol)
-        curr_bear = max(last_price * 0.5, last_price * (1.0 + step_drift * step - 1.645 * step_vol))
+    for step, f_date in enumerate(future_dates):
+        step_idx = step + 1
+        curr_base = m_base[step] if step < len(m_base) else last_price
+        curr_bull = m_bull[step] if step < len(m_bull) else last_price * 1.05
+        curr_bear = m_bear[step] if step < len(m_bear) else last_price * 0.95
 
         pct_change = ((curr_base - last_price) / last_price) * 100.0
 
-        path_base.append({"time": f_date, "value": round(curr_base, 2)})
-        path_bull.append({"time": f_date, "value": round(curr_bull, 2)})
-        path_bear.append({"time": f_date, "value": round(curr_bear, 2)})
+        path_base.append({"time": f_date, "value": curr_base})
+        path_bull.append({"time": f_date, "value": curr_bull})
+        path_bear.append({"time": f_date, "value": curr_bear})
 
         daily_details.append({
-            "step": f"T+{step}",
+            "step": f"T+{step_idx}",
             "date": f_date,
-            "predicted_price": round(curr_base, 2),
-            "range_min": round(curr_bear, 2),
-            "range_max": round(curr_bull, 2),
+            "predicted_price": curr_base,
+            "range_min": curr_bear,
+            "range_max": curr_bull,
             "change_pct": round(pct_change, 2),
-            "trend": "Tăng" if pct_change > 0.3 else ("Giảm" if pct_change < -0.3 else "Đi ngang"),
-            "confidence": f"{max(50, int(92 - step * 3.5))}%"
+            "trend": "Tăng" if pct_change > 0.2 else ("Giảm" if pct_change < -0.2 else "Đi ngang"),
+            "confidence": f"{max(55, int(94 - step_idx * 3.0))}%"
         })
 
     # Summary metrics
-    target_t5 = daily_details[4]["predicted_price"] if len(daily_details) >= 5 else curr_base
+    target_t5 = daily_details[4]["predicted_price"] if len(daily_details) >= 5 else path_base[-1]["value"]
     target_t10 = daily_details[-1]["predicted_price"]
     expected_gain_t5 = round(((target_t5 - last_price) / last_price) * 100, 2)
     expected_gain_t10 = round(((target_t10 - last_price) / last_price) * 100, 2)
 
-    # Narrative explanation
     commentary = generate_forecast_commentary(
+        model_name=active_m["name"],
+        model_type=active_m["type"],
+        accuracy=active_m["accuracy"],
+        loss_mse=active_m["loss_mse"],
         last_price=last_price,
         target_t5=target_t5,
         target_t10=target_t10,
@@ -139,10 +131,35 @@ def predict_daily_path(df: pd.DataFrame, days_ahead: int = 10) -> Dict[str, Any]
         daily_vol=daily_vol * 100
     )
 
+    # Format deep models for client consumption
+    formatted_models = {}
+    for k, v in deep_results.items():
+        formatted_models[k] = {
+            "name": v["name"],
+            "type": v["type"],
+            "accuracy": v["accuracy"],
+            "loss_mse": v["loss_mse"],
+            "epochs": v["epochs"],
+            "description": v["description"],
+            "path_base": [{"time": f_date, "value": v["path_base"][i]} for i, f_date in enumerate(future_dates)],
+            "path_bull": [{"time": f_date, "value": v["path_bull"][i]} for i, f_date in enumerate(future_dates)],
+            "path_bear": [{"time": f_date, "value": v["path_bear"][i]} for i, f_date in enumerate(future_dates)]
+        }
+
     return {
         "last_price": last_price,
         "last_date": last_date,
         "days_ahead": days_ahead,
+        "active_model_key": model_key,
+        "active_model": {
+            "name": active_m["name"],
+            "type": active_m["type"],
+            "accuracy": active_m["accuracy"],
+            "loss_mse": active_m["loss_mse"],
+            "epochs": active_m["epochs"],
+            "description": active_m["description"]
+        },
+        "all_models": formatted_models,
         "win_probability": win_prob,
         "trend_forecast": trend_forecast,
         "trend_color": trend_color,
@@ -158,6 +175,7 @@ def predict_daily_path(df: pd.DataFrame, days_ahead: int = 10) -> Dict[str, Any]
     }
 
 def generate_forecast_commentary(
+    model_name: str, model_type: str, accuracy: str, loss_mse: str,
     last_price: float, target_t5: float, target_t10: float,
     gain_t5: float, gain_t10: float, win_prob: float,
     trend: str, rsi: float, daily_vol: float
@@ -166,10 +184,12 @@ def generate_forecast_commentary(
     sign_t10 = f"+{gain_t10}%" if gain_t10 >= 0 else f"{gain_t10}%"
 
     return (
-        f"Mô hình AI dự báo xu hướng **{trend}** trong 10 phiên giao dịch tiếp theo với xác suất thành công xấp xỉ **{win_prob}%**.\n\n"
-        f"• **Ngắn hạn (T+1 đến T+5)**: Giá kỳ vọng dao động hướng về mốc **{target_t5:,.2f} VNĐ** ({sign_t5}). "
-        f"Biến động ngày bình quân dự kiến quanh mức ±{daily_vol:.1f}%.\n"
-        f"• **Trung hạn (T+6 đến T+10)**: Mục tiêu giá mở rộng kỳ vọng đạt **{target_t10:,.2f} VNĐ** ({sign_t10}) theo kịch bản cơ sở.\n"
-        f"• **Quản trị rủi ro**: Trong trường hợp xuất hiện biến số bất lợi (Kịch bản Tiêu cực), đường giá có thể kiểm định lại dải biên dưới. "
-        f"Nhà đầu tư nên chủ động bám sát ngưỡng cắt lỗ được thiết lập."
+        f"Mô hình Deep Learning **{model_name}** ({model_type}) đã hoàn tất huấn luyện online với hàm mất mát MSE đạt **{loss_mse}** "
+        f"và độ chính xác định hướng kiểm định đạt **{accuracy}**.\n\n"
+        f"• **Dự báo xu hướng chủ đạo**: **{trend}** trong 10 phiên tới (Xác suất thành công: **{win_prob}%**).\n"
+        f"• **Ngắn hạn T+1 đến T+5**: Đường nơ-ron học sâu dự phóng giá tiệm cận mốc **{target_t5:,.2f} VNĐ** ({sign_t5}) "
+        f"với biên độ dao động nón biến động kỳ vọng ±{daily_vol:.1f}%/ngày.\n"
+        f"• **Mục tiêu T+6 đến T+10**: Giá mục tiêu mở rộng kỳ vọng đạt **{target_t10:,.2f} VNĐ** ({sign_t10}).\n"
+        f"• **Cảnh báo rủi ro**: Nếu xuất hiện áp lực bán tháo bất ngờ, dải biên dưới (Bearish Cone) sẽ đóng vai trò hỗ trợ động. "
+        f"Nhà đầu tư nên tuân thủ kỷ luật dừng lỗ (Stop Loss) theo tỷ lệ Risk:Reward khuyến nghị."
     )

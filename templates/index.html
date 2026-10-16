@@ -452,11 +452,45 @@
           </div>
         </div>
 
-        <!-- Horizon Selector -->
-        <div class="flex items-center space-x-1.5 bg-gray-900/90 p-1 rounded-xl border border-gray-800 text-xs">
-          <button onclick="setForecastDays(5)" class="forecast-day-btn px-2.5 py-1 rounded-lg font-medium text-gray-400 hover:text-white" data-days="5">5 Phiên (T+5)</button>
-          <button onclick="setForecastDays(10)" class="forecast-day-btn px-2.5 py-1 rounded-lg font-bold bg-cyan-500 text-black shadow-md shadow-cyan-500/20" data-days="10">10 Phiên (T+10)</button>
-          <button onclick="setForecastDays(15)" class="forecast-day-btn px-2.5 py-1 rounded-lg font-medium text-gray-400 hover:text-white" data-days="15">15 Phiên (T+15)</button>
+        <!-- Control Bars (Deep Learning Model & Horizon) -->
+        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-2">
+          <!-- Deep Learning Model Architecture Selector -->
+          <div class="flex items-center space-x-1 bg-gray-900/90 p-1 rounded-xl border border-gray-800 text-xs">
+            <button onclick="setDeepModel('ensemble')" id="btn-model-ensemble" class="model-select-btn px-2.5 py-1 rounded-lg font-bold bg-cyan-500 text-black shadow-md shadow-cyan-500/20 flex items-center space-x-1" data-model="ensemble">
+              <span>🧠 Ensemble AI</span>
+            </button>
+            <button onclick="setDeepModel('lstm')" id="btn-model-lstm" class="model-select-btn px-2.5 py-1 rounded-lg font-medium text-gray-400 hover:text-white flex items-center space-x-1" data-model="lstm">
+              <span>⚡ LSTM</span>
+            </button>
+            <button onclick="setDeepModel('gru')" id="btn-model-gru" class="model-select-btn px-2.5 py-1 rounded-lg font-medium text-gray-400 hover:text-white flex items-center space-x-1" data-model="gru">
+              <span>🔄 GRU</span>
+            </button>
+            <button onclick="setDeepModel('transformer')" id="btn-model-transformer" class="model-select-btn px-2.5 py-1 rounded-lg font-medium text-gray-400 hover:text-white flex items-center space-x-1" data-model="transformer">
+              <span>🎯 Attention</span>
+            </button>
+          </div>
+
+          <!-- Horizon Selector -->
+          <div class="flex items-center space-x-1 bg-gray-900/90 p-1 rounded-xl border border-gray-800 text-xs">
+            <button onclick="setForecastDays(5)" class="forecast-day-btn px-2.5 py-1 rounded-lg font-medium text-gray-400 hover:text-white" data-days="5">T+5</button>
+            <button onclick="setForecastDays(10)" class="forecast-day-btn px-2.5 py-1 rounded-lg font-bold bg-cyan-500 text-black shadow-md shadow-cyan-500/20" data-days="10">T+10</button>
+            <button onclick="setForecastDays(15)" class="forecast-day-btn px-2.5 py-1 rounded-lg font-medium text-gray-400 hover:text-white" data-days="15">T+15</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Deep Learning Architecture Specifications Bar -->
+      <div id="deep-model-spec-bar" class="bg-gray-900/70 border border-cyan-500/20 rounded-xl px-4 py-2 flex flex-wrap items-center justify-between gap-2 text-xs">
+        <div class="flex items-center space-x-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span class="text-gray-400 font-medium">Mô hình:</span>
+          <span id="model-spec-name" class="font-bold text-cyan-300">Ensemble Deep AI</span>
+          <span id="model-spec-type" class="text-[11px] text-gray-400 hidden md:inline">(Tổ Hợp Đa Mô Hình LSTM + GRU + Attention)</span>
+        </div>
+        <div class="flex items-center space-x-4 text-[11px]">
+          <div><span class="text-gray-500">Độ chính xác: </span><span id="model-spec-acc" class="font-bold text-emerald-400 mono">88.5%</span></div>
+          <div><span class="text-gray-500">Loss (MSE): </span><span id="model-spec-loss" class="font-bold text-amber-400 mono">0.00034</span></div>
+          <div><span class="text-gray-500">Huấn luyện: </span><span id="model-spec-epochs" class="font-bold text-gray-300 mono">50 Epochs (Online)</span></div>
         </div>
       </div>
 
@@ -1147,10 +1181,12 @@
       }
     }
 
-    // 9. AI Daily Price Path Forecasting Functions
-    async function loadForecast(symbol, days) {
+    // 9. AI Deep Learning Daily Price Path Forecasting Functions
+    let currentDeepModel = 'ensemble';
+
+    async function loadForecast(symbol, days, model = currentDeepModel) {
       try {
-        const res = await fetch(`/api/stock/${symbol}/forecast?days=${days}`);
+        const res = await fetch(`/api/stock/${symbol}/forecast?days=${days}&model=${model}`);
         const data = await res.json();
         currentForecastData = data;
         renderForecastUI(data);
@@ -1159,8 +1195,29 @@
       }
     }
 
+    function setDeepModel(modelKey) {
+      currentDeepModel = modelKey;
+      document.querySelectorAll('.model-select-btn').forEach(btn => {
+        if (btn.dataset.model === modelKey) {
+          btn.className = 'model-select-btn px-2.5 py-1 rounded-lg font-bold bg-cyan-500 text-black shadow-md shadow-cyan-500/20 flex items-center space-x-1';
+        } else {
+          btn.className = 'model-select-btn px-2.5 py-1 rounded-lg font-medium text-gray-400 hover:text-white flex items-center space-x-1';
+        }
+      });
+      loadForecast(currentSymbol, forecastDays, modelKey);
+    }
+
     function renderForecastUI(data) {
       if (!data || !data.daily_details) return;
+
+      // Update Deep Learning Architecture Specs Bar
+      if (data.active_model) {
+        document.getElementById('model-spec-name').innerText = data.active_model.name;
+        document.getElementById('model-spec-type').innerText = `(${data.active_model.type})`;
+        document.getElementById('model-spec-acc').innerText = data.active_model.accuracy;
+        document.getElementById('model-spec-loss').innerText = data.active_model.loss_mse;
+        document.getElementById('model-spec-epochs').innerText = data.active_model.epochs;
+      }
 
       // Update projected lines on chart
       if (data.path_base && forecastBaseSeries) forecastBaseSeries.setData(data.path_base);
@@ -1226,7 +1283,7 @@
           btn.className = 'forecast-day-btn px-2.5 py-1 rounded-lg font-medium text-gray-400 hover:text-white';
         }
       });
-      loadForecast(currentSymbol, days);
+      loadForecast(currentSymbol, days, currentDeepModel);
     }
 
     // 9. Interactive AI Chatbot Logic

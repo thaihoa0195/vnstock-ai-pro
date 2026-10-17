@@ -5,6 +5,12 @@ import numpy as np
 import pandas as pd
 from typing import Dict, Any, List, Optional
 
+from app.elliott_ichimoku import (
+    compute_ichimoku_kinko_hyo,
+    compute_elliott_wave_and_fibonacci,
+    generate_multi_timeframe_investment_strategy
+)
+
 def compute_indicators(df: pd.DataFrame) -> pd.DataFrame:
     """
     Compute technical indicators on OHLCV DataFrame
@@ -59,6 +65,20 @@ def compute_indicators(df: pd.DataFrame) -> pd.DataFrame:
     # 6. Volume MA
     df["vol_sma_20"] = df["volume"].rolling(window=20).mean()
     df["vol_ratio"] = df["volume"] / df["vol_sma_20"].replace(0, np.nan)
+
+    # 7. Ichimoku Kinko Hyo (Mây Mochi / Ichimoku)
+    p9_high = df["high"].rolling(9).max()
+    p9_low = df["low"].rolling(9).min()
+    df["tenkan_sen"] = (p9_high + p9_low) / 2.0
+
+    p26_high = df["high"].rolling(26).max()
+    p26_low = df["low"].rolling(26).min()
+    df["kijun_sen"] = (p26_high + p26_low) / 2.0
+
+    df["senkou_span_a"] = (df["tenkan_sen"] + df["kijun_sen"]) / 2.0
+    p52_high = df["high"].rolling(52).max()
+    p52_low = df["low"].rolling(52).min()
+    df["senkou_span_b"] = (p52_high + p52_low) / 2.0
 
     return df
 
@@ -297,13 +317,32 @@ def calculate_ai_analysis(df: pd.DataFrame, symbol: str) -> Dict[str, Any]:
     entry_zone = f"{round(max(s1, c * 0.98), 2):,} - {round(c, 2):,}"
     rr_ratio = round((tp1 - c) / risk, 1) if risk > 0 else 1.5
 
-    # Generate Vietnamese AI Comprehensive Report
+    change_pct = round(((c - prev["close"]) / prev["close"]) * 100, 2) if prev["close"] else 0.0
+
+    # 7. Ichimoku & Elliott Wave Analysis
+    ichimoku = compute_ichimoku_kinko_hyo(df)
+    elliott = compute_elliott_wave_and_fibonacci(df)
+    strategy = generate_multi_timeframe_investment_strategy(symbol, c, ichimoku, elliott)
+
+    # Append Ichimoku & Elliott to signals
+    if ichimoku:
+        signals_list.append({
+            "type": "BULLISH" if ichimoku.get("cloud_status") == "BULLISH" else ("BEARISH" if ichimoku.get("cloud_status") == "BEARISH" else "NEUTRAL"),
+            "text": f"Mây Ichimoku: {ichimoku.get('cloud_position', '')} - {ichimoku.get('tk_signal', '')}"
+        })
+    if elliott:
+        signals_list.append({
+            "type": "BULLISH",
+            "text": f"Sóng Elliott: {elliott.get('current_wave', '')} (Mục tiêu sóng: {elliott.get('next_wave_target', c):,.2f} VNĐ)"
+        })
+
+    # AI Report Generation
     report = generate_vietnamese_ai_report(
         symbol=symbol,
         score=final_score,
         rating=rating,
         price=c,
-        change_pct=round(((c - prev["close"]) / prev["close"]) * 100, 2) if prev["close"] else 0.0,
+        change_pct=change_pct,
         rsi=rsi,
         macd=macd,
         macd_signal=macd_signal,
@@ -318,7 +357,10 @@ def calculate_ai_analysis(df: pd.DataFrame, symbol: str) -> Dict[str, Any]:
         tp1=tp1,
         tp2=tp2,
         patterns=candlestick_patterns,
-        action=action
+        action=action,
+        ichimoku=ichimoku,
+        elliott=elliott,
+        strategy=strategy
     )
 
     return {
@@ -364,6 +406,9 @@ def calculate_ai_analysis(df: pd.DataFrame, symbol: str) -> Dict[str, Any]:
             "fib_500": round(fib_500, 2),
             "fib_618": round(fib_618, 2)
         },
+        "ichimoku": ichimoku,
+        "elliott_wave": elliott,
+        "investment_strategy": strategy,
         "patterns": candlestick_patterns,
         "signals": signals_list,
         "ai_report": report
@@ -374,7 +419,10 @@ def generate_vietnamese_ai_report(
     rsi: float, macd: float, macd_signal: float, sma_20: float, sma_50: float,
     vol_ratio: float, swing_high: float, swing_low: float,
     s1: float, r1: float, stop_loss: float, tp1: float, tp2: float,
-    patterns: List[Dict[str, str]], action: str
+    patterns: List[Dict[str, str]], action: str,
+    ichimoku: Optional[Dict[str, Any]] = None,
+    elliott: Optional[Dict[str, Any]] = None,
+    strategy: Optional[Dict[str, Any]] = None
 ) -> str:
     """
     Produce structured, in-depth analytical report in Vietnamese
@@ -400,16 +448,41 @@ def generate_vietnamese_ai_report(
         f"- **Chỉ báo RSI (14)**: Đạt mức `{rsi:.1f}`. {'Cảnh báo quá mua, áp lực rung lắc cao.' if rsi > 70 else ('Vùng quá bán, mở ra xác suất phục hồi kỹ thuật.' if rsi < 30 else 'Động lượng nằm trong khoảng ổn định, phe mua và bán đang tìm điểm cân bằng.')}",
         f"- **Chỉ báo MACD**: Đường MACD (`{macd:.2f}`) đang {'NẰM TRÊN' if macd > macd_signal else 'NẰM DƯỚI'} đường Signal (`{macd_signal:.2f}`). {'Xung lực tăng đang có ưu thế.' if macd > macd_signal else 'Áp lực điều chỉnh ngắn hạn vẫn còn.'}",
         f"- **Động thái Dòng tiền**: {money_flow} (Tỷ lệ khối lượng so với TB 20 phiên: `{vol_ratio:.2f}x`).\n",
-        "#### 3. Các Vùng Giá Trọng Yếu & Kịch bản Giao dịch",
-        f"- **Vùng Hỗ trợ gần nhất (S1)**: `{s1:,.2f}` | **Hỗ trợ cứng**: `{swing_low:,.2f}`",
-        f"- **Vùng Kháng cự gần nhất (R1)**: `{r1:,.2f}` | **Đỉnh cũ mục tiêu**: `{swing_high:,.2f}`",
-        f"- **Kịch bản Tích cực (Bull Case)**: Nếu {symbol} giữ vững trên vùng `{s1:,.2f}` và bứt phá kháng cự `{r1:,.2f}`, giá hướng tới mục tiêu chốt lời 1 (TP1) tại `{tp1:,.2f}` và xa hơn là `{tp2:,.2f}`.",
-        f"- **Kịch bản Tiêu cực (Bear Case)**: Trong trường hợp áp lực bán tăng đột biến thủng mốc hỗ trợ then chốt `{stop_loss:,.2f}`, nhà đầu tư nên kích hoạt quản trị rủi ro cắt lỗ triệt để.\n",
-        "#### 4. Chiến lược Hành động Khuyến nghị",
-        f"- **Hành động đề xuất**: **{action}**.",
-        f"- **Vùng mua tối ưu**: Quanh `{max(s1, price * 0.98):,.2f}` - `{price:,.2f}`",
-        f"- **Mục tiêu chốt lời (TP1 / TP2)**: `{tp1:,.2f}` / `{tp2:,.2f}`",
-        f"- **Điểm dừng lỗ (Stop Loss)**: `{stop_loss:,.2f}`"
     ]
+
+    if ichimoku and elliott:
+        report_lines.extend([
+            "#### 3. Phân Tích Sóng Elliott & Mây Ichimoku Kinko Hyo (Mây Mochi)",
+            f"- **Vị thế Sóng Elliott**: **{elliott.get('current_wave', 'N/A')}**.",
+            f"  - *Nhận định cấu trúc sóng*: {elliott.get('wave_description', '')}",
+            f"  - *Mục tiêu sóng tiếp theo*: `{elliott.get('next_wave_target', price):,.2f} VNĐ` | *Hỗ trợ then chốt sóng*: `{elliott.get('key_wave_support', swing_low):,.2f} VNĐ`.",
+            f"  - *Các mốc Fibonacci mở rộng*: Fibo 1.272: `{elliott.get('fib_ext_127', 0):,.2f}` | Fibo 1.618: `{elliott.get('fib_ext_161', 0):,.2f}` | Fibo 2.618: `{elliott.get('fib_ext_261', 0):,.2f}`.",
+            f"- **Trạng thái Mây Ichimoku**: **{ichimoku.get('cloud_position', 'N/A')}** ({ichimoku.get('cloud_color', '')}).",
+            f"  - *Tín hiệu Tenkan/Kijun*: **{ichimoku.get('tk_signal', '')}** (Tenkan: `{ichimoku.get('tenkan_sen', 0):,.2f}` | Kijun: `{ichimoku.get('kijun_sen', 0):,.2f}`).",
+            f"  - *Biên độ dải mây Kumo*: Dải trên `{ichimoku.get('cloud_top', 0):,.2f}` | Dải dưới `{ichimoku.get('cloud_bottom', 0):,.2f}` (Độ dày mây: `{ichimoku.get('cloud_thickness_pct', 0)}%`).",
+            f"  - *Đánh giá Kumo*: {ichimoku.get('cloud_description', '')}\n"
+        ])
+
+    if strategy:
+        w = strategy.get("weekly", {})
+        m = strategy.get("monthly", {})
+        y = strategy.get("yearly", {})
+        report_lines.extend([
+            "#### 4. Chiến Lược Đầu Tư Đa Khung Thời Gian (Tuần - Tháng - Năm)",
+            f"- 🗓️ **THEO TUẦN (1 - 4 Tuần)**: Mục tiêu `{w.get('target_price', 0):,.2f} VNĐ` (+{w.get('upside_pct', 0)}%) | Dừng lỗ: `{w.get('stop_loss', 0):,.2f}` | R:R `{w.get('risk_reward', '')}`.",
+            f"  - *Chiến thuật*: {w.get('catalyst', '')}",
+            f"- 📅 **THEO THÁNG (1 - 6 Tháng)**: Mục tiêu `{m.get('target_price', 0):,.2f} VNĐ` (+{m.get('upside_pct', 0)}%) | Dừng lỗ: `{m.get('stop_loss', 0):,.2f}` | R:R `{m.get('risk_reward', '')}`.",
+            f"  - *Chiến thuật*: {m.get('catalyst', '')}",
+            f"- 📈 **THEO NĂM (1 - 3 Năm)**: Mục tiêu `{y.get('target_price', 0):,.2f} VNĐ` (+{y.get('upside_pct', 0)}%) | Tỷ lệ R:R `{y.get('risk_reward', '')}`.",
+            f"  - *Chiến lược*: {y.get('catalyst', '')}\n"
+        ])
+
+    report_lines.extend([
+        "#### 5. Khuyến Nghị Hành Động Tổng Thể",
+        f"- **Hành động đề xuất**: **{action}**.",
+        f"- **Vùng gom mua tối ưu**: Quanh `{max(s1, price * 0.98):,.2f}` - `{price:,.2f} VNĐ`",
+        f"- **Mục tiêu chốt lời (TP1 / TP2)**: `{tp1:,.2f}` / `{tp2:,.2f} VNĐ`",
+        f"- **Điểm dừng lỗ (Stop Loss)**: `{stop_loss:,.2f} VNĐ`"
+    ])
 
     return "\n".join(report_lines)

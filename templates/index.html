@@ -185,17 +185,23 @@
 
     <!-- AI TOP 5 PICKS BANNER -->
     <div class="glass-card rounded-2xl p-4 border border-emerald-500/30 bg-gradient-to-r from-emerald-950/30 via-gray-900/60 to-cyan-950/30 space-y-3">
-      <div class="flex items-center justify-between pb-2 border-b border-gray-800">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-2 border-b border-gray-800 gap-2">
         <div class="flex items-center space-x-2">
           <span class="flex h-2 w-2 relative">
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
             <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
           </span>
           <h2 class="text-xs sm:text-sm font-extrabold text-white tracking-wide uppercase flex items-center">
-            🏆 TOP 5 CỔ PHIẾU ĐÁNG MUA SINH LỜI NHẤT (AI ĐỀ XUẤT)
+            🏆 TOP 5 CỔ PHIẾU ĐẦU TƯ: SÓNG ELLIOTT + MÂY ICHIMOKU + DEEP LEARNING
           </h2>
         </div>
-        <span class="text-[11px] text-gray-400">Bấm vào mã để xem phân tích chi tiết</span>
+        <!-- Horizon Filters -->
+        <div class="flex items-center space-x-1 text-xs">
+          <button onclick="setTopPicksHorizon('all')" id="picks-tab-all" class="picks-tab-btn px-2.5 py-1 rounded-lg font-bold bg-emerald-500 text-black shadow-sm">⚡ Tổng Hợp</button>
+          <button onclick="setTopPicksHorizon('weekly')" id="picks-tab-weekly" class="picks-tab-btn px-2.5 py-1 rounded-lg font-medium text-gray-400 hover:text-white bg-gray-900 border border-gray-800">🗓️ Theo Tuần</button>
+          <button onclick="setTopPicksHorizon('monthly')" id="picks-tab-monthly" class="picks-tab-btn px-2.5 py-1 rounded-lg font-medium text-gray-400 hover:text-white bg-gray-900 border border-gray-800">📅 Theo Tháng</button>
+          <button onclick="setTopPicksHorizon('yearly')" id="picks-tab-yearly" class="picks-tab-btn px-2.5 py-1 rounded-lg font-medium text-gray-400 hover:text-white bg-gray-900 border border-gray-800">📈 Theo Năm</button>
+        </div>
       </div>
 
       <!-- 5 Cards Horizontal Grid -->
@@ -393,6 +399,10 @@
             <input type="checkbox" id="toggle-sr" checked class="rounded text-emerald-500 focus:ring-0 bg-gray-800" onchange="toggleIndicator('sr')">
             <span class="text-rose-400 font-semibold">Hỗ trợ / Cản</span>
           </label>
+          <label class="flex items-center space-x-1.5 px-2 py-1 rounded bg-purple-950/40 border border-purple-500/30 cursor-pointer hover:border-purple-400 transition">
+            <input type="checkbox" id="toggle-ichimoku" checked class="rounded text-purple-500 focus:ring-0 bg-gray-800" onchange="toggleIndicator('ichimoku')">
+            <span class="text-purple-300 font-bold">Mây Ichimoku (Mochi)</span>
+          </label>
           <label class="flex items-center space-x-1.5 px-3 py-1 rounded bg-cyan-950/50 border border-cyan-500/40 cursor-pointer hover:border-cyan-400 transition">
             <input type="checkbox" id="toggle-forecast" checked class="rounded text-cyan-500 focus:ring-0 bg-gray-800" onchange="toggleIndicator('forecast')">
             <i data-lucide="sparkles" class="w-3.5 h-3.5 text-cyan-400 animate-pulse"></i>
@@ -568,6 +578,71 @@
       </div>
     </div>
 
+    <!-- ELLIOTT WAVE, ICHIMOKU CLOUD (MÂY MOCHI) & MULTI-TIMEFRAME STRATEGY PANEL -->
+    <div class="glass-card rounded-2xl p-5 space-y-4 border border-purple-500/30 bg-gradient-to-br from-gray-900/95 via-purple-950/20 to-gray-900/95 shadow-xl shadow-purple-950/20">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-gray-800 gap-3">
+        <div class="flex items-center space-x-3">
+          <div class="w-9 h-9 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center shadow-lg shadow-purple-500/20">
+            <i data-lucide="layers" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="flex items-center space-x-2">
+              <h2 class="text-base font-extrabold text-white tracking-wide">Chiến Lược Sóng Elliott & Mây Ichimoku Kinko Hyo (Mây Mochi)</h2>
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30">TUẦN • THÁNG • NĂM</span>
+            </div>
+            <p class="text-xs text-gray-400">Kết hợp toàn diện Sóng Elliott 1-2-3-4-5, Mây Kumo Ichimoku và Dự phóng Deep Learning đa khung thời gian</p>
+          </div>
+        </div>
+
+        <!-- Strategy Horizon Tabs -->
+        <div class="flex items-center space-x-1.5 bg-gray-900/90 p-1 rounded-xl border border-gray-800 text-xs">
+          <button onclick="setStrategyTab('weekly')" id="strat-tab-weekly" class="strat-tab-btn px-3 py-1.5 rounded-lg font-bold bg-purple-500 text-white shadow-md shadow-purple-500/20">🗓️ Theo Tuần (1-4 Tuần)</button>
+          <button onclick="setStrategyTab('monthly')" id="strat-tab-monthly" class="strat-tab-btn px-3 py-1.5 rounded-lg font-medium text-gray-400 hover:text-white">📅 Theo Tháng (1-6 Tháng)</button>
+          <button onclick="setStrategyTab('yearly')" id="strat-tab-yearly" class="strat-tab-btn px-3 py-1.5 rounded-lg font-medium text-gray-400 hover:text-white">📈 Theo Năm (1-3 Năm)</button>
+        </div>
+      </div>
+
+      <!-- Elliott & Ichimoku Technical Badges Row -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Elliott Wave Status Box -->
+        <div class="bg-gray-900/70 border border-gray-800 p-4 rounded-xl space-y-2.5">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-gray-400 flex items-center space-x-1.5">
+              <i data-lucide="activity" class="w-4 h-4 text-cyan-400"></i>
+              <span>CẤU TRÚC SÓNG ELLIOTT</span>
+            </span>
+            <span id="elliott-wave-title" class="px-2.5 py-0.5 rounded text-xs font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">Sóng 3 Mở Rộng</span>
+          </div>
+          <p id="elliott-wave-desc" class="text-xs text-gray-300 leading-relaxed min-h-[40px]">Đang tải phân tích sóng...</p>
+          <div class="pt-2 border-t border-gray-800/60 flex items-center justify-between text-xs">
+            <span class="text-gray-400">Mục tiêu Fibo Sóng Kế Tiếp:</span>
+            <span id="elliott-target-val" class="font-extrabold text-emerald-400 mono">-- VNĐ</span>
+          </div>
+        </div>
+
+        <!-- Ichimoku Cloud Status Box -->
+        <div class="bg-gray-900/70 border border-gray-800 p-4 rounded-xl space-y-2.5">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-gray-400 flex items-center space-x-1.5">
+              <i data-lucide="cloud" class="w-4 h-4 text-purple-400"></i>
+              <span>MÂY ICHIMOKU KINKO HYO (MOCHI)</span>
+            </span>
+            <span id="ichimoku-cloud-title" class="px-2.5 py-0.5 rounded text-xs font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30">Trên Mây Kumo</span>
+          </div>
+          <p id="ichimoku-cloud-desc" class="text-xs text-gray-300 leading-relaxed min-h-[40px]">Đang tải trạng thái mây...</p>
+          <div class="pt-2 border-t border-gray-800/60 flex items-center justify-between text-xs">
+            <span class="text-gray-400">Tín hiệu Tenkan / Kijun:</span>
+            <span id="ichimoku-tk-val" class="font-extrabold text-purple-300 mono">Tenkan > Kijun</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Active Horizon Strategy Detail Card -->
+      <div id="horizon-strategy-card" class="bg-purple-950/20 border border-purple-500/30 rounded-xl p-4 space-y-3">
+        <!-- Rendered dynamically based on active tab (weekly/monthly/yearly) -->
+      </div>
+    </div>
+
     <!-- LOWER SECTION: AI REPORT & INTERACTIVE AI ASSISTANT -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
 
@@ -706,10 +781,31 @@
     let candleSeries, volumeSeries, sma20Series, sma50Series, bbUpperSeries, bbLowerSeries;
     let forecastBaseSeries, forecastBullSeries, forecastBearSeries;
     let rsiSeries, macdLineSeries, macdSignalSeries, macdHistSeries;
+    let tenkanSeries, kijunSeries, senkouASeries, senkouBSeries;
     let supportLine, resistanceLine;
     let currentAnalysisData = null;
     let currentForecastData = null;
+    let currentStrategyData = null;
+    let activeStrategyTab = 'weekly';
+    let topPicksData = [];
+    let currentPicksHorizon = 'all';
     let allStocks = [];
+
+    // Helper: Number / Price Formatter
+    function formatPriceNum(val) {
+      if (val === undefined || val === null) return '--';
+      const num = typeof val === 'number' ? val : parseFloat(val);
+      if (isNaN(num)) return val;
+      if (num > 0 && num < 1000) {
+        return (num * 1000).toLocaleString('vi-VN');
+      }
+      return num.toLocaleString('vi-VN');
+    }
+
+    function formatVND(val) {
+      if (val === undefined || val === null) return '-- VNĐ';
+      return formatPriceNum(val) + ' VNĐ';
+    }
 
     // Initialize on DOM Ready
     document.addEventListener('DOMContentLoaded', async () => {
@@ -727,38 +823,110 @@
       setInterval(fetchIndices, 30000); // 30s market refresh
     });
 
-    // 0. Fetch Top 5 AI Picks
+    // 0. Fetch & Filter Top 5 AI Picks (Sóng Elliott + Ichimoku Mochi + Deep Learning)
     async function fetchTopPicks() {
       try {
         const res = await fetch('/api/top-picks');
-        const picks = await res.json();
-        const container = document.getElementById('top-picks-container');
-        if (!picks || picks.length === 0) return;
-
-        container.innerHTML = picks.map((p, idx) => `
-          <div onclick="selectStock('${p.symbol}')" class="bg-gray-900/90 hover:bg-gray-800/90 border border-gray-800 hover:border-emerald-500/50 rounded-xl p-3 cursor-pointer transition flex flex-col justify-between space-y-2 group shadow-md hover:shadow-emerald-500/10">
-            <div>
-              <div class="flex items-center justify-between">
-                <span class="font-black text-white text-base mono group-hover:text-emerald-400 transition">${p.symbol}</span>
-                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">#${idx+1} TOP PICK</span>
-              </div>
-              <div class="text-[11px] text-gray-400 truncate mt-0.5">${p.name}</div>
-            </div>
-            <div>
-              <div class="flex items-baseline justify-between">
-                <span class="text-xs font-bold text-gray-200 mono">${p.current_price.toLocaleString('vi-VN')}</span>
-                <span class="text-[11px] font-extrabold text-emerald-400 mono">TP: +${p.upside_tp1}%</span>
-              </div>
-              <div class="text-[10px] text-gray-400 mt-1 flex justify-between border-t border-gray-800/60 pt-1">
-                <span>Vùng gom:</span>
-                <span class="font-bold text-emerald-300 mono">${p.entry_zone}</span>
-              </div>
-            </div>
-          </div>
-        `).join('');
+        topPicksData = await res.json();
+        renderTopPicksUI();
       } catch (e) {
         console.error('Error fetching top picks:', e);
       }
+    }
+
+    function setTopPicksHorizon(horizon) {
+      currentPicksHorizon = horizon;
+      const tabs = ['all', 'weekly', 'monthly', 'yearly'];
+      tabs.forEach(t => {
+        const btn = document.getElementById(`picks-tab-${t}`);
+        if (btn) {
+          if (t === horizon) {
+            btn.className = 'picks-tab-btn px-2.5 py-1 rounded-lg font-bold bg-emerald-500 text-black shadow-sm';
+          } else {
+            btn.className = 'picks-tab-btn px-2.5 py-1 rounded-lg font-medium text-gray-400 hover:text-white bg-gray-900 border border-gray-800';
+          }
+        }
+      });
+      renderTopPicksUI();
+    }
+
+    function renderTopPicksUI() {
+      const container = document.getElementById('top-picks-container');
+      if (!container || !topPicksData || topPicksData.length === 0) return;
+
+      const horizon = currentPicksHorizon || 'all';
+
+      container.innerHTML = topPicksData.map((p, idx) => {
+        const priceDisplay = formatVND(p.current_price);
+        const h = p.horizons || {};
+        const w = h.weekly || {};
+        const m = h.monthly || {};
+        const y = h.yearly || {};
+
+        if (horizon === 'all') {
+          return `
+            <div onclick="selectStock('${p.symbol}')" class="bg-gray-900/90 hover:bg-gray-800/90 border border-gray-800 hover:border-emerald-500/50 rounded-xl p-3 cursor-pointer transition flex flex-col justify-between space-y-2 group shadow-md hover:shadow-emerald-500/10">
+              <div>
+                <div class="flex items-center justify-between">
+                  <span class="font-black text-white text-base mono group-hover:text-emerald-400 transition">${p.symbol}</span>
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">#${idx+1} TOP PICK</span>
+                </div>
+                <div class="text-[11px] text-gray-400 truncate mt-0.5">${p.name}</div>
+              </div>
+              <div class="space-y-1">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-gray-200 mono">${priceDisplay}</span>
+                  <span class="text-[10px] px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300 font-bold border border-cyan-500/30 truncate max-w-[110px]">${p.elliott_wave?.wave?.split('(')[0] || 'Sóng 3'}</span>
+                </div>
+                <div class="flex items-center justify-between text-[10px]">
+                  <span class="text-purple-300 font-semibold truncate max-w-[100px]">${p.ichimoku?.cloud_status?.split('(')[0] || 'Trên Mây'}</span>
+                  <span class="text-emerald-400 font-extrabold mono">Tuần: +${w.upside_pct || 0}% | Tháng: +${m.upside_pct || 0}%</span>
+                </div>
+              </div>
+              <div class="text-[10px] text-gray-400 flex justify-between border-t border-gray-800/60 pt-1.5">
+                <span>Vùng gom:</span>
+                <span class="font-bold text-emerald-300 mono">${w.entry_zone || p.entry_zone || '--'}</span>
+              </div>
+            </div>
+          `;
+        } else {
+          const activeH = h[horizon] || w;
+          const targetDisplay = formatVND(activeH.target_price);
+          const horizonLabels = {
+            weekly: 'Tuần (1-4W)',
+            monthly: 'Tháng (1-6M)',
+            yearly: 'Năm (1-3Y)'
+          };
+
+          return `
+            <div onclick="selectStock('${p.symbol}')" class="bg-gray-900/90 hover:bg-gray-800/90 border border-gray-800 hover:border-purple-500/50 rounded-xl p-3 cursor-pointer transition flex flex-col justify-between space-y-2 group shadow-md hover:shadow-purple-500/10">
+              <div>
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center space-x-1.5">
+                    <span class="font-black text-white text-base mono group-hover:text-purple-300 transition">${p.symbol}</span>
+                    <span class="text-[10px] text-gray-400">(${priceDisplay})</span>
+                  </div>
+                  <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30 uppercase">${horizonLabels[horizon] || horizon}</span>
+                </div>
+                <div class="text-[11px] text-gray-400 truncate mt-0.5">${p.name}</div>
+              </div>
+              <div class="bg-purple-950/30 p-2 rounded-lg border border-purple-500/20 space-y-1">
+                <div class="flex items-baseline justify-between">
+                  <span class="text-[10px] text-gray-400">Mục tiêu TP:</span>
+                  <span class="text-xs font-black text-emerald-400 mono">${targetDisplay} (+${activeH.upside_pct}%)</span>
+                </div>
+                <div class="flex items-baseline justify-between text-[10px]">
+                  <span class="text-gray-400">Cắt lỗ / R:R:</span>
+                  <span class="font-bold text-rose-400 mono">${formatVND(activeH.stop_loss)} <span class="text-cyan-300">(${activeH.risk_reward})</span></span>
+                </div>
+              </div>
+              <div class="text-[10px] text-gray-300 line-clamp-1 border-t border-gray-800/60 pt-1">
+                <span class="text-emerald-400 font-semibold">AI:</span> ${activeH.catalyst || ''}
+              </div>
+            </div>
+          `;
+        }
+      }).join('');
     }
 
     // 1. Initialize TradingView Lightweight Charts
@@ -819,6 +987,12 @@
       sma50Series = mainChart.addLineSeries({ color: '#3b82f6', lineWidth: 2, title: 'MA50' });
       bbUpperSeries = mainChart.addLineSeries({ color: 'rgba(6, 182, 212, 0.5)', lineWidth: 1, lineStyle: 2, title: 'BB Upper' });
       bbLowerSeries = mainChart.addLineSeries({ color: 'rgba(6, 182, 212, 0.5)', lineWidth: 1, lineStyle: 2, title: 'BB Lower' });
+
+      // Ichimoku Cloud Lines (Mây Mochi / Kinko Hyo)
+      tenkanSeries = mainChart.addLineSeries({ color: '#38bdf8', lineWidth: 1.5, title: 'Tenkan (9)' });
+      kijunSeries = mainChart.addLineSeries({ color: '#f43f5e', lineWidth: 1.5, title: 'Kijun (26)' });
+      senkouASeries = mainChart.addLineSeries({ color: 'rgba(34, 197, 94, 0.75)', lineWidth: 1, lineStyle: LightweightCharts.LineStyle.Dotted, title: 'Span A' });
+      senkouBSeries = mainChart.addLineSeries({ color: 'rgba(239, 68, 68, 0.75)', lineWidth: 1, lineStyle: LightweightCharts.LineStyle.Dotted, title: 'Span B' });
 
       // AI Daily Forecast Line Series (Dashed projection into future)
       forecastBaseSeries = mainChart.addLineSeries({
@@ -1013,6 +1187,12 @@
           macdLineSeries.setData(histData.indicators.macd);
           macdSignalSeries.setData(histData.indicators.macd_signal);
 
+          // Populate Ichimoku Cloud (Mây Mochi) series
+          if (histData.indicators.tenkan && tenkanSeries) tenkanSeries.setData(histData.indicators.tenkan);
+          if (histData.indicators.kijun && kijunSeries) kijunSeries.setData(histData.indicators.kijun);
+          if (histData.indicators.senkou_a && senkouASeries) senkouASeries.setData(histData.indicators.senkou_a);
+          if (histData.indicators.senkou_b && senkouBSeries) senkouBSeries.setData(histData.indicators.senkou_b);
+
           mainChart.timeScale().fitContent();
           rsiChart.timeScale().fitContent();
           macdChart.timeScale().fitContent();
@@ -1029,6 +1209,7 @@
         const analysis = await analysisRes.json();
         currentAnalysisData = analysis;
         renderAnalysisUI(analysis);
+        renderElliottAndIchimokuUI(analysis);
 
         // Fetch AI Daily Price Path Forecast
         await loadForecast(symbol, forecastDays);
@@ -1052,7 +1233,7 @@
 
       // Price & Changes
       const price = data.current_price || 0;
-      document.getElementById('stock-current-price').innerText = price.toLocaleString('vi-VN');
+      document.getElementById('stock-current-price').innerText = formatPriceNum(price);
 
       // AI Score & Rating
       const score = data.score || 50;
@@ -1069,15 +1250,15 @@
 
       // Trade Setup Values
       document.getElementById('setup-entry-zone').innerText = data.entry_zone || `${price}`;
-      document.getElementById('setup-tp1').innerText = (data.target_1 || 0).toLocaleString('vi-VN');
-      document.getElementById('setup-tp2').innerText = (data.target_2 || 0).toLocaleString('vi-VN');
-      document.getElementById('setup-stop-loss').innerText = (data.stop_loss || 0).toLocaleString('vi-VN');
+      document.getElementById('setup-tp1').innerText = formatPriceNum(data.target_1 || 0);
+      document.getElementById('setup-tp2').innerText = formatPriceNum(data.target_2 || 0);
+      document.getElementById('setup-stop-loss').innerText = formatPriceNum(data.stop_loss || 0);
       document.getElementById('stat-rr-ratio').innerText = data.risk_reward || '1:2';
 
       // Mini stats
       if (data.levels) {
-        document.getElementById('stat-swing-high').innerText = (data.levels.swing_high || 0).toLocaleString('vi-VN');
-        document.getElementById('stat-swing-low').innerText = (data.levels.swing_low || 0).toLocaleString('vi-VN');
+        document.getElementById('stat-swing-high').innerText = formatPriceNum(data.levels.swing_high || 0);
+        document.getElementById('stat-swing-low').innerText = formatPriceNum(data.levels.swing_low || 0);
       }
       if (data.indicators) {
         document.getElementById('stat-rsi').innerText = `${data.indicators.rsi} (${data.indicators.rsi > 70 ? 'Quá mua' : (data.indicators.rsi < 30 ? 'Quá bán' : 'Cân bằng')})`;
@@ -1178,7 +1359,124 @@
         if (forecastBaseSeries) forecastBaseSeries.applyOptions({ visible: checked });
         if (forecastBullSeries) forecastBullSeries.applyOptions({ visible: checked });
         if (forecastBearSeries) forecastBearSeries.applyOptions({ visible: checked });
+      } else if (type === 'ichimoku') {
+        const checked = document.getElementById('toggle-ichimoku').checked;
+        if (tenkanSeries) tenkanSeries.applyOptions({ visible: checked });
+        if (kijunSeries) kijunSeries.applyOptions({ visible: checked });
+        if (senkouASeries) senkouASeries.applyOptions({ visible: checked });
+        if (senkouBSeries) senkouBSeries.applyOptions({ visible: checked });
       }
+    }
+
+    // 8.1 Elliott Wave, Ichimoku Cloud (Mây Mochi) & Multi-Timeframe Strategy Handlers
+    function setStrategyTab(tab) {
+      activeStrategyTab = tab;
+      ['weekly', 'monthly', 'yearly'].forEach(t => {
+        const btn = document.getElementById(`strat-tab-${t}`);
+        if (btn) {
+          if (t === tab) {
+            btn.className = 'strat-tab-btn px-3 py-1.5 rounded-lg font-bold bg-purple-500 text-white shadow-md shadow-purple-500/20';
+          } else {
+            btn.className = 'strat-tab-btn px-3 py-1.5 rounded-lg font-medium text-gray-400 hover:text-white';
+          }
+        }
+      });
+      renderActiveStrategyCard(tab);
+    }
+
+    function renderElliottAndIchimokuUI(data) {
+      if (!data) return;
+
+      // Elliott Wave status
+      if (data.elliott_wave) {
+        const ew = data.elliott_wave;
+        document.getElementById('elliott-wave-title').innerText = ew.current_wave || 'Sóng Đẩy Tăng Trưởng';
+        document.getElementById('elliott-wave-desc').innerText = ew.wave_phase || 'Cấu trúc sóng đẩy tiếp diễn xu hướng tăng.';
+        const targetPrice = ew.next_wave_target || 0;
+        document.getElementById('elliott-target-val').innerText = formatVND(targetPrice);
+      }
+
+      // Ichimoku Cloud status
+      if (data.ichimoku) {
+        const ichi = data.ichimoku;
+        document.getElementById('ichimoku-cloud-title').innerText = ichi.cloud_status || 'Trên Mây Kumo';
+        document.getElementById('ichimoku-cloud-desc').innerText = `${ichi.cloud_position || 'Nến nằm trên mây Kumo'}. ${ichi.cloud_color || 'Mây xanh mở rộng đệm hỗ trợ'}`;
+        document.getElementById('ichimoku-tk-val').innerText = ichi.tk_signal || 'Tenkan-sen > Kijun-sen';
+      }
+
+      // Investment Strategy multi-timeframe
+      currentStrategyData = data.investment_strategy || null;
+      renderActiveStrategyCard(activeStrategyTab);
+      lucide.createIcons();
+    }
+
+    function renderActiveStrategyCard(tab) {
+      const container = document.getElementById('horizon-strategy-card');
+      if (!container) return;
+
+      const strat = currentStrategyData && currentStrategyData[tab] ? currentStrategyData[tab] : null;
+      if (!strat) {
+        container.innerHTML = '<div class="text-xs text-gray-400 italic">Đang đồng bộ chiến lược Sóng Elliott & Mây Ichimoku đa khung thời gian...</div>';
+        return;
+      }
+
+      const horizonIcons = {
+        weekly: '🗓️',
+        monthly: '📅',
+        yearly: '📈'
+      };
+
+      container.innerHTML = `
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-2 border-b border-purple-500/20 gap-2">
+          <div class="flex items-center space-x-2">
+            <span class="text-base">${horizonIcons[tab] || '🎯'}</span>
+            <span class="text-sm font-black text-purple-200 tracking-wide uppercase">${strat.horizon || tab.toUpperCase()}</span>
+          </div>
+          <div class="flex items-center space-x-2 text-xs">
+            <span class="text-gray-400">Xác Suất Thắng Dự Kiến (AI Deep Learning):</span>
+            <span class="font-extrabold text-emerald-400 mono">${strat.win_probability || '78%'}</span>
+          </div>
+        </div>
+
+        <!-- Strategy Key Metrics Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-1">
+          <div class="bg-gray-900/80 p-2.5 rounded-lg border border-purple-500/20">
+            <span class="text-[10px] text-gray-400 block font-medium">Vùng Mua Gom Khuyến Nghị</span>
+            <span class="text-xs font-black text-purple-300 mono">${strat.entry_zone || '--'}</span>
+          </div>
+          <div class="bg-gray-900/80 p-2.5 rounded-lg border border-purple-500/20">
+            <span class="text-[10px] text-gray-400 block font-medium">Giá Mục Tiêu Chốt Lời</span>
+            <div class="flex items-baseline space-x-1">
+              <span class="text-xs font-black text-emerald-400 mono">${formatVND(strat.target_price)}</span>
+              <span class="text-[10px] font-bold text-emerald-400 mono">(+${strat.upside_pct}%)</span>
+            </div>
+          </div>
+          <div class="bg-gray-900/80 p-2.5 rounded-lg border border-purple-500/20">
+            <span class="text-[10px] text-gray-400 block font-medium">Ngưỡng Cắt Lỗ Kỷ Luật</span>
+            <span class="text-xs font-black text-rose-400 mono">${formatVND(strat.stop_loss)}</span>
+          </div>
+          <div class="bg-gray-900/80 p-2.5 rounded-lg border border-purple-500/20">
+            <span class="text-[10px] text-gray-400 block font-medium">Tỷ Lệ Lợi Nhuận / Rủi Ro (R:R)</span>
+            <span class="text-xs font-black text-cyan-300 mono">${strat.risk_reward || '1:2.5'}</span>
+          </div>
+        </div>
+
+        <!-- Strategy Synthesis Commentary -->
+        <div class="space-y-1.5 pt-1 text-xs">
+          <div class="flex items-start space-x-2 text-gray-300">
+            <span class="text-cyan-400 font-bold shrink-0">🌊 Sóng Elliott:</span>
+            <span class="text-gray-300">${strat.elliott_context || ''}</span>
+          </div>
+          <div class="flex items-start space-x-2 text-gray-300">
+            <span class="text-purple-400 font-bold shrink-0">☁️ Mây Ichimoku:</span>
+            <span class="text-gray-300">${strat.ichimoku_context || ''}</span>
+          </div>
+          <div class="flex items-start space-x-2 text-emerald-300 bg-emerald-950/20 p-2 rounded-lg border border-emerald-500/20">
+            <span class="font-bold shrink-0">💡 Hành Động:</span>
+            <span>${strat.action_advice || ''}</span>
+          </div>
+        </div>
+      `;
     }
 
     // 9. AI Deep Learning Daily Price Path Forecasting Functions

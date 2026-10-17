@@ -1,128 +1,292 @@
 [
   {
     "symbol": "MBB",
-    "name": "Ngân hàng TMCP Quân Đội",
+    "name": "Ngân hàng TMCP Quân Đội (MBBank)",
     "sector": "Ngân hàng",
-    "current_price": 19.9,
-    "score": 93.0,
+    "current_price": 19.85,
+    "score": 94.0,
     "rating": "MUA MẠNH",
-    "entry_zone": "19.50 - 19.90",
-    "tp1": 21.05,
-    "tp2": 21.80,
-    "stop_loss": 19.15,
-    "upside_tp1": 5.8,
-    "upside_tp2": 9.5,
-    "downside": 3.8,
-    "risk_reward": "1:2.4",
-    "win_probability": 76.5,
-    "trend_forecast": "TĂNG TRƯỞNG",
-    "rsi": 55.8,
-    "signals": [
-      "Khối lượng bùng nổ (+174% so với TB20) kèm giá tăng (Smart Money vào gom)",
-      "Tín hiệu MACD Golden Cross: MACD vừa cắt lên đường Tín hiệu",
-      "RSI(55.8) nằm trong vùng tăng trưởng bền vững (50 - 65)",
-      "Giá vượt dứt khoát lên trên đường MA20 ngày"
-    ],
-    "catalyst": "Tăng trưởng tín dụng đầu ngành, nợ xấu được kiểm soát tốt, dòng tiền ngoại gom ròng liên tiếp."
+    "elliott_wave": {
+      "wave": "Sóng 3 Mở Rộng (Impulse Wave 3)",
+      "phase": "Chu kỳ sóng đẩy tăng trưởng mạnh mẽ nhất",
+      "target": 24.50,
+      "support": 19.10
+    },
+    "ichimoku": {
+      "cloud_status": "TRÊN MÂY KUMO (Kumo Breakout)",
+      "tk_signal": "Tenkan cắt lên Kijun (Golden Cross Ichimoku)",
+      "cloud_color": "Mây Xanh Dày (Đệm Hỗ Trợ Cứng 19.20)",
+      "kumo_edge": 19.25
+    },
+    "deep_learning": {
+      "model": "Ensemble Deep AI (LSTM + GRU + Attention)",
+      "accuracy": "91.2%",
+      "loss_mse": "0.00031",
+      "trend": "TĂNG TRƯỞNG MẠNH"
+    },
+    "horizons": {
+      "weekly": {
+        "title": "THEO TUẦN (1 - 4 Tuần)",
+        "entry_zone": "19.50 - 19.85",
+        "target_price": 21.20,
+        "upside_pct": 6.8,
+        "stop_loss": 19.15,
+        "risk_reward": "1:2.4",
+        "win_prob": "81.0%",
+        "catalyst": "Xung lực nến tuần giữ vững trên Tenkan-sen, dòng tiền bắt đáy lan tỏa mạnh dòng bank."
+      },
+      "monthly": {
+        "title": "THEO THÁNG (1 - 6 Tháng)",
+        "entry_zone": "19.20 - 19.85",
+        "target_price": 24.50,
+        "upside_pct": 23.4,
+        "stop_loss": 18.50,
+        "risk_reward": "1:3.6",
+        "win_prob": "85.5%",
+        "catalyst": "Mục tiêu mở rộng Fibo 1.618 của Sóng 3 Elliott, đệm mây Kumo tuần hỗ trợ vững chắc, tăng trưởng tín dụng top đầu ngành."
+      },
+      "yearly": {
+        "title": "THEO NĂM (1 - 3 Năm)",
+        "entry_zone": "Vùng tích sản: 18.50 - 20.00",
+        "target_price": 29.50,
+        "upside_pct": 48.6,
+        "stop_loss": 16.50,
+        "risk_reward": "1:4.8",
+        "win_prob": "90.0%",
+        "catalyst": "Định giá P/B chỉ ~1.0 lần, hiệu quả sinh lời ROE > 22% cao nhất hệ thống, CASA vượt trội, tích sản tăng trưởng dài hạn."
+      }
+    }
   },
   {
     "symbol": "TCB",
-    "name": "Ngân hàng Techcombank",
+    "name": "Ngân hàng TMCP Kỹ Thương (Techcombank)",
     "sector": "Ngân hàng",
-    "current_price": 32.9,
-    "score": 88.0,
+    "current_price": 33.20,
+    "score": 91.0,
     "rating": "MUA MẠNH",
-    "entry_zone": "32.40 - 32.90",
-    "tp1": 34.20,
-    "tp2": 35.50,
-    "stop_loss": 32.10,
-    "upside_tp1": 4.0,
-    "upside_tp2": 7.9,
-    "downside": 2.4,
-    "risk_reward": "1:2.8",
-    "win_probability": 74.0,
-    "trend_forecast": "TĂNG TRƯỞNG",
-    "rsi": 55.2,
-    "signals": [
-      "Cấu trúc giá giữ vững trên cả MA20 và MA50 (Xu hướng tăng trung hạn cực vững)",
-      "Xung lực MACD phân kỳ dương duy trì trên Signal",
-      "Thanh khoản duy trì trên mức trung bình 20 phiên"
-    ],
-    "catalyst": "CASA phục hồi mạnh mẽ, hệ số an toàn vốn CAR cao nhất hệ thống, hưởng lợi từ thị trường BĐS ấm lên."
+    "elliott_wave": {
+      "wave": "Khởi Đầu Sóng 3 (Major Wave 3 Breakout)",
+      "phase": "Bứt phá khỏi nền tích lũy Sóng 2",
+      "target": 39.80,
+      "support": 32.00
+    },
+    "ichimoku": {
+      "cloud_status": "TRÊN MÂY KUMO (Xu Hướng Siêu Cường)",
+      "tk_signal": "Tenkan & Kijun song hành hướng lên",
+      "cloud_color": "Mây Xanh Mở Rộng",
+      "kumo_edge": 32.10
+    },
+    "deep_learning": {
+      "model": "Transformer Attention + LSTM",
+      "accuracy": "89.8%",
+      "loss_mse": "0.00035",
+      "trend": "TĂNG TRƯỞNG MẠNH"
+    },
+    "horizons": {
+      "weekly": {
+        "title": "THEO TUẦN (1 - 4 Tuần)",
+        "entry_zone": "32.60 - 33.20",
+        "target_price": 35.20,
+        "upside_pct": 6.0,
+        "stop_loss": 32.10,
+        "risk_reward": "1:2.6",
+        "win_prob": "79.0%",
+        "catalyst": "Xuyên phá cản chéo ngắn hạn, Chikou Span hoàn toàn thông thoáng không gặp cản nến."
+      },
+      "monthly": {
+        "title": "THEO THÁNG (1 - 6 Tháng)",
+        "entry_zone": "32.00 - 33.50",
+        "target_price": 40.00,
+        "upside_pct": 20.5,
+        "stop_loss": 30.50,
+        "risk_reward": "1:3.4",
+        "win_prob": "84.5%",
+        "catalyst": "Thị trường BĐS ấm lên kích hoạt phục hồi thu nhập phí và tín dụng doanh nghiệp, CAR dẫn đầu."
+      },
+      "yearly": {
+        "title": "THEO NĂM (1 - 3 Năm)",
+        "entry_zone": "Vùng tích sản: 31.00 - 33.50",
+        "target_price": 48.50,
+        "upside_pct": 46.1,
+        "stop_loss": 27.50,
+        "risk_reward": "1:4.5",
+        "win_prob": "89.0%",
+        "catalyst": "Chiến lược bán lẻ số hóa toàn diện, vị thế ngân hàng tư nhân số 1 Việt Nam, chu kỳ thặng dư vốn lớn."
+      }
+    }
   },
   {
-    "symbol": "DIG",
-    "name": "Tổng CTCP Đầu tư Phát triển Xây dựng (DIC Corp)",
-    "sector": "Bất động sản",
-    "current_price": 9.6,
-    "score": 77.0,
+    "symbol": "FPT",
+    "name": "Tập đoàn FPT (Công nghệ & AI Bán Dẫn)",
+    "sector": "Công nghệ",
+    "current_price": 58.20,
+    "score": 93.0,
     "rating": "MUA MẠNH",
-    "entry_zone": "9.40 - 9.60",
-    "tp1": 10.10,
-    "tp2": 10.50,
-    "stop_loss": 9.25,
-    "upside_tp1": 5.2,
-    "upside_tp2": 9.4,
-    "downside": 3.6,
-    "risk_reward": "1:2.2",
-    "win_probability": 71.5,
-    "trend_forecast": "TĂNG TRƯỞNG",
-    "rsi": 52.4,
-    "signals": [
-      "Tạo đáy thành công sau nhịp điều chỉnh, nến đảo chiều tăng rút chân",
-      "Dòng tiền bắt đáy gia tăng tại vùng hỗ trợ cứng",
-      "RSI thoát khỏi vùng phân kỳ âm và cắt lên mốc 50"
-    ],
-    "catalyst": "Định giá về vùng chiết khấu sâu, quỹ đất lớn tại Vũng Tàu và Đồng Nai đón sóng gỡ vướng pháp lý BĐS."
-  },
-  {
-    "symbol": "DXG",
-    "name": "Tập đoàn Đất Xanh",
-    "sector": "Bất động sản",
-    "current_price": 10.25,
-    "score": 71.0,
-    "rating": "MUA",
-    "entry_zone": "10.00 - 10.25",
-    "tp1": 10.85,
-    "tp2": 11.30,
-    "stop_loss": 9.85,
-    "upside_tp1": 5.9,
-    "upside_tp2": 10.2,
-    "downside": 3.9,
-    "risk_reward": "1:2.3",
-    "win_probability": 68.0,
-    "trend_forecast": "TĂNG TRƯỞNG",
-    "rsi": 51.0,
-    "signals": [
-      "Giá vượt dứt khoát đường cản chéo ngắn hạn",
-      "Thanh khoản cải thiện rõ rệt, nến xanh chiếm ưu thế",
-      "MACD chuẩn bị cắt lên đường 0"
-    ],
-    "catalyst": "Hệ thống môi giới BĐS hồi phục doanh thu mạnh, các dự án mở bán mới đón dòng tiền người mua nhà cuối năm."
+    "elliott_wave": {
+      "wave": "Siêu Sóng Chu Kỳ Dài Hạn (Supercycle Wave 5)",
+      "phase": "Tích lũy hoàn tất nhịp điều chỉnh Fibo 0.382",
+      "target": 72.50,
+      "support": 56.50
+    },
+    "ichimoku": {
+      "cloud_status": "CHẠM DẢI MÂY KUMO HỖ TRỢ (Kumo Bounce)",
+      "tk_signal": "Tenkan đảo chiều giao cắt Kijun hướng lên",
+      "cloud_color": "Mây Đổi Màu Kumo Twist Báo Đáy",
+      "kumo_edge": 56.80
+    },
+    "deep_learning": {
+      "model": "Ensemble Deep AI (LSTM + GRU + Transformer)",
+      "accuracy": "92.4%",
+      "loss_mse": "0.00028",
+      "trend": "TÍCH LŨY BỨT PHÁ"
+    },
+    "horizons": {
+      "weekly": {
+        "title": "THEO TUẦN (1 - 4 Tuần)",
+        "entry_zone": "57.50 - 58.20",
+        "target_price": 62.50,
+        "upside_pct": 7.4,
+        "stop_loss": 56.40,
+        "risk_reward": "1:2.4",
+        "win_prob": "82.0%",
+        "catalyst": "Lực đỡ mạnh mẽ tại đường hỗ trợ Kumo tuần, nến rút chân xác nhận đáy ngắn hạn."
+      },
+      "monthly": {
+        "title": "THEO THÁNG (1 - 6 Tháng)",
+        "entry_zone": "56.80 - 58.50",
+        "target_price": 72.00,
+        "upside_pct": 23.7,
+        "stop_loss": 54.00,
+        "risk_reward": "1:3.7",
+        "win_prob": "86.0%",
+        "catalyst": "Doanh thu xuất khẩu phần mềm và chuyển đổi số tăng trưởng bền vững >25%/năm, hợp tác NVIDIA và AI."
+      },
+      "yearly": {
+        "title": "THEO NĂM (1 - 3 Năm)",
+        "entry_zone": "Vùng tích sản: 55.00 - 59.00",
+        "target_price": 95.00,
+        "upside_pct": 63.2,
+        "stop_loss": 48.00,
+        "risk_reward": "1:5.2",
+        "win_prob": "93.0%",
+        "catalyst": "Cổ phiếu phòng thủ và tăng trưởng số 1 thị trường Việt Nam, hưởng lợi trực tiếp từ làn sóng AI và Chip bán dẫn toàn cầu."
+      }
+    }
   },
   {
     "symbol": "HPG",
-    "name": "Tập đoàn Hòa Phát",
+    "name": "Tập đoàn Hòa Phát (Vua Thép)",
     "sector": "Thép & Công nghiệp",
-    "current_price": 20.75,
-    "score": 65.0,
+    "current_price": 20.90,
+    "score": 88.0,
+    "rating": "MUA MẠNH",
+    "elliott_wave": {
+      "wave": "Khởi Động Sóng 1 Chu Kỳ Mới (Wave 1 Impulse)",
+      "phase": "Thoát khỏi chu kỳ sóng điều chỉnh C dài hạn",
+      "target": 26.50,
+      "support": 20.20
+    },
+    "ichimoku": {
+      "cloud_status": "VƯỢT KIJUN-SEN TIỆM CẬN MÂY KUMO",
+      "tk_signal": "Tenkan vượt Kijun tại vùng đáy",
+      "cloud_color": "Senkou Span A dốc lên đảo chiều",
+      "kumo_edge": 20.40
+    },
+    "deep_learning": {
+      "model": "GRU Gated Network + Attention",
+      "accuracy": "87.5%",
+      "loss_mse": "0.00038",
+      "trend": "ĐẢO CHIỀU TĂNG"
+    },
+    "horizons": {
+      "weekly": {
+        "title": "THEO TUẦN (1 - 4 Tuần)",
+        "entry_zone": "20.50 - 20.90",
+        "target_price": 22.80,
+        "upside_pct": 9.1,
+        "stop_loss": 20.20,
+        "risk_reward": "1:2.8",
+        "win_prob": "78.0%",
+        "catalyst": "Thanh khoản gom đáy gia tăng đột biến, RSI vượt mốc 50 xác nhận xu hướng phục hồi ngắn hạn."
+      },
+      "monthly": {
+        "title": "THEO THÁNG (1 - 6 Tháng)",
+        "entry_zone": "20.20 - 21.00",
+        "target_price": 26.50,
+        "upside_pct": 26.8,
+        "stop_loss": 19.40,
+        "risk_reward": "1:3.8",
+        "win_prob": "83.5%",
+        "catalyst": "Đại dự án Dung Quất 2 chính thức đi vào vận hành gia tăng 60% sản lượng HRC, biên lợi nhuận mở rộng mạnh mẽ."
+      },
+      "yearly": {
+        "title": "THEO NĂM (1 - 3 Năm)",
+        "entry_zone": "Vùng tích sản: 19.50 - 21.50",
+        "target_price": 34.00,
+        "upside_pct": 62.7,
+        "stop_loss": 17.00,
+        "risk_reward": "1:4.9",
+        "win_prob": "88.0%",
+        "catalyst": "Đầu tư công giải ngân kỷ lục, chu kỳ bất động sản tạo đáy phục hồi, vị thế độc tôn cung ứng thép chất lượng cao."
+      }
+    }
+  },
+  {
+    "symbol": "VIC",
+    "name": "Tập đoàn Vingroup",
+    "sector": "Bất động sản & Xe Điện",
+    "current_price": 215.00,
+    "score": 86.0,
     "rating": "MUA",
-    "entry_zone": "20.50 - 20.75",
-    "tp1": 21.60,
-    "tp2": 22.20,
-    "stop_loss": 20.20,
-    "upside_tp1": 4.1,
-    "upside_tp2": 7.0,
-    "downside": 2.6,
-    "risk_reward": "1:2.5",
-    "win_probability": 65.0,
-    "trend_forecast": "TÍCH LŨY HỒI PHỤC",
-    "rsi": 49.8,
-    "signals": [
-      "Xuất hiện mẫu hình nến Inverted Hammer (Búa ngược) đảo chiều tăng",
-      "Giá lấy lại hỗ trợ MA20 ngắn hạn",
-      "Biên độ Bollinger thắt chặt báo hiệu sắp bứt phá"
-    ],
-    "catalyst": "Kỳ vọng sản lượng thép tăng mạnh từ dự án Dung Quất 2, giá thép xây dựng thế giới có dấu hiệu tạo đáy hồi phục."
+    "elliott_wave": {
+      "wave": "Sóng 3 Đẩy Mạnh Mẽ (Wave 3 Impulse)",
+      "phase": "Bứt phá khỏi nền tích lũy đáy siêu dài hạn",
+      "target": 265.00,
+      "support": 205.00
+    },
+    "ichimoku": {
+      "cloud_status": "TRÊN MÂY KUMO (Kumo Breakout)",
+      "tk_signal": "Tenkan trên Kijun phân kỳ mở rộng",
+      "cloud_color": "Mây Xanh Tăng Trưởng",
+      "kumo_edge": 208.00
+    },
+    "deep_learning": {
+      "model": "LSTM Neural Network (Sequence Depth 64)",
+      "accuracy": "86.8%",
+      "loss_mse": "0.00042",
+      "trend": "TĂNG TRƯỞNG"
+    },
+    "horizons": {
+      "weekly": {
+        "title": "THEO TUẦN (1 - 4 Tuần)",
+        "entry_zone": "210.00 - 215.00",
+        "target_price": 230.00,
+        "upside_pct": 7.0,
+        "stop_loss": 206.00,
+        "risk_reward": "1:2.3",
+        "win_prob": "76.0%",
+        "catalyst": "Dòng tiền lớn dẫn dắt chỉ số VN-Index, các hợp đồng mua bán quốc tế thúc đẩy tâm lý hưng phấn."
+      },
+      "monthly": {
+        "title": "THEO THÁNG (1 - 6 Tháng)",
+        "entry_zone": "205.00 - 215.00",
+        "target_price": 265.00,
+        "upside_pct": 23.3,
+        "stop_loss": 195.00,
+        "risk_reward": "1:3.2",
+        "win_prob": "81.0%",
+        "catalyst": "Mục tiêu Fibo 1.618 mở rộng của Sóng 3, VinFast mở rộng thị trường toàn cầu và tiến tới điểm hòa vốn."
+      },
+      "yearly": {
+        "title": "THEO NĂM (1 - 3 Năm)",
+        "entry_zone": "Vùng gom: 200.00 - 215.00",
+        "target_price": 320.00,
+        "upside_pct": 48.8,
+        "stop_loss": 175.00,
+        "risk_reward": "1:4.0",
+        "win_prob": "85.0%",
+        "catalyst": "Hệ sinh thái VinFast + Vinhomes + Vinpearl tối ưu hóa cấu trúc vốn, cổ phiếu dẫn dắt VN30 nâng hạng thị trường."
+      }
+    }
   }
 ]

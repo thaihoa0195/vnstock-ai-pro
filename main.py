@@ -129,6 +129,22 @@ async def stock_history(symbol: str, days: int = Query(180, ge=30, le=500)):
                 "color": "#10b981" if hist_val >= 0 else "#ef4444"
             })
 
+    # Ichimoku series
+    tenkan_series = []
+    kijun_series = []
+    senkou_a_series = []
+    senkou_b_series = []
+    for _, row in df_ind.iterrows():
+        t = str(row["time"])
+        if "tenkan_sen" in row and pd.notna(row["tenkan_sen"]):
+            tenkan_series.append({"time": t, "value": round(float(row["tenkan_sen"]), 2)})
+        if "kijun_sen" in row and pd.notna(row["kijun_sen"]):
+            kijun_series.append({"time": t, "value": round(float(row["kijun_sen"]), 2)})
+        if "senkou_span_a" in row and pd.notna(row["senkou_span_a"]):
+            senkou_a_series.append({"time": t, "value": round(float(row["senkou_span_a"]), 2)})
+        if "senkou_span_b" in row and pd.notna(row["senkou_span_b"]):
+            senkou_b_series.append({"time": t, "value": round(float(row["senkou_span_b"]), 2)})
+
     info = get_stock_info(symbol)
 
     return {
@@ -146,7 +162,11 @@ async def stock_history(symbol: str, days: int = Query(180, ge=30, le=500)):
             "rsi": rsi_series,
             "macd": macd_series,
             "macd_signal": macd_signal_series,
-            "macd_hist": macd_hist_series
+            "macd_hist": macd_hist_series,
+            "tenkan": tenkan_series,
+            "kijun": kijun_series,
+            "senkou_a": senkou_a_series,
+            "senkou_b": senkou_b_series
         }
     }
 

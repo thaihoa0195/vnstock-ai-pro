@@ -220,7 +220,7 @@ def stock_forecast(symbol: str, days: int = 10, model: str = "ensemble"):
     df = fetch_history(symbol, days=120)
     if df is None or df.empty:
         raise HTTPException(status_code=404, detail="Không có dữ liệu lịch sử")
-    forecast = predict_daily_path(df, days_ahead=days, model_type=model)
+    forecast = predict_daily_path(df, days_ahead=days, model_type=model, symbol=symbol)
     forecast["symbol"] = symbol
     return forecast
 

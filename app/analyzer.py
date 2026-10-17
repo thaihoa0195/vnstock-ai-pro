@@ -185,7 +185,8 @@ def calculate_ai_analysis(df: pd.DataFrame, symbol: str) -> Dict[str, Any]:
     macd_hist = float(last["macd_hist"]) if not np.isnan(last["macd_hist"]) else 0.0
     sma_20 = float(last["sma_20"]) if not np.isnan(last["sma_20"]) else c
     sma_50 = float(last["sma_50"]) if not np.isnan(last["sma_50"]) else c
-    sma_200 = float(last["sma_200"]) if not np.isnan(last["sma_200"]) else c
+    has_valid_sma200 = ("sma_200" in last and not np.isnan(last["sma_200"]) and float(last["sma_200"]) > 0)
+    sma_200 = float(last["sma_200"]) if has_valid_sma200 else None
     ema_9 = float(last["ema_9"]) if not np.isnan(last["ema_9"]) else c
     ema_21 = float(last["ema_21"]) if not np.isnan(last["ema_21"]) else c
     bb_upper = float(last["bb_upper"]) if not np.isnan(last["bb_upper"]) else c * 1.05
@@ -195,8 +196,13 @@ def calculate_ai_analysis(df: pd.DataFrame, symbol: str) -> Dict[str, Any]:
     vol_sma20 = float(last["vol_sma_20"]) if not np.isnan(last["vol_sma_20"]) else vol
     vol_ratio = float(last["vol_ratio"]) if not np.isnan(last["vol_ratio"]) else 1.0
 
+    # 7. Ichimoku & Elliott Wave Analysis (Computed early for score integration)
+    ichimoku = compute_ichimoku_kinko_hyo(df)
+    elliott = compute_elliott_wave_and_fibonacci(df)
+    strategy = generate_multi_timeframe_investment_strategy(symbol, c, ichimoku, elliott)
+
     # AI Multi-factor Scoring
-    score = 50.0 # Neutral baseline
+    score = 50.0  # Neutral baseline
     signals_list = []
 
     # 1. Trend Factor (Up to +- 25 pts)
@@ -210,23 +216,31 @@ def calculate_ai_analysis(df: pd.DataFrame, symbol: str) -> Dict[str, Any]:
         score -= 15
         signals_list.append({"type": "BEARISH", "text": "Giá nằm dưới MA20 & MA50 (Xu hướng giảm chi phối)"})
     else:
-        score -= 6
+        score -= 4
         signals_list.append({"type": "NEUTRAL", "text": "Giá dao động quanh MA20, đang giằng co tích lũy"})
 
-    if len(df) >= 120 and sma_200 > 0:
+    if has_valid_sma200 and sma_200 is not None:
         if c > sma_200:
             score += 10
             signals_list.append({"type": "BULLISH", "text": "Giá trên MA200 (Thị trường Bullish dài hạn)"})
         else:
             score -= 10
             signals_list.append({"type": "BEARISH", "text": "Giá dưới MA200 (Thị trường Bearish dài hạn)"})
+    elif "sma_100" in last and not np.isnan(last["sma_100"]) and float(last["sma_100"]) > 0:
+        sma_100 = float(last["sma_100"])
+        if c > sma_100:
+            score += 6
+            signals_list.append({"type": "BULLISH", "text": "Giá trên MA100 (Xu hướng trung - dài hạn tích cực)"})
+        else:
+            score -= 6
+            signals_list.append({"type": "BEARISH", "text": "Giá dưới MA100 (Áp lực cản trung hạn)"})
 
     # 2. Momentum Factor (Up to +- 20 pts)
     if rsi < 30:
-        score += 12 # Oversold opportunity
+        score += 12  # Oversold opportunity
         signals_list.append({"type": "BULLISH", "text": f"RSI({rsi:.1f}) rơi vào vùng Quá bán (Oversold < 30) - Tiềm năng bật đáy"})
     elif rsi > 70:
-        score -= 8 # Overbought risk
+        score -= 8  # Overbought risk
         signals_list.append({"type": "BEARISH", "text": f"RSI({rsi:.1f}) chạm vùng Quá mua (Overbought > 70) - Áp lực chốt lời gia tăng"})
     elif 50 <= rsi <= 65:
         score += 8
@@ -263,7 +277,7 @@ def calculate_ai_analysis(df: pd.DataFrame, symbol: str) -> Dict[str, Any]:
 
     # 4. Bollinger Bands & Volatility Factor
     if c >= bb_upper:
-        score -= 5
+        score -= 4
         signals_list.append({"type": "BEARISH", "text": "Giá chạm dải trên Bollinger Band, cẩn trọng nhịp chỉnh kỹ thuật"})
     elif c <= bb_lower:
         score += 8
@@ -280,13 +294,41 @@ def calculate_ai_analysis(df: pd.DataFrame, symbol: str) -> Dict[str, Any]:
             score -= 6
             signals_list.append({"type": "BEARISH", "text": f"Mẫu hình nến: {p['name']} - {p['desc']}"})
 
+    # 6. Ichimoku & Elliott Wave Factor Integration
+    if ichimoku:
+        cloud_pos = ichimoku.get("cloud_position", "")
+        if "TRÊN MÂY" in cloud_pos or ichimoku.get("cloud_status") == "BULLISH":
+            score += 12
+            signals_list.append({"type": "BULLISH", "text": f"Mây Ichimoku: {cloud_pos} - Đệm mây Kumo hỗ trợ xung lực tăng"})
+        elif "DƯỚI MÂY" in cloud_pos or ichimoku.get("cloud_status") == "BEARISH":
+            score -= 8
+            signals_list.append({"type": "BEARISH", "text": f"Mây Ichimoku: {cloud_pos} - {ichimoku.get('tk_signal', '')}"})
+        else:
+            score += 3
+            signals_list.append({"type": "NEUTRAL", "text": f"Mây Ichimoku: {cloud_pos} - Giằng co trong mây Kumo"})
+
+    if elliott:
+        current_w = elliott.get("current_wave", "")
+        if "SÓNG 3" in current_w.upper():
+            score += 15
+            signals_list.append({"type": "BULLISH", "text": f"Sóng Elliott: {current_w} (Mục tiêu bứt phá: {elliott.get('next_wave_target', c):,.2f} VNĐ)"})
+        elif "SÓNG 1" in current_w.upper():
+            score += 10
+            signals_list.append({"type": "BULLISH", "text": f"Sóng Elliott: {current_w} (Khởi động chu kỳ sóng đẩy mới)"})
+        elif "SÓNG 5" in current_w.upper():
+            score += 6
+            signals_list.append({"type": "BULLISH", "text": f"Sóng Elliott: {current_w} (Sóng nước rút cuối chu kỳ)"})
+        elif "SÓNG 2" in current_w.upper() or "A-B-C" in current_w.upper():
+            score += 8  # Retracement accumulation bottom
+            signals_list.append({"type": "BULLISH", "text": f"Sóng Elliott: {current_w} (Vùng tích lũy kiểm định đáy tạo đà cho Sóng 3)"})
+
     # Clamp Score between 0 and 100
     final_score = max(5.0, min(95.0, round(score, 1)))
 
     # Overall Rating & Recommendation
     if final_score >= 75:
         rating = "MUA MẠNH"
-        rating_color = "#10b981" # Green
+        rating_color = "#10b981"  # Green
         action = "Canh mua chủ động theo đà tăng hoặc tích lũy vị thế tại vùng hỗ trợ"
     elif final_score >= 60:
         rating = "MUA"
@@ -294,7 +336,7 @@ def calculate_ai_analysis(df: pd.DataFrame, symbol: str) -> Dict[str, Any]:
         action = "Có thể mở vị thế mua thăm dò, giải ngân từng phần quanh vùng hỗ trợ"
     elif final_score >= 45:
         rating = "QUAN SÁT / NẮM GIỮ"
-        rating_color = "#f59e0b" # Amber
+        rating_color = "#f59e0b"  # Amber
         action = "Chưa có điểm mua an toàn rõ nét. Ưu tiên quan sát phản ứng giá hoặc nắm giữ chờ chốt"
     elif final_score >= 30:
         rating = "BÁN / HẠ TỶ TRỌNG"
@@ -302,7 +344,7 @@ def calculate_ai_analysis(df: pd.DataFrame, symbol: str) -> Dict[str, Any]:
         action = "Hạ tỷ trọng cổ phiếu, hạ margin, không mua đuổi khi có nhịp hồi kỹ thuật"
     else:
         rating = "BÁN MẠNH"
-        rating_color = "#ef4444" # Red
+        rating_color = "#ef4444"  # Red
         action = "Thoát vị thế hoặc đứng ngoài, xu hướng giảm giá đang kiểm soát hoàn toàn"
 
     # Dynamic Trading Targets & Stop Loss
@@ -318,23 +360,6 @@ def calculate_ai_analysis(df: pd.DataFrame, symbol: str) -> Dict[str, Any]:
     rr_ratio = round((tp1 - c) / risk, 1) if risk > 0 else 1.5
 
     change_pct = round(((c - prev["close"]) / prev["close"]) * 100, 2) if prev["close"] else 0.0
-
-    # 7. Ichimoku & Elliott Wave Analysis
-    ichimoku = compute_ichimoku_kinko_hyo(df)
-    elliott = compute_elliott_wave_and_fibonacci(df)
-    strategy = generate_multi_timeframe_investment_strategy(symbol, c, ichimoku, elliott)
-
-    # Append Ichimoku & Elliott to signals
-    if ichimoku:
-        signals_list.append({
-            "type": "BULLISH" if ichimoku.get("cloud_status") == "BULLISH" else ("BEARISH" if ichimoku.get("cloud_status") == "BEARISH" else "NEUTRAL"),
-            "text": f"Mây Ichimoku: {ichimoku.get('cloud_position', '')} - {ichimoku.get('tk_signal', '')}"
-        })
-    if elliott:
-        signals_list.append({
-            "type": "BULLISH",
-            "text": f"Sóng Elliott: {elliott.get('current_wave', '')} (Mục tiêu sóng: {elliott.get('next_wave_target', c):,.2f} VNĐ)"
-        })
 
     # AI Report Generation
     report = generate_vietnamese_ai_report(
@@ -386,7 +411,7 @@ def calculate_ai_analysis(df: pd.DataFrame, symbol: str) -> Dict[str, Any]:
             "macd_hist": round(macd_hist, 2),
             "sma_20": round(sma_20, 2),
             "sma_50": round(sma_50, 2),
-            "sma_200": round(sma_200, 2),
+            "sma_200": round(sma_200, 2) if sma_200 is not None else round(c, 2),
             "ema_9": round(ema_9, 2),
             "ema_21": round(ema_21, 2),
             "bb_upper": round(bb_upper, 2),

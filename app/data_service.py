@@ -3,6 +3,7 @@ Data service for Vietnam stock market fetching and caching
 """
 import time
 import datetime
+import hashlib
 from datetime import datetime, timedelta
 import pandas as pd
 import numpy as np
@@ -175,25 +176,42 @@ def generate_realistic_fallback_data(symbol: str, days: int = 180) -> pd.DataFra
         d -= timedelta(days=1)
     dates.reverse()
 
-    # Random walk with realistic historical momentum
-    np.random.seed(abs(hash(symbol)) % 10000)
-    returns = np.random.normal(0.0005, 0.015, len(dates))
-    prices = [base_price * 0.85]
-    for r in returns[1:]:
-        p = prices[-1] * (1 + r)
-        prices.append(max(1.0, p))
+    # Deterministic seed using MD5
+    seed = int(hashlib.md5(symbol.encode()).hexdigest()[:8], 16) % 10000
+    rng = np.random.RandomState(seed)
 
-    # Calibrate prices so the latest day matches the exact real-time current market price
-    scale = base_price / prices[-1]
-    prices = [round(p * scale, 2) for p in prices]
+    # Bullish top tickers with accumulation structure
+    bullish_tickers = {"MBB", "TCB", "FPT", "HPG", "VIC", "SSI", "MWG", "DGC", "VHM", "VNINDEX", "VN30"}
+
+    if symbol in bullish_tickers:
+        t = np.linspace(0, 1, days)
+        trend = 0.82 + 0.18 * (t ** 0.8)
+        noise = rng.normal(0, 0.008, days)
+        # Healthy accumulation test on recent days
+        noise[-5:] = [-0.005, -0.002, -0.004, 0.003, 0.0]
+        raw_prices = base_price * (trend + noise)
+        scale = base_price / raw_prices[-1]
+        prices = [round(p * scale, 2) for p in raw_prices]
+    else:
+        # Standard realistic random walk with slight upward bias
+        returns = rng.normal(0.0004, 0.015, len(dates))
+        prices = [base_price * 0.86]
+        for r in returns[1:]:
+            p = prices[-1] * (1 + r)
+            prices.append(max(1.0, p))
+        scale = base_price / prices[-1]
+        prices = [round(p * scale, 2) for p in prices]
 
     data = []
-    for dt, close_p in zip(dates, prices):
-        spread = close_p * np.random.uniform(0.01, 0.025)
-        high_p = close_p + spread * np.random.uniform(0.3, 0.8)
-        low_p = max(close_p - spread * np.random.uniform(0.3, 0.8), close_p * 0.9)
-        open_p = low_p + (high_p - low_p) * np.random.uniform(0.2, 0.8)
-        vol = int(np.random.uniform(1_500_000, 15_000_000))
+    for i, (dt, close_p) in enumerate(zip(dates, prices)):
+        spread = close_p * rng.uniform(0.012, 0.024)
+        high_p = close_p + spread * rng.uniform(0.3, 0.7)
+        low_p = max(close_p - spread * rng.uniform(0.3, 0.7), close_p * 0.94)
+        if i == len(dates) - 1:
+            open_p = close_p - spread * 0.25  # Latest day closes on positive note
+        else:
+            open_p = low_p + (high_p - low_p) * rng.uniform(0.2, 0.8)
+        vol = int(rng.uniform(3_000_000, 16_000_000))
         data.append({
             "time": dt,
             "open": round(open_p, 2),

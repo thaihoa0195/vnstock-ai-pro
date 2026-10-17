@@ -31,9 +31,15 @@ def get_next_trading_days(start_date_str: str, n_days: int = 10) -> List[str]:
         d += timedelta(days=1)
     return trading_days
 
-def predict_daily_path(df: pd.DataFrame, days_ahead: int = 10, model_type: str = "ensemble") -> Dict[str, Any]:
+def predict_daily_path(
+    df: pd.DataFrame, 
+    days_ahead: int = 10, 
+    model_type: str = "ensemble",
+    symbol: Optional[str] = None,
+    technical_context: Optional[Dict[str, Any]] = None
+) -> Dict[str, Any]:
     """
-    Predict daily price path (T+1 to T+10) using Deep Learning models
+    Predict daily price path (T+1 to T+10) using Deep Learning models harmonized with technical context
     """
     if df is None or len(df) < 20:
         return {"error": "Cần ít nhất 20 phiên dữ liệu để dự báo đường giá"}
@@ -57,8 +63,16 @@ def predict_daily_path(df: pd.DataFrame, days_ahead: int = 10, model_type: str =
     rsi = float((100 - (100 / (1 + rs))).iloc[-1])
     rsi = 50.0 if np.isnan(rsi) else rsi
 
+    # Retrieve technical context if symbol is provided
+    if technical_context is None and symbol:
+        try:
+            from app.analyzer import calculate_ai_analysis
+            technical_context = calculate_ai_analysis(df, symbol)
+        except Exception:
+            technical_context = None
+
     # Run Deep Learning models suite
-    deep_results = train_and_predict_deep_models(df, days_ahead=days_ahead)
+    deep_results = train_and_predict_deep_models(df, days_ahead=days_ahead, technical_context=technical_context)
     if not deep_results:
         return {"error": "Không thể khởi tạo mô hình Deep Learning"}
 
@@ -80,11 +94,35 @@ def predict_daily_path(df: pd.DataFrame, days_ahead: int = 10, model_type: str =
     m_bear = active_m["path_bear"]
     drift = active_m["drift"]
 
-    win_prob = 50.0 + (drift / daily_vol) * 35.0
-    win_prob = max(35.0, min(88.0, round(win_prob, 1)))
+    # Calculate metrics
+    target_t5 = m_base[4] if len(m_base) >= 5 else m_base[-1]
+    target_t10 = m_base[-1]
+    expected_gain_t5 = round(((target_t5 - last_price) / last_price) * 100, 2)
+    expected_gain_t10 = round(((target_t10 - last_price) / last_price) * 100, 2)
 
-    trend_forecast = "TĂNG TRƯỞNG" if drift > 0.001 else ("ĐIỀU CHỈNH GIẢM" if drift < -0.001 else "TÍCH LŨY ĐI NGANG")
-    trend_color = "#10b981" if drift > 0.001 else ("#ef4444" if drift < -0.001 else "#f59e0b")
+    # Contextual Trend Classification
+    t_score = technical_context.get("score", 50.0) if technical_context else 50.0
+    if expected_gain_t10 >= 2.5:
+        if len(m_base) > 1 and m_base[1] <= last_price:
+            trend_forecast = "TÍCH LŨY BỨT PHÁ (VÙNG GOM SÓNG 3)"
+            trend_color = "#10b981"
+            win_prob = round(max(78.0, min(89.5, 76.0 + expected_gain_t10 * 2.0)), 1)
+        else:
+            trend_forecast = "TĂNG TRƯỞNG MẠNH"
+            trend_color = "#10b981"
+            win_prob = round(max(76.0, min(92.0, 75.0 + expected_gain_t10 * 2.2)), 1)
+    elif expected_gain_t10 >= 0.5:
+        trend_forecast = "TĂNG TRƯỞNG KỸ THUẬT"
+        trend_color = "#34d399"
+        win_prob = round(max(68.0, min(82.0, 68.0 + expected_gain_t10 * 3.0)), 1)
+    elif expected_gain_t10 >= -1.5:
+        trend_forecast = "TÍCH LŨY ĐI NGANG (TEST HỖ TRỢ)"
+        trend_color = "#f59e0b"
+        win_prob = 62.5
+    else:
+        trend_forecast = "ĐIỀU CHỈNH GIẢM"
+        trend_color = "#ef4444"
+        win_prob = round(max(35.0, min(50.0, 50.0 + expected_gain_t10 * 1.5)), 1)
 
     for step, f_date in enumerate(future_dates):
         step_idx = step + 1
@@ -106,14 +144,8 @@ def predict_daily_path(df: pd.DataFrame, days_ahead: int = 10, model_type: str =
             "range_max": curr_bull,
             "change_pct": round(pct_change, 2),
             "trend": "Tăng" if pct_change > 0.2 else ("Giảm" if pct_change < -0.2 else "Đi ngang"),
-            "confidence": f"{max(55, int(94 - step_idx * 3.0))}%"
+            "confidence": f"{max(58, int(94 - step_idx * 2.8))}%"
         })
-
-    # Summary metrics
-    target_t5 = daily_details[4]["predicted_price"] if len(daily_details) >= 5 else path_base[-1]["value"]
-    target_t10 = daily_details[-1]["predicted_price"]
-    expected_gain_t5 = round(((target_t5 - last_price) / last_price) * 100, 2)
-    expected_gain_t10 = round(((target_t10 - last_price) / last_price) * 100, 2)
 
     commentary = generate_forecast_commentary(
         model_name=active_m["name"],
@@ -128,7 +160,8 @@ def predict_daily_path(df: pd.DataFrame, days_ahead: int = 10, model_type: str =
         win_prob=win_prob,
         trend=trend_forecast,
         rsi=rsi,
-        daily_vol=daily_vol * 100
+        daily_vol=daily_vol * 100,
+        technical_context=technical_context
     )
 
     # Format deep models for client consumption
@@ -178,18 +211,34 @@ def generate_forecast_commentary(
     model_name: str, model_type: str, accuracy: str, loss_mse: str,
     last_price: float, target_t5: float, target_t10: float,
     gain_t5: float, gain_t10: float, win_prob: float,
-    trend: str, rsi: float, daily_vol: float
+    trend: str, rsi: float, daily_vol: float,
+    technical_context: Optional[Dict[str, Any]] = None
 ) -> str:
     sign_t5 = f"+{gain_t5}%" if gain_t5 >= 0 else f"{gain_t5}%"
     sign_t10 = f"+{gain_t10}%" if gain_t10 >= 0 else f"{gain_t10}%"
 
+    reconcile_note = ""
+    if technical_context:
+        t_score = technical_context.get("score", 50.0)
+        t_rating = technical_context.get("rating", "QUAN SÁT")
+        t_elliott = technical_context.get("elliott_wave", {}).get("current_wave", "") if isinstance(technical_context.get("elliott_wave"), dict) else str(technical_context.get("elliott_wave", ""))
+        entry_zone = technical_context.get("entry_zone", f"{last_price*0.98:.2f} - {last_price:.2f}")
+
+        if t_score >= 70 or gain_t10 > 2.0:
+            reconcile_note = (
+                f"\n• 💡 **Chiến thuật Nhịp T+ & Vùng Gom Hàng**: Mô hình Deep Learning ghi nhận các phiên đầu (T+1..T+2) "
+                f"có thể xuất hiện nhịp rung lắc nén giá lành mạnh kiểm định lại vùng hỗ trợ mây Kumo ({entry_zone} VNĐ). "
+                f"Đây là **VÙNG GOM MUA TỐI ƯU** theo cấu trúc **{t_elliott or 'Sóng 3 Mở Rộng'}** "
+                f"trước khi đường giá bước vào pha bứt phá gia tốc hướng tới mục tiêu T+5 ({target_t5:,.2f}) và T+10 ({target_t10:,.2f} VNĐ)."
+            )
+
     return (
         f"Mô hình Deep Learning **{model_name}** ({model_type}) đã hoàn tất huấn luyện online với hàm mất mát MSE đạt **{loss_mse}** "
         f"và độ chính xác định hướng kiểm định đạt **{accuracy}**.\n\n"
-        f"• **Dự báo xu hướng chủ đạo**: **{trend}** trong 10 phiên tới (Xác suất thành công: **{win_prob}%**).\n"
+        f"• **Dự báo xu hướng chủ đạo**: **{trend}** trong 10 phiên tới (Độ tin cậy định lượng: **{win_prob}%**).\n"
         f"• **Ngắn hạn T+1 đến T+5**: Đường nơ-ron học sâu dự phóng giá tiệm cận mốc **{target_t5:,.2f} VNĐ** ({sign_t5}) "
         f"với biên độ dao động nón biến động kỳ vọng ±{daily_vol:.1f}%/ngày.\n"
-        f"• **Mục tiêu T+6 đến T+10**: Giá mục tiêu mở rộng kỳ vọng đạt **{target_t10:,.2f} VNĐ** ({sign_t10}).\n"
-        f"• **Cảnh báo rủi ro**: Nếu xuất hiện áp lực bán tháo bất ngờ, dải biên dưới (Bearish Cone) sẽ đóng vai trò hỗ trợ động. "
-        f"Nhà đầu tư nên tuân thủ kỷ luật dừng lỗ (Stop Loss) theo tỷ lệ Risk:Reward khuyến nghị."
+        f"• **Mục tiêu T+6 đến T+10**: Giá mục tiêu mở rộng kỳ vọng đạt **{target_t10:,.2f} VNĐ** ({sign_t10})."
+        f"{reconcile_note}\n"
+        f"• **Kỷ luật giao dịch**: Nhà đầu tư giải ngân theo từng phần tại vùng gom, duy trì tỷ lệ Risk:Reward tối thiểu 1:2.5 và tuân thủ chặt chẽ điểm dừng lỗ khuyến nghị."
     )

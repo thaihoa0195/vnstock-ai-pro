@@ -4,6 +4,7 @@ FastAPI Server for Vietnam Stock AI Price Action Web Application
 import os
 import json
 from typing import Optional
+import pandas as pd
 from fastapi import FastAPI, HTTPException, Query, Request
 from fastapi.responses import HTMLResponse, JSONResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
@@ -13,7 +14,8 @@ from app.data_service import (
     POPULAR_STOCKS,
     fetch_history,
     get_stock_info,
-    get_market_indices
+    get_market_indices,
+    warm_up_cache
 )
 from app.analyzer import calculate_ai_analysis, compute_indicators
 from app.chat_service import generate_ai_chat_response
@@ -24,6 +26,11 @@ app = FastAPI(
     description="Nền tảng phân tích kỹ thuật và hành động giá chứng khoán Việt Nam tích hợp AI thông minh",
     version="1.0.0"
 )
+
+# Startup hook to pre-warm cache for instantaneous response
+@app.on_event("startup")
+def on_startup():
+    warm_up_cache()
 
 # Ensure static & templates directory exist
 os.makedirs("static", exist_ok=True)
@@ -40,7 +47,7 @@ class ChatRequest(BaseModel):
     api_key: Optional[str] = None
 
 @app.get("/", response_class=HTMLResponse)
-async def index_page():
+def index_page():
     """
     Serve main application web interface
     """
@@ -50,21 +57,21 @@ async def index_page():
     return HTMLResponse("<h1>VN-Stock AI Pro</h1>", status_code=200)
 
 @app.get("/api/stocks")
-async def list_stocks():
+def list_stocks():
     """
     Return available Vietnamese stock list & sectors
     """
     return {"stocks": POPULAR_STOCKS}
 
 @app.get("/api/market/indices")
-async def market_indices():
+def market_indices():
     """
     Return VN-Index, VN30 status
     """
     return {"indices": get_market_indices()}
 
 @app.get("/api/stock/{symbol}/history")
-async def stock_history(symbol: str, days: int = Query(180, ge=30, le=500)):
+def stock_history(symbol: str, days: int = 180):
     """
     Return OHLCV candlestick data for TradingView Lightweight Charts
     """
@@ -171,7 +178,7 @@ async def stock_history(symbol: str, days: int = Query(180, ge=30, le=500)):
     }
 
 @app.get("/api/stock/{symbol}/analysis")
-async def stock_analysis(symbol: str):
+def stock_analysis(symbol: str):
     """
     Generate AI Technical Analysis & Strategy Report
     """
@@ -186,7 +193,7 @@ async def stock_analysis(symbol: str):
     return analysis
 
 @app.post("/api/stock/{symbol}/chat")
-async def stock_chat(symbol: str, req: ChatRequest):
+def stock_chat(symbol: str, req: ChatRequest):
     """
     Interactive AI Q&A for stock price action
     """
@@ -205,7 +212,7 @@ async def stock_chat(symbol: str, req: ChatRequest):
     return {"symbol": symbol, "answer": answer}
 
 @app.get("/api/stock/{symbol}/forecast")
-async def stock_forecast(symbol: str, days: int = Query(10, ge=3, le=20), model: str = Query("ensemble")):
+def stock_forecast(symbol: str, days: int = 10, model: str = "ensemble"):
     """
     Generate AI Daily Price Path Prediction (T+1 to T+10) using Deep Learning
     """
@@ -218,7 +225,7 @@ async def stock_forecast(symbol: str, days: int = Query(10, ge=3, le=20), model:
     return forecast
 
 @app.get("/api/top-picks")
-async def get_top_picks():
+def get_top_picks():
     """
     Return AI-Screened Top 5 Stock Picks with Highest Profit Potential
     """
@@ -232,7 +239,7 @@ async def get_top_picks():
     return []
 
 @app.get("/api/tunnel-status")
-async def get_tunnel_status():
+def get_tunnel_status():
     """
     Return current public online link if available
     """
@@ -242,7 +249,7 @@ async def get_tunnel_status():
     }
 
 @app.post("/api/set-tunnel-url")
-async def set_tunnel_url(payload: dict):
+def set_tunnel_url(payload: dict):
     global PUBLIC_TUNNEL_URL
     PUBLIC_TUNNEL_URL = payload.get("url")
     return {"status": "ok", "url": PUBLIC_TUNNEL_URL}

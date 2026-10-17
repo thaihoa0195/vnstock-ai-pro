@@ -166,11 +166,12 @@
         <button onclick="selectStock('VNINDEX')" class="ticker-pill px-3 py-1 rounded-lg text-xs font-semibold bg-gray-800 hover:bg-gray-700 text-gray-300 border border-gray-700 transition" data-symbol="VNINDEX">VN-INDEX</button>
         <button onclick="selectStock('FPT')" class="ticker-pill px-3 py-1 rounded-lg text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 transition" data-symbol="FPT">FPT</button>
         <button onclick="selectStock('HPG')" class="ticker-pill px-3 py-1 rounded-lg text-xs font-semibold bg-gray-800 hover:bg-gray-700 text-gray-300 border border-gray-700 transition" data-symbol="HPG">HPG</button>
+        <button onclick="selectStock('MBB')" class="ticker-pill px-3 py-1 rounded-lg text-xs font-semibold bg-gray-800 hover:bg-gray-700 text-gray-300 border border-gray-700 transition" data-symbol="MBB">MBB</button>
+        <button onclick="selectStock('TCB')" class="ticker-pill px-3 py-1 rounded-lg text-xs font-semibold bg-gray-800 hover:bg-gray-700 text-gray-300 border border-gray-700 transition" data-symbol="TCB">TCB</button>
+        <button onclick="selectStock('VIC')" class="ticker-pill px-3 py-1 rounded-lg text-xs font-semibold bg-gray-800 hover:bg-gray-700 text-gray-300 border border-gray-700 transition" data-symbol="VIC">VIC</button>
         <button onclick="selectStock('SSI')" class="ticker-pill px-3 py-1 rounded-lg text-xs font-semibold bg-gray-800 hover:bg-gray-700 text-gray-300 border border-gray-700 transition" data-symbol="SSI">SSI</button>
         <button onclick="selectStock('VCB')" class="ticker-pill px-3 py-1 rounded-lg text-xs font-semibold bg-gray-800 hover:bg-gray-700 text-gray-300 border border-gray-700 transition" data-symbol="VCB">VCB</button>
-        <button onclick="selectStock('TCB')" class="ticker-pill px-3 py-1 rounded-lg text-xs font-semibold bg-gray-800 hover:bg-gray-700 text-gray-300 border border-gray-700 transition" data-symbol="TCB">TCB</button>
         <button onclick="selectStock('MWG')" class="ticker-pill px-3 py-1 rounded-lg text-xs font-semibold bg-gray-800 hover:bg-gray-700 text-gray-300 border border-gray-700 transition" data-symbol="MWG">MWG</button>
-        <button onclick="selectStock('VIC')" class="ticker-pill px-3 py-1 rounded-lg text-xs font-semibold bg-gray-800 hover:bg-gray-700 text-gray-300 border border-gray-700 transition" data-symbol="VIC">VIC</button>
         <button onclick="selectStock('DGC')" class="ticker-pill px-3 py-1 rounded-lg text-xs font-semibold bg-gray-800 hover:bg-gray-700 text-gray-300 border border-gray-700 transition" data-symbol="DGC">DGC</button>
       </div>
 
@@ -1144,15 +1145,17 @@
       });
     }
 
-    // 5. Select Stock & Load Everything
+    // 5. Select Stock & Load Everything (Parallel & Instantaneous UI Feedback)
     async function selectStock(symbol) {
       if (!symbol) return;
       symbol = symbol.trim().toUpperCase();
       currentSymbol = symbol;
 
       // Close dropdown
-      document.getElementById('search-dropdown').classList.add('hidden');
-      document.getElementById('stock-search-input').value = symbol;
+      const searchDropdown = document.getElementById('search-dropdown');
+      if (searchDropdown) searchDropdown.classList.add('hidden');
+      const searchInput = document.getElementById('stock-search-input');
+      if (searchInput) searchInput.value = symbol;
 
       // Update Ticker Pills UI
       document.querySelectorAll('.ticker-pill').forEach(btn => {
@@ -1163,62 +1166,95 @@
         }
       });
 
-      // Update titles
+      // Update titles immediately
       document.getElementById('stock-symbol-title').innerText = symbol;
       document.getElementById('chat-symbol-badge').innerText = symbol;
+
+      // Instant optimistic UI feedback if stock is in Top 5 picks
+      if (topPicksData && topPicksData.length > 0) {
+        const cached = topPicksData.find(p => p.symbol === symbol);
+        if (cached) {
+          document.getElementById('stock-current-price').innerText = formatPriceNum(cached.current_price);
+          document.getElementById('stock-name-subtitle').innerText = `${cached.name} • ${cached.sector || 'Cổ phiếu'}`;
+          const ratingBadge = document.getElementById('ai-rating-badge');
+          if (ratingBadge && cached.rating) {
+            ratingBadge.innerText = cached.rating;
+            ratingBadge.style.color = '#10b981';
+          }
+          if (cached.elliott_wave) {
+            document.getElementById('elliott-wave-title').innerText = cached.elliott_wave.wave || 'Sóng Đẩy';
+            document.getElementById('elliott-wave-desc').innerText = cached.elliott_wave.phase || '';
+            document.getElementById('elliott-target-val').innerText = formatVND(cached.elliott_wave.target);
+          }
+          if (cached.ichimoku) {
+            document.getElementById('ichimoku-cloud-title').innerText = cached.ichimoku.cloud_status || 'Trên Mây';
+            document.getElementById('ichimoku-cloud-desc').innerText = `${cached.ichimoku.cloud_color || ''}`;
+            document.getElementById('ichimoku-tk-val').innerText = cached.ichimoku.tk_signal || '';
+          }
+        }
+      }
 
       // Show loader on chart
       document.getElementById('chart-loader').classList.remove('hidden');
 
-      try {
-        // Fetch History Candles & Indicators
-        const histRes = await fetch(`/api/stock/${symbol}/history?days=${currentDays}`);
-        const histData = await histRes.json();
+      // 1. Fetch Candlesticks & Technical Indicators (Concurrent)
+      const fetchHistoryTask = fetch(`/api/stock/${symbol}/history?days=${currentDays}`)
+        .then(res => res.ok ? res.json() : null)
+        .then(histData => {
+          if (currentSymbol !== symbol || !histData) return;
+          if (histData.candles && histData.candles.length > 0) {
+            candleSeries.setData(histData.candles);
+            volumeSeries.setData(histData.volume || []);
+            if (histData.indicators) {
+              if (histData.indicators.sma20) sma20Series.setData(histData.indicators.sma20);
+              if (histData.indicators.sma50) sma50Series.setData(histData.indicators.sma50);
+              if (histData.indicators.bb_upper) bbUpperSeries.setData(histData.indicators.bb_upper);
+              if (histData.indicators.bb_lower) bbLowerSeries.setData(histData.indicators.bb_lower);
+              if (histData.indicators.rsi) rsiSeries.setData(histData.indicators.rsi);
+              if (histData.indicators.macd_hist) macdHistSeries.setData(histData.indicators.macd_hist);
+              if (histData.indicators.macd) macdLineSeries.setData(histData.indicators.macd);
+              if (histData.indicators.macd_signal) macdSignalSeries.setData(histData.indicators.macd_signal);
 
-        if (histData.candles && histData.candles.length > 0) {
-          candleSeries.setData(histData.candles);
-          volumeSeries.setData(histData.volume);
-          sma20Series.setData(histData.indicators.sma20);
-          sma50Series.setData(histData.indicators.sma50);
-          bbUpperSeries.setData(histData.indicators.bb_upper);
-          bbLowerSeries.setData(histData.indicators.bb_lower);
-          rsiSeries.setData(histData.indicators.rsi);
-          macdHistSeries.setData(histData.indicators.macd_hist);
-          macdLineSeries.setData(histData.indicators.macd);
-          macdSignalSeries.setData(histData.indicators.macd_signal);
+              if (histData.indicators.tenkan && tenkanSeries) tenkanSeries.setData(histData.indicators.tenkan);
+              if (histData.indicators.kijun && kijunSeries) kijunSeries.setData(histData.indicators.kijun);
+              if (histData.indicators.senkou_a && senkouASeries) senkouASeries.setData(histData.indicators.senkou_a);
+              if (histData.indicators.senkou_b && senkouBSeries) senkouBSeries.setData(histData.indicators.senkou_b);
+            }
 
-          // Populate Ichimoku Cloud (Mây Mochi) series
-          if (histData.indicators.tenkan && tenkanSeries) tenkanSeries.setData(histData.indicators.tenkan);
-          if (histData.indicators.kijun && kijunSeries) kijunSeries.setData(histData.indicators.kijun);
-          if (histData.indicators.senkou_a && senkouASeries) senkouASeries.setData(histData.indicators.senkou_a);
-          if (histData.indicators.senkou_b && senkouBSeries) senkouBSeries.setData(histData.indicators.senkou_b);
+            mainChart.timeScale().fitContent();
+            rsiChart.timeScale().fitContent();
+            macdChart.timeScale().fitContent();
 
-          mainChart.timeScale().fitContent();
-          rsiChart.timeScale().fitContent();
-          macdChart.timeScale().fitContent();
+            if (histData.indicators && histData.indicators.rsi && histData.indicators.rsi.length > 0) {
+              const lastRsi = histData.indicators.rsi[histData.indicators.rsi.length - 1];
+              if (lastRsi) document.getElementById('rsi-live-val').innerText = lastRsi.value;
+            }
+            if (histData.indicators && histData.indicators.macd && histData.indicators.macd.length > 0) {
+              const lastMacd = histData.indicators.macd[histData.indicators.macd.length - 1];
+              if (lastMacd) document.getElementById('macd-live-val').innerText = (lastMacd.value >= 0 ? '+' : '') + lastMacd.value;
+            }
+          }
+        })
+        .catch(err => console.error('History load error:', err))
+        .finally(() => {
+          document.getElementById('chart-loader').classList.add('hidden');
+        });
 
-          // Subchart live numbers
-          const lastRsi = histData.indicators.rsi[histData.indicators.rsi.length - 1];
-          if (lastRsi) document.getElementById('rsi-live-val').innerText = lastRsi.value;
-          const lastMacd = histData.indicators.macd[histData.indicators.macd.length - 1];
-          if (lastMacd) document.getElementById('macd-live-val').innerText = (lastMacd.value >= 0 ? '+' : '') + lastMacd.value;
-        }
+      // 2. Fetch AI Technical & Strategy Analysis (Concurrent)
+      const fetchAnalysisTask = fetch(`/api/stock/${symbol}/analysis`)
+        .then(res => res.ok ? res.json() : null)
+        .then(analysis => {
+          if (currentSymbol !== symbol || !analysis) return;
+          currentAnalysisData = analysis;
+          renderAnalysisUI(analysis);
+          renderElliottAndIchimokuUI(analysis);
+        })
+        .catch(err => console.error('Analysis load error:', err));
 
-        // Fetch AI Analysis & Strategy
-        const analysisRes = await fetch(`/api/stock/${symbol}/analysis`);
-        const analysis = await analysisRes.json();
-        currentAnalysisData = analysis;
-        renderAnalysisUI(analysis);
-        renderElliottAndIchimokuUI(analysis);
+      // 3. Fetch Deep Learning Price Path Forecast (Concurrent)
+      const fetchForecastTask = loadForecast(symbol, forecastDays);
 
-        // Fetch AI Daily Price Path Forecast
-        await loadForecast(symbol, forecastDays);
-
-      } catch (e) {
-        console.error('Error fetching stock data:', e);
-      } finally {
-        document.getElementById('chart-loader').classList.add('hidden');
-      }
+      await Promise.allSettled([fetchHistoryTask, fetchAnalysisTask, fetchForecastTask]);
     }
 
     // 6. Render AI Analysis & Strategy Cards
@@ -1302,26 +1338,38 @@
       }
 
       // Update Support/Resistance Price Lines on Chart
-      if (supportLine) candleSeries.removePriceLine(supportLine);
-      if (resistanceLine) candleSeries.removePriceLine(resistanceLine);
+      if (supportLine) {
+        try { candleSeries.removePriceLine(supportLine); } catch (e) {}
+        supportLine = null;
+      }
+      if (resistanceLine) {
+        try { candleSeries.removePriceLine(resistanceLine); } catch (e) {}
+        resistanceLine = null;
+      }
 
-      if (data.levels) {
-        supportLine = candleSeries.createPriceLine({
-          price: data.levels.support_1,
-          color: '#10b981',
-          lineWidth: 1.5,
-          lineStyle: LightweightCharts.LineStyle.Dashed,
-          axisLabelVisible: true,
-          title: 'Hỗ Trợ S1',
-        });
-        resistanceLine = candleSeries.createPriceLine({
-          price: data.levels.resistance_1,
-          color: '#ef4444',
-          lineWidth: 1.5,
-          lineStyle: LightweightCharts.LineStyle.Dashed,
-          axisLabelVisible: true,
-          title: 'Kháng Cự R1',
-        });
+      if (data.levels && typeof data.levels.support_1 === 'number' && !isNaN(data.levels.support_1)) {
+        try {
+          supportLine = candleSeries.createPriceLine({
+            price: data.levels.support_1,
+            color: '#10b981',
+            lineWidth: 1.5,
+            lineStyle: LightweightCharts.LineStyle.Dashed,
+            axisLabelVisible: true,
+            title: 'Hỗ Trợ S1',
+          });
+        } catch (e) {}
+      }
+      if (data.levels && typeof data.levels.resistance_1 === 'number' && !isNaN(data.levels.resistance_1)) {
+        try {
+          resistanceLine = candleSeries.createPriceLine({
+            price: data.levels.resistance_1,
+            color: '#ef4444',
+            lineWidth: 1.5,
+            lineStyle: LightweightCharts.LineStyle.Dashed,
+            axisLabelVisible: true,
+            title: 'Kháng Cự R1',
+          });
+        } catch (e) {}
       }
     }
 

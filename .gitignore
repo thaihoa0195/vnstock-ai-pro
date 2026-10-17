@@ -19,3 +19,4 @@ ENV/
 .idea/
 .vscode/
 *.swp
+push_to_github.bat

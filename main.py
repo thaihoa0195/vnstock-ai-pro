@@ -211,6 +211,23 @@ def stock_chat(symbol: str, req: ChatRequest):
     )
     return {"symbol": symbol, "answer": answer}
 
+@app.get("/api/stock/{symbol}/position-calc")
+def position_calc(symbol: str, capital: float = 100000000.0, risk_pct: float = 2.0):
+    """
+    Calculate Institutional Position Sizing based on Account Capital & Stop Loss Risk
+    """
+    symbol = symbol.upper().strip()
+    df = fetch_history(symbol, days=60)
+    if df is None or df.empty:
+        raise HTTPException(status_code=404, detail="Không có dữ liệu")
+    analysis = calculate_ai_analysis(df, symbol)
+    c = analysis["current_price"]
+    sl = analysis["stop_loss"]
+    tp1 = analysis["target_1"]
+    tp2 = analysis["target_2"]
+    from app.analyzer import calculate_smart_position
+    return calculate_smart_position(capital=capital, risk_pct=risk_pct, current_price=c, stop_loss=sl, tp1=tp1, tp2=tp2)
+
 @app.get("/api/stock/{symbol}/forecast")
 def stock_forecast(symbol: str, days: int = 10, model: str = "ensemble"):
     """

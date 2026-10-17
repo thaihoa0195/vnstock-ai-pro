@@ -141,6 +141,153 @@ def detect_candlestick_patterns(row: pd.Series, prev_row: Optional[pd.Series] = 
 
     return patterns
 
+def analyze_smart_money_vsa(df: pd.DataFrame) -> Dict[str, Any]:
+    """
+    20-year institutional VSA (Volume Spread Analysis) & Smart Money Tracking
+    Detects Accumulation, Stopping Volume, No Supply, SOS Breakout, and Distribution
+    """
+    if df is None or len(df) < 10:
+        return {
+            "vsa_type": "BÌNH THƯỜNG",
+            "vsa_title": "Thanh Khoản Ổn Định",
+            "vsa_desc": "Cung cầu ở trạng thái cân bằng.",
+            "smart_money_score": 50.0,
+            "vol_ratio": 1.0,
+            "signal_color": "#94a3b8"
+        }
+
+    last = df.iloc[-1]
+    prev = df.iloc[-2]
+
+    c = float(last["close"])
+    o = float(last["open"])
+    h = float(last["high"])
+    l = float(last["low"])
+    vol = float(last["volume"])
+
+    vol_sma20 = float(df["volume"].rolling(20, min_periods=1).mean().iloc[-1])
+    vol_ratio = vol / max(1.0, vol_sma20)
+
+    spread = h - l
+    avg_spread = float((df["high"] - df["low"]).rolling(20, min_periods=1).mean().iloc[-1])
+    spread_ratio = spread / max(1e-4, avg_spread)
+
+    # Close position in bar range [0.0 = low of day, 1.0 = high of day]
+    close_pos = (c - l) / max(1e-4, spread)
+
+    # VSA Institutional Footprint Classification
+    if vol_ratio >= 1.35:
+        if close_pos >= 0.65 and c > prev["close"]:
+            vsa_type = "BÙNG NỔ XÁC NHẬN (SOS)"
+            vsa_title = "Dòng Tiền Cá Mập Đẩy Giá (Sign of Strength)"
+            vsa_desc = f"Khối lượng bùng nổ (+{(vol_ratio-1)*100:.0f}% so với TB20) kèm nến đóng sát trần phiên. Dòng tiền tay to áp đảo hoàn toàn phe bán."
+            smart_money_score = 92.0
+            signal_color = "#10b981"
+        elif close_pos <= 0.35 and c < prev["close"]:
+            vsa_type = "ÁP LỰC BÁN (UPTHRUST / XẢ HÀNG)"
+            vsa_title = "Dòng Tiền Lớn Chốt Lời / Phân Phối"
+            vsa_desc = f"Khối lượng đột biến (+{(vol_ratio-1)*100:.0f}% so với TB20) nhưng giá bị ép đóng cửa sát đáy nến. Cảnh báo áp lực ra hàng."
+            smart_money_score = 28.0
+            signal_color = "#ef4444"
+        else:
+            vsa_type = "HẤP THỤ CUNG (ABSORPTION / ĐỠ GIÁ)"
+            vsa_title = "Tay To Hấp Thụ Toàn Bộ Lượng Bán"
+            vsa_desc = f"Khối lượng rất lớn ({vol_ratio:.1f}x TB20) trong biên độ nén giá. Dòng tiền tổ chức đang kê lệnh đỡ giá và gom ròng."
+            smart_money_score = 84.0
+            signal_color = "#06b6d4"
+    elif vol_ratio < 0.7:
+        if spread_ratio < 0.8 and close_pos >= 0.45:
+            vsa_type = "CẠN CUNG KIỂM ĐỊNH (NO SUPPLY TEST)"
+            vsa_title = "Kiểm Định Cạn Cung (Vùng Bật Nảy Cao)"
+            vsa_desc = "Biên độ hẹp kèm thanh khoản teo tóp xác nhận lực bán tháo đã hoàn toàn cạn kiệt. Cổ phiếu sẵn sàng nổ sóng khi có dòng tiền kích hoạt."
+            smart_money_score = 86.0
+            signal_color = "#a855f7"
+        else:
+            vsa_type = "TÍCH LŨY CẠN KIỆT THANH KHOẢN"
+            vsa_title = "Nén Giá Tích Lũy"
+            vsa_desc = "Thanh khoản thấp cho thấy thị trường đang nén chặt, áp lực cung không còn đáng kể."
+            smart_money_score = 66.0
+            signal_color = "#f59e0b"
+    else:
+        if c >= prev["close"] and close_pos > 0.55:
+            smart_money_score = 72.0
+            vsa_type = "CẦU CHỦ ĐỘNG GIA TĂNG"
+            vsa_title = "Lực Cầu Duy Trì Ưu Thế"
+            vsa_desc = "Khối lượng duy trì mức ổn định, phe mua kiểm soát tốt vùng giá đóng cửa."
+            signal_color = "#34d399"
+        else:
+            smart_money_score = 52.0
+            vsa_type = "GIẰNG CO TÍCH LŨY"
+            vsa_title = "Thanh Khoản Trung Bình"
+            vsa_desc = "Cung cầu duy trì ở thế giằng co, chờ đợi phiên xác nhận xu hướng."
+            signal_color = "#94a3b8"
+
+    return {
+        "vsa_type": vsa_type,
+        "vsa_title": vsa_title,
+        "vsa_desc": vsa_desc,
+        "smart_money_score": round(smart_money_score, 1),
+        "vol_ratio": round(vol_ratio, 2),
+        "spread_ratio": round(spread_ratio, 2),
+        "close_pos_pct": round(close_pos * 100, 1),
+        "signal_color": signal_color
+    }
+
+def calculate_smart_position(
+    capital: float, 
+    risk_pct: float, 
+    current_price: float, 
+    stop_loss: float, 
+    tp1: float, 
+    tp2: float
+) -> Dict[str, Any]:
+    """
+    Institutional Capital Management & Position Sizing (Turtle / Minervini formula):
+    Max shares = (Capital * Risk%) / (Current Price - Stop Loss)
+    """
+    if current_price <= stop_loss or capital <= 0:
+        return {
+            "capital": capital,
+            "risk_pct": risk_pct,
+            "max_shares": 100,
+            "total_cost": current_price * 100,
+            "portfolio_weight": 5.0,
+            "max_loss": (current_price - stop_loss) * 100,
+            "profit_tp1": (tp1 - current_price) * 100,
+            "profit_tp2": (tp2 - current_price) * 100,
+            "rr_ratio": "1:2.5"
+        }
+
+    risk_amount = capital * (risk_pct / 100.0)
+    per_share_risk = max(0.1, current_price - stop_loss)
+
+    max_shares = int(risk_amount / per_share_risk)
+    # Round down to standard HOSE/HNX lot of 100
+    max_shares = (max_shares // 100) * 100
+    if max_shares < 100:
+        max_shares = 100
+
+    total_cost = max_shares * current_price
+    portfolio_weight = round(min(100.0, (total_cost / capital) * 100), 1)
+
+    max_loss = max_shares * (current_price - stop_loss)
+    profit_tp1 = max_shares * (tp1 - current_price)
+    profit_tp2 = max_shares * (tp2 - current_price)
+
+    rr_ratio = round((tp1 - current_price) / per_share_risk, 1)
+
+    return {
+        "capital": capital,
+        "risk_pct": risk_pct,
+        "max_shares": max_shares,
+        "total_cost": round(total_cost, 2),
+        "portfolio_weight": portfolio_weight,
+        "max_loss": round(max_loss, 2),
+        "profit_tp1": round(profit_tp1, 2),
+        "profit_tp2": round(profit_tp2, 2),
+        "rr_ratio": f"1:{rr_ratio}"
+    }
+
 def calculate_ai_analysis(df: pd.DataFrame, symbol: str) -> Dict[str, Any]:
     """
     Perform complete AI analysis, calculating score, signals, levels, and narrative report
@@ -388,6 +535,16 @@ def calculate_ai_analysis(df: pd.DataFrame, symbol: str) -> Dict[str, Any]:
         strategy=strategy
     )
 
+    vsa = analyze_smart_money_vsa(df)
+    position_calc = calculate_smart_position(
+        capital=100_000_000,
+        risk_pct=2.0,
+        current_price=c,
+        stop_loss=stop_loss,
+        tp1=tp1,
+        tp2=tp2
+    )
+
     return {
         "symbol": symbol,
         "current_price": c,
@@ -431,6 +588,8 @@ def calculate_ai_analysis(df: pd.DataFrame, symbol: str) -> Dict[str, Any]:
             "fib_500": round(fib_500, 2),
             "fib_618": round(fib_618, 2)
         },
+        "vsa": vsa,
+        "position_sizing": position_calc,
         "ichimoku": ichimoku,
         "elliott_wave": elliott,
         "investment_strategy": strategy,

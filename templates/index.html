@@ -240,6 +240,34 @@
               +2,500 (+1.84%)
             </div>
           </div>
+
+          <!-- Institutional Fundamentals Valuation Bar (P/E, P/B, ROE, EPS, Khối Ngoại) -->
+          <div class="mt-3.5 grid grid-cols-3 gap-1.5 text-[11px] font-mono">
+            <div class="bg-gray-900/90 px-2 py-1.5 rounded-lg border border-gray-800 text-center">
+              <span class="text-gray-500 block text-[9px] font-sans font-medium">P/E Hiện Tại</span>
+              <span id="fund-pe" class="text-white font-bold">5.6x</span>
+            </div>
+            <div class="bg-gray-900/90 px-2 py-1.5 rounded-lg border border-gray-800 text-center">
+              <span class="text-gray-500 block text-[9px] font-sans font-medium">P/B Định Giá</span>
+              <span id="fund-pb" class="text-white font-bold">1.05x</span>
+            </div>
+            <div class="bg-gray-900/90 px-2 py-1.5 rounded-lg border border-gray-800 text-center">
+              <span class="text-gray-500 block text-[9px] font-sans font-medium">ROE Sinh Lời</span>
+              <span id="fund-roe" class="text-emerald-400 font-bold">22.8%</span>
+            </div>
+            <div class="bg-gray-900/90 px-2 py-1.5 rounded-lg border border-gray-800 text-center">
+              <span class="text-gray-500 block text-[9px] font-sans font-medium">Tăng Trưởng EPS</span>
+              <span id="fund-eps" class="text-cyan-400 font-bold">+18.5%</span>
+            </div>
+            <div class="bg-gray-900/90 px-2 py-1.5 rounded-lg border border-gray-800 text-center">
+              <span class="text-gray-500 block text-[9px] font-sans font-medium">Khối Ngoại 5P</span>
+              <span id="fund-foreign" class="text-emerald-400 font-bold">+120 tỷ</span>
+            </div>
+            <div class="bg-gray-900/90 px-2 py-1.5 rounded-lg border border-gray-800 text-center">
+              <span class="text-gray-500 block text-[9px] font-sans font-medium">Vốn Hóa</span>
+              <span id="fund-cap" class="text-gray-300 font-bold">105T</span>
+            </div>
+          </div>
         </div>
 
         <!-- AI Confidence Radial / Meter Card -->
@@ -352,6 +380,104 @@
                 Vượt MA20 ngày
               </span>
             </div>
+          </div>
+
+          <!-- INSTITUTIONAL RADAR: VSA SMART MONEY & POSITION SIZING (2 COLS) -->
+          <div class="mt-4 pt-3 border-t border-gray-800 grid grid-cols-1 md:grid-cols-2 gap-3">
+            
+            <!-- VSA SMART MONEY RADAR -->
+            <div class="bg-gray-900/90 rounded-xl p-3 border border-emerald-500/20 flex flex-col justify-between space-y-2">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-1.5">
+                  <i data-lucide="activity" class="w-4 h-4 text-emerald-400"></i>
+                  <span class="text-xs font-bold text-white uppercase tracking-wide">Radar Dòng Tiền Lớn (VSA)</span>
+                </div>
+                <span id="vsa-badge" class="px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                  BÙNG NỔ (SOS)
+                </span>
+              </div>
+
+              <div>
+                <div class="flex items-center justify-between text-[11px] mb-1">
+                  <span class="text-gray-400">Điểm Gom Hàng Tay To (Smart Money):</span>
+                  <span id="vsa-score" class="font-extrabold text-emerald-400 mono">88/100</span>
+                </div>
+                <div class="w-full bg-gray-800 rounded-full h-2 overflow-hidden">
+                  <div id="vsa-score-bar" class="bg-gradient-to-r from-emerald-500 to-cyan-400 h-2 rounded-full transition-all duration-700" style="width: 88%"></div>
+                </div>
+              </div>
+
+              <div class="bg-gray-950/60 p-2 rounded-lg border border-gray-800/80 text-[11px] leading-relaxed">
+                <span id="vsa-title" class="font-bold text-emerald-300 block mb-0.5">Dòng tiền cá mập đỡ giá mạnh</span>
+                <span id="vsa-desc" class="text-gray-400 block">Khối lượng lớn đột biến trong biên độ nén giá, tổ chức đang hấp thụ hàng.</span>
+              </div>
+            </div>
+
+            <!-- POSITION SIZING & RISK BUDGET CALCULATOR (Minervini / Turtle) -->
+            <div class="bg-gray-900/90 rounded-xl p-3 border border-cyan-500/20 flex flex-col justify-between space-y-2">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-1.5">
+                  <i data-lucide="calculator" class="w-4 h-4 text-cyan-400"></i>
+                  <span class="text-xs font-bold text-white uppercase tracking-wide">Quản Trị Vốn & Lô Lệnh (Minervini)</span>
+                </div>
+                <span class="text-[10px] text-gray-400 mono">Lô chuẩn 100 CP</span>
+              </div>
+
+              <!-- Capital & Risk Inputs -->
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <label class="text-[10px] text-gray-400 block font-medium">Vốn Đầu Tư (VNĐ):</label>
+                  <input
+                    id="calc-capital-input"
+                    type="number"
+                    value="100000000"
+                    step="10000000"
+                    class="w-full bg-gray-950 border border-gray-700 focus:border-cyan-500 rounded-lg px-2 py-1 text-xs text-white mono font-bold focus:outline-none"
+                    oninput="recalcPositionLive()"
+                  />
+                </div>
+                <div>
+                  <label class="text-[10px] text-gray-400 block font-medium">Chấp Nhận Rủi Ro (%):</label>
+                  <select
+                    id="calc-risk-select"
+                    class="w-full bg-gray-950 border border-gray-700 focus:border-cyan-500 rounded-lg px-2 py-1 text-xs text-white mono font-bold focus:outline-none"
+                    onchange="recalcPositionLive()"
+                  >
+                    <option value="1.0">1.0% Vốn (Thận Trọng)</option>
+                    <option value="2.0" selected>2.0% Vốn (Chuẩn Tổ Chức)</option>
+                    <option value="3.0">3.0% Vốn (Tấn Công)</option>
+                    <option value="5.0">5.0% Vốn (Mạo Hiểm)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Quick Capital Pills -->
+              <div class="flex items-center space-x-1 text-[10px]">
+                <span class="text-gray-500">Nhanh:</span>
+                <button type="button" onclick="setCalcCapital(50000000)" class="px-1.5 py-0.5 rounded bg-gray-800 hover:bg-gray-700 text-gray-300">50Tr</button>
+                <button type="button" onclick="setCalcCapital(100000000)" class="px-1.5 py-0.5 rounded bg-cyan-900/40 text-cyan-300 border border-cyan-500/30">100Tr</button>
+                <button type="button" onclick="setCalcCapital(300000000)" class="px-1.5 py-0.5 rounded bg-gray-800 hover:bg-gray-700 text-gray-300">300Tr</button>
+                <button type="button" onclick="setCalcCapital(500000000)" class="px-1.5 py-0.5 rounded bg-gray-800 hover:bg-gray-700 text-gray-300">500Tr</button>
+                <button type="button" onclick="setCalcCapital(1000000000)" class="px-1.5 py-0.5 rounded bg-gray-800 hover:bg-gray-700 text-gray-300">1 Tỷ</button>
+              </div>
+
+              <!-- Live Calculated Metrics Results -->
+              <div class="grid grid-cols-3 gap-1.5 pt-1 text-[10px] font-mono border-t border-gray-800">
+                <div class="bg-gray-950/80 p-1.5 rounded border border-gray-800/80 text-center">
+                  <span class="text-gray-500 block text-[9px] font-sans">Khối Lượng Mua</span>
+                  <span id="calc-max-shares" class="text-white font-extrabold text-xs">300 CP</span>
+                </div>
+                <div class="bg-gray-950/80 p-1.5 rounded border border-gray-800/80 text-center">
+                  <span class="text-gray-500 block text-[9px] font-sans">Rủi Ro Tối Đa</span>
+                  <span id="calc-max-loss" class="text-rose-400 font-bold">-1,950,000 đ</span>
+                </div>
+                <div class="bg-gray-950/80 p-1.5 rounded border border-gray-800/80 text-center">
+                  <span class="text-gray-500 block text-[9px] font-sans">Kỳ Vọng Lãi TP1</span>
+                  <span id="calc-profit-tp1" class="text-emerald-400 font-bold">+1,800,000 đ</span>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
 
@@ -1265,6 +1391,20 @@
       if (data.info) {
         document.getElementById('stock-name-subtitle').innerText = `${data.info.name} • ${data.info.sector}`;
         document.getElementById('stock-exchange-badge').innerText = data.info.exchange;
+
+        // Institutional Fundamentals Valuation Bar
+        const fPe = document.getElementById('fund-pe');
+        if (fPe) fPe.innerText = data.info.pe ? `${data.info.pe}x` : 'N/A';
+        const fPb = document.getElementById('fund-pb');
+        if (fPb) fPb.innerText = data.info.pb ? `${data.info.pb}x` : 'N/A';
+        const fRoe = document.getElementById('fund-roe');
+        if (fRoe) fRoe.innerText = data.info.roe ? `${data.info.roe}%` : 'N/A';
+        const fEps = document.getElementById('fund-eps');
+        if (fEps) fEps.innerText = data.info.eps_growth ? `${data.info.eps_growth > 0 ? '+' : ''}${data.info.eps_growth}%` : 'N/A';
+        const fForeign = document.getElementById('fund-foreign');
+        if (fForeign) fForeign.innerText = data.info.foreign_flow || '+0 tỷ';
+        const fCap = document.getElementById('fund-cap');
+        if (fCap) fCap.innerText = data.info.market_cap || 'N/A';
       }
 
       // Price & Changes
@@ -1371,6 +1511,64 @@
           });
         } catch (e) {}
       }
+
+      // Update VSA Smart Money Radar
+      if (data.vsa) {
+        const vsa = data.vsa;
+        const vsaBadge = document.getElementById('vsa-badge');
+        if (vsaBadge) {
+          vsaBadge.innerText = vsa.vsa_type || 'BÙNG NỔ (SOS)';
+          vsaBadge.style.color = vsa.signal_color || '#10b981';
+          vsaBadge.style.borderColor = `${vsa.signal_color || '#10b981'}40`;
+          vsaBadge.style.backgroundColor = `${vsa.signal_color || '#10b981'}20`;
+        }
+        const vsaScore = vsa.smart_money_score || 50;
+        const scoreElem = document.getElementById('vsa-score');
+        if (scoreElem) scoreElem.innerText = `${vsaScore}/100`;
+        const barElem = document.getElementById('vsa-score-bar');
+        if (barElem) barElem.style.width = `${vsaScore}%`;
+        const titleElem = document.getElementById('vsa-title');
+        if (titleElem) titleElem.innerText = vsa.vsa_title || '';
+        const descElem = document.getElementById('vsa-desc');
+        if (descElem) descElem.innerText = vsa.vsa_desc || '';
+      }
+
+      // Recalculate Live Position Sizing
+      recalcPositionLive();
+    }
+
+    // Interactive Position Sizing Live Calculator
+    function setCalcCapital(val) {
+      const input = document.getElementById('calc-capital-input');
+      if (input) input.value = val;
+      recalcPositionLive();
+    }
+
+    function recalcPositionLive() {
+      if (!currentAnalysisData) return;
+      const capitalInput = document.getElementById('calc-capital-input');
+      const riskSelect = document.getElementById('calc-risk-select');
+      const capital = parseFloat(capitalInput ? capitalInput.value : 100000000) || 100000000;
+      const riskPct = parseFloat(riskSelect ? riskSelect.value : 2.0) || 2.0;
+      const price = currentAnalysisData.current_price || 0;
+      const sl = currentAnalysisData.stop_loss || (price * 0.95);
+      const tp1 = currentAnalysisData.target_1 || (price * 1.05);
+
+      const riskAmount = capital * (riskPct / 100.0);
+      const perShareRisk = Math.max(100, price - sl);
+      let maxShares = Math.floor(riskAmount / perShareRisk);
+      maxShares = Math.floor(maxShares / 100) * 100;
+      if (maxShares < 100) maxShares = 100;
+
+      const maxLoss = maxShares * (price - sl);
+      const profitTp1 = maxShares * (tp1 - price);
+
+      const sharesElem = document.getElementById('calc-max-shares');
+      if (sharesElem) sharesElem.innerText = `${maxShares.toLocaleString('vi-VN')} CP`;
+      const lossElem = document.getElementById('calc-max-loss');
+      if (lossElem) lossElem.innerText = `-${Math.round(maxLoss).toLocaleString('vi-VN')} đ`;
+      const tp1Elem = document.getElementById('calc-profit-tp1');
+      if (tp1Elem) tp1Elem.innerText = `+${Math.round(profitTp1).toLocaleString('vi-VN')} đ`;
     }
 
     // 7. Timeframe change
@@ -1565,10 +1763,25 @@
         document.getElementById('model-spec-epochs').innerText = data.active_model.epochs;
       }
 
-      // Update projected lines on chart
-      if (data.path_base && forecastBaseSeries) forecastBaseSeries.setData(data.path_base);
-      if (data.path_bull && forecastBullSeries) forecastBullSeries.setData(data.path_bull);
-      if (data.path_bear && forecastBearSeries) forecastBearSeries.setData(data.path_bear);
+      // Update projected lines on chart with seamless continuity from last candlestick
+      if (data.path_base && forecastBaseSeries) {
+        const fullBase = (data.last_date && data.last_price)
+          ? [{ time: data.last_date, value: data.last_price }, ...data.path_base]
+          : data.path_base;
+        forecastBaseSeries.setData(fullBase);
+      }
+      if (data.path_bull && forecastBullSeries) {
+        const fullBull = (data.last_date && data.last_price)
+          ? [{ time: data.last_date, value: data.last_price }, ...data.path_bull]
+          : data.path_bull;
+        forecastBullSeries.setData(fullBull);
+      }
+      if (data.path_bear && forecastBearSeries) {
+        const fullBear = (data.last_date && data.last_price)
+          ? [{ time: data.last_date, value: data.last_price }, ...data.path_bear]
+          : data.path_bear;
+        forecastBearSeries.setData(fullBear);
+      }
 
       // Trend badge
       const trendBadge = document.getElementById('forecast-trend-badge');

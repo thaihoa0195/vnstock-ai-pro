@@ -979,11 +979,19 @@
 
     function renderTopPicksUI() {
       const container = document.getElementById('top-picks-container');
-      if (!container || !topPicksData || topPicksData.length === 0) return;
+      if (!container || !topPicksData) return;
 
       const horizon = currentPicksHorizon || 'all';
+      let list = [];
+      if (Array.isArray(topPicksData)) {
+        list = topPicksData;
+      } else if (typeof topPicksData === 'object') {
+        list = topPicksData[horizon] || topPicksData['all'] || [];
+      }
 
-      container.innerHTML = topPicksData.map((p, idx) => {
+      if (list.length === 0) return;
+
+      container.innerHTML = list.map((p, idx) => {
         const priceDisplay = formatVND(p.current_price);
         const h = p.horizons || {};
         const w = h.weekly || {};
@@ -1307,8 +1315,18 @@
       }
 
       // Instant optimistic UI feedback if stock is in Top 5 picks
-      if (topPicksData && topPicksData.length > 0) {
-        const cached = topPicksData.find(p => p.symbol === symbol);
+      if (topPicksData) {
+        let cached = null;
+        if (Array.isArray(topPicksData)) {
+          cached = topPicksData.find(p => p.symbol === symbol);
+        } else if (typeof topPicksData === 'object') {
+          for (const k in topPicksData) {
+            if (Array.isArray(topPicksData[k])) {
+              const found = topPicksData[k].find(p => p.symbol === symbol);
+              if (found) { cached = found; break; }
+            }
+          }
+        }
         if (cached) {
           document.getElementById('stock-current-price').innerText = formatPriceNum(cached.current_price);
           document.getElementById('stock-name-subtitle').innerText = `${cached.name} • ${cached.sector || 'Cổ phiếu'}`;

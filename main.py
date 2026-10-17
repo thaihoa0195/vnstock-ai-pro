@@ -243,25 +243,20 @@ def stock_forecast(symbol: str, days: int = 10, model: str = "ensemble"):
     return forecast
 
 @app.get("/api/top-picks")
-def get_top_picks():
+def get_top_picks(horizon: Optional[str] = Query(None)):
     """
-    Return AI-Screened Top 5 Stock Picks with Highest Profit Potential & live prices
+    Return AI-Screened Top Stock Picks for each investment horizon (all, weekly, monthly, yearly)
     """
     picks_path = "top_5_picks.json"
     if os.path.exists(picks_path):
         try:
             with open(picks_path, "r", encoding="utf-8") as f:
-                picks = json.load(f)
-            for p in picks:
-                sym = p.get("symbol")
-                if sym:
-                    try:
-                        df = fetch_history(sym, days=5)
-                        if df is not None and not df.empty:
-                            p["current_price"] = float(df.iloc[-1]["close"])
-                    except Exception:
-                        pass
-            return picks
+                data = json.load(f)
+            if isinstance(data, dict):
+                if horizon and horizon in data:
+                    return data[horizon]
+                return data
+            return data
         except Exception:
             pass
     return []

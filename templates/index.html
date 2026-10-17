@@ -1243,8 +1243,9 @@
         }
 
         const matches = allStocks.filter(s =>
-          s.symbol.includes(query) || s.name.toUpperCase().includes(query)
-        ).slice(0, 6);
+          (s.symbol && s.symbol.toUpperCase().includes(query)) ||
+          (s.name && s.name.toUpperCase().includes(query))
+        ).slice(0, 8);
 
         if (matches.length === 0) {
           dropdown.classList.add('hidden');
@@ -1295,6 +1296,15 @@
       // Update titles immediately
       document.getElementById('stock-symbol-title').innerText = symbol;
       document.getElementById('chat-symbol-badge').innerText = symbol;
+
+      // Instant optimistic UI feedback from 1523 stocks database
+      if (allStocks && allStocks.length > 0) {
+        const found = allStocks.find(s => s.symbol === symbol);
+        if (found) {
+          document.getElementById('stock-name-subtitle').innerText = `${found.name} • ${found.sector || found.exchange}`;
+          document.getElementById('stock-exchange-badge').innerText = found.exchange || 'HOSE';
+        }
+      }
 
       // Instant optimistic UI feedback if stock is in Top 5 picks
       if (topPicksData && topPicksData.length > 0) {
@@ -1410,6 +1420,19 @@
       // Price & Changes
       const price = data.current_price || 0;
       document.getElementById('stock-current-price').innerText = formatPriceNum(price);
+
+      const chg = data.change !== undefined ? data.change : 0;
+      const chgPct = data.change_pct !== undefined ? data.change_pct : 0;
+      const isUp = chg >= 0;
+      const sign = isUp ? '+' : '';
+      const priceChangeEl = document.getElementById('stock-price-change');
+      if (priceChangeEl) {
+        priceChangeEl.className = `flex items-center text-sm font-bold ${isUp ? 'text-emerald-400' : 'text-rose-400'} mono`;
+        priceChangeEl.innerHTML = `
+          <i data-lucide="${isUp ? 'arrow-up-right' : 'arrow-down-right'}" class="w-4 h-4 mr-0.5"></i>
+          ${sign}${formatPriceNum(chg)} (${sign}${chgPct.toFixed(2)}%)
+        `;
+      }
 
       // AI Score & Rating
       const score = data.score || 50;

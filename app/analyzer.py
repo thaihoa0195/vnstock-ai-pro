@@ -545,9 +545,15 @@ def calculate_ai_analysis(df: pd.DataFrame, symbol: str) -> Dict[str, Any]:
         tp2=tp2
     )
 
+    prev_close = float(prev["close"])
+    chg = round(c - prev_close, 2)
+    chg_pct = round((chg / prev_close) * 100, 2) if prev_close > 0 else 0.0
+
     return {
         "symbol": symbol,
         "current_price": c,
+        "change": chg,
+        "change_pct": chg_pct,
         "open": o,
         "high": h,
         "low": l,

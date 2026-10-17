@@ -12,6 +12,7 @@ from pydantic import BaseModel
 
 from app.data_service import (
     POPULAR_STOCKS,
+    ALL_STOCKS,
     fetch_history,
     get_stock_info,
     get_market_indices,
@@ -59,9 +60,9 @@ def index_page():
 @app.get("/api/stocks")
 def list_stocks():
     """
-    Return available Vietnamese stock list & sectors
+    Return all 1523 Vietnamese stocks & sectors
     """
-    return {"stocks": POPULAR_STOCKS}
+    return {"stocks": ALL_STOCKS if ALL_STOCKS else POPULAR_STOCKS}
 
 @app.get("/api/market/indices")
 def market_indices():
@@ -244,13 +245,23 @@ def stock_forecast(symbol: str, days: int = 10, model: str = "ensemble"):
 @app.get("/api/top-picks")
 def get_top_picks():
     """
-    Return AI-Screened Top 5 Stock Picks with Highest Profit Potential
+    Return AI-Screened Top 5 Stock Picks with Highest Profit Potential & live prices
     """
     picks_path = "top_5_picks.json"
     if os.path.exists(picks_path):
         try:
             with open(picks_path, "r", encoding="utf-8") as f:
-                return json.load(f)
+                picks = json.load(f)
+            for p in picks:
+                sym = p.get("symbol")
+                if sym:
+                    try:
+                        df = fetch_history(sym, days=5)
+                        if df is not None and not df.empty:
+                            p["current_price"] = float(df.iloc[-1]["close"])
+                    except Exception:
+                        pass
+            return picks
         except Exception:
             pass
     return []

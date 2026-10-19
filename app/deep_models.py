@@ -241,21 +241,42 @@ def train_and_predict_deep_models(
     # Incorporate Technical & Strategic Context
     tech_bias = 0.0
     is_bullish = False
+    is_bearish = False
     entry_low = last_price * 0.985
 
     if technical_context:
-        t_score = technical_context.get("score", 50.0)
-        t_elliott = str(technical_context.get("elliott_wave", "")).upper()
-        t_cloud = str(technical_context.get("cloud_position", "")).upper()
+        t_score = float(technical_context.get("score", 50.0))
+        t_rating = str(technical_context.get("rating", "")).upper()
 
-        if t_score >= 70 or "SÓNG 3" in t_elliott or "TRÊN MÂY" in t_cloud or "SÓNG 1" in t_elliott:
-            is_bullish = True
-            # Strategic impulse bias calibrated to technical score
-            tech_bias = 0.0035 + 0.0045 * ((min(95.0, t_score) - 70.0) / 25.0)
-        elif t_score <= 35:
-            tech_bias = -0.004 - 0.003 * ((35.0 - max(5.0, t_score)) / 30.0)
+        # Extract wave & cloud safely from dict or string
+        ew_data = technical_context.get("elliott_wave") or {}
+        if isinstance(ew_data, dict):
+            t_wave_name = str(ew_data.get("current_wave") or ew_data.get("wave") or "").upper()
         else:
-            tech_bias = (t_score - 50.0) / 50.0 * 0.002
+            t_wave_name = str(ew_data).upper()
+
+        ichi_data = technical_context.get("ichimoku") or {}
+        if isinstance(ichi_data, dict):
+            t_cloud = str(ichi_data.get("cloud_status") or ichi_data.get("cloud_position") or "").upper()
+        else:
+            t_cloud = str(ichi_data).upper()
+
+        # Strict classification: Bearish vs Bullish vs Neutral
+        if t_score <= 40.0 or ("BÁN" in t_rating) or ("BEARISH" in t_cloud and t_score < 50.0):
+            is_bearish = True
+            is_bullish = False
+            # Strategic downward drift calibrated to weakness
+            tech_bias = -0.003 - 0.005 * ((40.0 - max(5.0, min(40.0, t_score))) / 35.0)
+        elif t_score >= 65.0 or ("MUA" in t_rating):
+            is_bullish = True
+            is_bearish = False
+            # Strategic upward drift calibrated to technical strength
+            tech_bias = 0.003 + 0.005 * ((min(95.0, max(65.0, t_score)) - 65.0) / 30.0)
+        else:
+            # Neutral / Consolidation
+            is_bullish = False
+            is_bearish = False
+            tech_bias = (t_score - 50.0) / 50.0 * 0.0015
 
         if "entry_zone" in technical_context:
             try:
@@ -267,45 +288,63 @@ def train_and_predict_deep_models(
         if stats["mean_return"] > 0:
             tech_bias = max(0.001, stats["mean_return"] * 0.8)
             is_bullish = True
+        elif stats["mean_return"] < 0:
+            tech_bias = min(-0.001, stats["mean_return"] * 0.8)
+            is_bearish = True
 
     # Harmonize model drifts with technical momentum
-    d_lstm = float(np.clip(0.65 * lstm_raw_drift + 0.35 * tech_bias, -0.02, 0.02))
-    d_gru = float(np.clip(0.65 * gru_raw_drift + 0.35 * tech_bias, -0.02, 0.02))
-    d_trans = float(np.clip(0.65 * trans_raw_drift + 0.35 * tech_bias, -0.02, 0.02))
+    d_lstm = float(np.clip(0.60 * lstm_raw_drift + 0.40 * tech_bias, -0.02, 0.02))
+    d_gru = float(np.clip(0.60 * gru_raw_drift + 0.40 * tech_bias, -0.02, 0.02))
+    d_trans = float(np.clip(0.60 * trans_raw_drift + 0.40 * tech_bias, -0.02, 0.02))
+
+    # Guarantee mathematical drift direction strictly matches the technical signal
+    if is_bullish:
+        d_lstm = max(0.002, d_lstm)
+        d_gru = max(0.002, d_gru)
+        d_trans = max(0.002, d_trans)
+    elif is_bearish:
+        d_lstm = min(-0.002, d_lstm)
+        d_gru = min(-0.002, d_gru)
+        d_trans = min(-0.002, d_trans)
 
     # Ensemble: Weighted combination
     d_ensemble = 0.35 * d_lstm + 0.35 * d_gru + 0.30 * d_trans
 
     def generate_path(drift: float, vol: float, n_days: int) -> Tuple[List[float], List[float], List[float]]:
         path_base, path_bull, path_bear = [], [], []
+
+        tp1_target = None
+        sl_target = None
+        if technical_context:
+            try:
+                tp1_target = float(technical_context.get("target_1") or 0.0)
+                sl_target = float(technical_context.get("stop_loss") or 0.0)
+            except Exception:
+                pass
+
         for step in range(1, n_days + 1):
             s_vol = vol * np.sqrt(step)
 
             if is_bullish:
-                # Realistic price action in an uptrend:
-                # T+1..T+2: Healthy accumulation test in entry zone
-                # T+3..T+5: Turnaround and breakout acceleration
-                # T+6..T+10: Wave expansion towards target
-                if step == 1:
-                    base = max(entry_low, last_price * 0.994)
-                elif step == 2:
-                    base = max(entry_low, last_price * 0.992)
-                elif step == 3:
-                    base = last_price * (1.0 + max(0.003, drift * 1.5))
-                elif step == 4:
-                    base = last_price * (1.0 + max(0.012, drift * 3.5))
-                elif step == 5:
-                    base = last_price * (1.0 + max(0.018, drift * 5.5))
-                else:
-                    growth = max(0.018, drift * 5.5) + max(0.004, drift * 1.2) * (step - 5)
-                    base = last_price * (1.0 + growth)
+                # Upward trajectory following positive momentum without artificial day 1/2 drops
+                drift_eff = max(0.0025, drift)
+                base = last_price * (1.0 + drift_eff * (step ** 0.85))
+                if tp1_target and tp1_target > last_price:
+                    base = min(base, tp1_target * 1.02)
+            elif is_bearish:
+                # Downward trajectory following bearish momentum towards support
+                drift_eff = min(-0.0025, drift)
+                base = last_price * (1.0 + drift_eff * (step ** 0.85))
+                if sl_target and sl_target < last_price:
+                    base = max(base, sl_target * 0.98)
             else:
-                decay = 1.0 / (1.0 + step * 0.04)
+                # Neutral / Sideways consolidation
+                decay = 1.0 / (1.0 + step * 0.05)
                 s_drift = drift * decay
                 base = last_price * (1.0 + s_drift * step)
 
-            bull = max(base * 1.01, base + last_price * 1.645 * s_vol)
-            bear = max(last_price * 0.6, base - last_price * 1.645 * s_vol)
+            bull = max(base * 1.003, base + last_price * 1.645 * s_vol)
+            bear = max(last_price * 0.5, min(base * 0.997, base - last_price * 1.645 * s_vol))
 
             path_base.append(round(base, 2))
             path_bull.append(round(bull, 2))

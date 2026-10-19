@@ -5,830 +5,67 @@
       "name": "Techcombank",
       "sector": "Ngân hàng",
       "exchange": "HOSE",
-      "current_price": 33.2,
+      "current_price": 33.25,
       "score": 95.0,
       "rating": "MUA MẠNH",
-      "entry_zone": "32.9 - 33.2",
+      "entry_zone": "32.83 - 33.25",
       "elliott_wave": {
         "wave": "SÓNG 4 ĐIỀU CHỈNH TÍCH LŨY (Tạo nền chuẩn bị Sóng 5)",
-        "phase": "CORRECTIVE_WAVE_4",
-        "target": 38.02,
-        "support": 31.21
+        "phase": "EXPANSION_WAVE",
+        "target": 41.56,
+        "support": 32.34
       },
       "ichimoku": {
         "cloud_status": "BULLISH",
         "tk_signal": "Tenkan duy trì trên Kijun (Động lượng Tăng Ổn Định)",
         "cloud_color": "Mây Xanh (Kumo Tăng Trưởng)",
-        "kumo_edge": 31.54
+        "kumo_edge": 32.25
       },
       "deep_learning": {
         "model": "Ensemble Deep AI",
-        "accuracy": "91.5%",
-        "loss_mse": "0.00030",
-        "trend": "TĂNG TRƯỞNG MẠNH"
+        "accuracy": "93.8%",
+        "loss_mse": "0.00028",
+        "trend": "TĂNG TRƯỞNG MẠNH (BỨT PHÁ)"
       },
       "horizons": {
         "weekly": {
           "title": "Chiến Lược THEO TUẦN (1 - 4 Tuần)",
           "horizon": "Ngắn Hạn / Swing Trade",
           "action": "GOM MUA THEO ĐỘNG LƯỢNG",
-          "entry_zone": "32.70 - 33.20",
-          "target_price": 35.36,
-          "upside_pct": 6.5,
-          "stop_loss": 31.9,
-          "risk_reward": "1:2.3",
-          "win_probability": "78.5%",
-          "technical_driver": "Tín hiệu Tenkan duy trì trên Kijun (Động lượng Tăng Ổn Định)",
-          "catalyst": "Vận động nến tuần trên đường Tenkan-sen (32.60), động lượng xung lực ngắn hạn duy trì tích cực đón nhịp bứt phá kháng cự gần."
+          "entry_zone": "32.75 - 33.25",
+          "target_price": 34.61,
+          "upside_pct": 4.1,
+          "stop_loss": 32.34,
+          "risk_reward": "1:1.5",
+          "win_probability": "86.8%",
+          "technical_driver": "Tenkan duy trì trên Kijun (Động lượng Tăng Ổn Định)",
+          "catalyst": "Động lượng dòng tiền ngắn hạn và cấu trúc nến duy trì xung lực trên hỗ trợ MA20/Tenkan, đón nhịp bứt phá kháng cự gần."
         },
         "monthly": {
           "title": "Chiến Lược THEO THÁNG (1 - 6 Tháng)",
           "horizon": "Trung Hạn / Vị Thế Sóng Lớn",
           "action": "NẮM GIỮ TỶ TRỌNG CAO / GIA TĂNG",
-          "entry_zone": "32.20 - 33.53",
-          "target_price": 40.5,
-          "upside_pct": 22.0,
-          "stop_loss": 32.05,
-          "risk_reward": "1:3.2",
-          "win_probability": "84.0%",
+          "entry_zone": "32.25 - 33.58",
+          "target_price": 35.51,
+          "upside_pct": 6.8,
+          "stop_loss": 31.69,
+          "risk_reward": "1:1.5",
+          "win_probability": "91.3%",
           "technical_driver": "SÓNG 4 ĐIỀU CHỈNH TÍCH LŨY (Tạo nền chuẩn bị Sóng 5) & Mây Ichimoku",
-          "catalyst": "Hưởng lợi từ chu kỳ SÓNG 4 ĐIỀU CHỈNH TÍCH LŨY (Tạo nền chuẩn bị Sóng 5), hỗ trợ vững chắc từ dải Mây Kumo (32.58) kết hợp cùng dòng tiền tổ chức duy trì mua ròng."
+          "catalyst": "Hưởng lợi từ chu kỳ tăng trưởng theo sóng SÓNG 4 ĐIỀU CHỈNH TÍCH LŨY (Tạo nền chuẩn bị Sóng 5), hỗ trợ vững chắc từ dải Mây Kumo (32.25) kết hợp cùng dòng tiền tổ chức duy trì mua ròng."
         },
         "yearly": {
           "title": "Chiến Lược THEO NĂM (1 - 3 Năm)",
           "horizon": "Dài Hạn / Đầu Tư Tích Sản",
           "action": "TÍCH SẢN TĂNG TRƯỞNG DÀI HẠN",
-          "entry_zone": "Vùng gom tích sản dài hạn: 31.21 - 33.86",
-          "target_price": 51.46,
-          "upside_pct": 55.0,
-          "stop_loss": 27.22,
-          "risk_reward": "1:4.5",
-          "win_probability": "89.5%",
-          "technical_driver": "Mục tiêu Siêu Sóng Fibo 1.618 (39.77 VNĐ)",
-          "catalyst": "Chu kỳ đại sóng Siêu tăng trưởng ngành, định giá P/E chiết khấu sâu so với tiềm năng tăng trưởng EPS 2026-2028, vị thế đầu ngành vững chắc phù hợp chiến lược đầu tư giá trị và tích sản."
-        }
-      }
-    },
-    {
-      "symbol": "FPT",
-      "name": "Tập đoàn FPT",
-      "sector": "Công nghệ & AI",
-      "exchange": "HOSE",
-      "current_price": 58.2,
-      "score": 23.0,
-      "rating": "BÁN MẠNH",
-      "entry_zone": "57.83 - 58.2",
-      "elliott_wave": {
-        "wave": "SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới)",
-        "phase": "CORRECTIVE_ABC",
-        "target": 63.56,
-        "support": 54.71
-      },
-      "ichimoku": {
-        "cloud_status": "BEARISH",
-        "tk_signal": "Tenkan dưới Kijun (Áp lực điều chỉnh còn duy trì)",
-        "cloud_color": "Mây Đỏ (Kumo Điều Chỉnh)",
-        "kumo_edge": 55.29
-      },
-      "deep_learning": {
-        "model": "Ensemble Deep AI",
-        "accuracy": "91.5%",
-        "loss_mse": "0.00030",
-        "trend": "TĂNG TRƯỞNG MẠNH"
-      },
-      "horizons": {
-        "weekly": {
-          "title": "Chiến Lược THEO TUẦN (1 - 4 Tuần)",
-          "horizon": "Ngắn Hạn / Swing Trade",
-          "action": "GOM MUA THEO ĐỘNG LƯỢNG",
-          "entry_zone": "57.33 - 58.20",
-          "target_price": 61.98,
-          "upside_pct": 6.5,
-          "stop_loss": 60.66,
-          "risk_reward": "1:2.3",
-          "win_probability": "78.5%",
-          "technical_driver": "Tín hiệu Tenkan dưới Kijun (Áp lực điều chỉnh còn duy trì)",
-          "catalyst": "Vận động nến tuần trên đường Tenkan-sen (59.00), động lượng xung lực ngắn hạn duy trì tích cực đón nhịp bứt phá kháng cự gần."
-        },
-        "monthly": {
-          "title": "Chiến Lược THEO THÁNG (1 - 6 Tháng)",
-          "horizon": "Trung Hạn / Vị Thế Sóng Lớn",
-          "action": "NẮM GIỮ TỶ TRỌNG CAO / GIA TĂNG",
-          "entry_zone": "56.45 - 58.78",
-          "target_price": 71.0,
-          "upside_pct": 22.0,
-          "stop_loss": 60.45,
-          "risk_reward": "1:3.2",
-          "win_probability": "84.0%",
-          "technical_driver": "SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới) & Mây Ichimoku",
-          "catalyst": "Hưởng lợi từ chu kỳ SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới), hỗ trợ vững chắc từ dải Mây Kumo (61.90) kết hợp cùng dòng tiền tổ chức duy trì mua ròng."
-        },
-        "yearly": {
-          "title": "Chiến Lược THEO NĂM (1 - 3 Năm)",
-          "horizon": "Dài Hạn / Đầu Tư Tích Sản",
-          "action": "TÍCH SẢN TĂNG TRƯỞNG DÀI HẠN",
-          "entry_zone": "Vùng gom tích sản dài hạn: 54.71 - 59.36",
-          "target_price": 90.21,
-          "upside_pct": 55.0,
-          "stop_loss": 47.72,
-          "risk_reward": "1:4.5",
-          "win_probability": "89.5%",
-          "technical_driver": "Mục tiêu Siêu Sóng Fibo 1.618 (76.12 VNĐ)",
-          "catalyst": "Chu kỳ đại sóng Siêu tăng trưởng ngành, định giá P/E chiết khấu sâu so với tiềm năng tăng trưởng EPS 2026-2028, vị thế đầu ngành vững chắc phù hợp chiến lược đầu tư giá trị và tích sản."
-        }
-      }
-    },
-    {
-      "symbol": "HPG",
-      "name": "Tập đoàn Hòa Phát",
-      "sector": "Thép & Vật liệu",
-      "exchange": "HOSE",
-      "current_price": 20.9,
-      "score": 77.0,
-      "rating": "MUA MẠNH",
-      "entry_zone": "20.77 - 20.9",
-      "elliott_wave": {
-        "wave": "SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới)",
-        "phase": "CORRECTIVE_ABC",
-        "target": 22.54,
-        "support": 19.65
-      },
-      "ichimoku": {
-        "cloud_status": "NEUTRAL",
-        "tk_signal": "Tenkan dưới Kijun (Áp lực điều chỉnh còn duy trì)",
-        "cloud_color": "Mây Đỏ (Kumo Điều Chỉnh)",
-        "kumo_edge": 19.85
-      },
-      "deep_learning": {
-        "model": "Ensemble Deep AI",
-        "accuracy": "91.5%",
-        "loss_mse": "0.00030",
-        "trend": "TĂNG TRƯỞNG MẠNH"
-      },
-      "horizons": {
-        "weekly": {
-          "title": "Chiến Lược THEO TUẦN (1 - 4 Tuần)",
-          "horizon": "Ngắn Hạn / Swing Trade",
-          "action": "GOM MUA THEO ĐỘNG LƯỢNG",
-          "entry_zone": "20.59 - 20.90",
-          "target_price": 22.26,
-          "upside_pct": 6.5,
-          "stop_loss": 20.29,
-          "risk_reward": "1:2.3",
-          "win_probability": "78.5%",
-          "technical_driver": "Tín hiệu Tenkan dưới Kijun (Áp lực điều chỉnh còn duy trì)",
-          "catalyst": "Vận động nến tuần trên đường Tenkan-sen (20.45), động lượng xung lực ngắn hạn duy trì tích cực đón nhịp bứt phá kháng cự gần."
-        },
-        "monthly": {
-          "title": "Chiến Lược THEO THÁNG (1 - 6 Tháng)",
-          "horizon": "Trung Hạn / Vị Thế Sóng Lớn",
-          "action": "NẮM GIỮ TỶ TRỌNG CAO / GIA TĂNG",
-          "entry_zone": "20.27 - 21.11",
-          "target_price": 25.5,
-          "upside_pct": 22.0,
-          "stop_loss": 20.58,
-          "risk_reward": "1:3.2",
-          "win_probability": "84.0%",
-          "technical_driver": "SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới) & Mây Ichimoku",
-          "catalyst": "Hưởng lợi từ chu kỳ SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới), hỗ trợ vững chắc từ dải Mây Kumo (21.12) kết hợp cùng dòng tiền tổ chức duy trì mua ròng."
-        },
-        "yearly": {
-          "title": "Chiến Lược THEO NĂM (1 - 3 Năm)",
-          "horizon": "Dài Hạn / Đầu Tư Tích Sản",
-          "action": "TÍCH SẢN TĂNG TRƯỞNG DÀI HẠN",
-          "entry_zone": "Vùng gom tích sản dài hạn: 19.65 - 21.32",
-          "target_price": 32.39,
-          "upside_pct": 55.0,
-          "stop_loss": 17.14,
-          "risk_reward": "1:4.5",
-          "win_probability": "89.5%",
-          "technical_driver": "Mục tiêu Siêu Sóng Fibo 1.618 (27.29 VNĐ)",
-          "catalyst": "Chu kỳ đại sóng Siêu tăng trưởng ngành, định giá P/E chiết khấu sâu so với tiềm năng tăng trưởng EPS 2026-2028, vị thế đầu ngành vững chắc phù hợp chiến lược đầu tư giá trị và tích sản."
-        }
-      }
-    },
-    {
-      "symbol": "MBB",
-      "name": "MBBank",
-      "sector": "Ngân hàng",
-      "exchange": "HOSE",
-      "current_price": 19.85,
-      "score": 75.0,
-      "rating": "MUA MẠNH",
-      "entry_zone": "19.77 - 19.85",
-      "elliott_wave": {
-        "wave": "SÓNG 4 ĐIỀU CHỈNH TÍCH LŨY (Tạo nền chuẩn bị Sóng 5)",
-        "phase": "CORRECTIVE_WAVE_4",
-        "target": 22.9,
-        "support": 18.66
-      },
-      "ichimoku": {
-        "cloud_status": "NEUTRAL",
-        "tk_signal": "Tenkan dưới Kijun (Áp lực điều chỉnh còn duy trì)",
-        "cloud_color": "Mây Đỏ (Kumo Điều Chỉnh)",
-        "kumo_edge": 18.86
-      },
-      "deep_learning": {
-        "model": "Ensemble Deep AI",
-        "accuracy": "91.5%",
-        "loss_mse": "0.00030",
-        "trend": "TĂNG TRƯỞNG MẠNH"
-      },
-      "horizons": {
-        "weekly": {
-          "title": "Chiến Lược THEO TUẦN (1 - 4 Tuần)",
-          "horizon": "Ngắn Hạn / Swing Trade",
-          "action": "GOM MUA THEO ĐỘNG LƯỢNG",
-          "entry_zone": "19.55 - 19.85",
-          "target_price": 21.14,
-          "upside_pct": 6.5,
-          "stop_loss": 19.23,
-          "risk_reward": "1:2.3",
-          "win_probability": "78.5%",
-          "technical_driver": "Tín hiệu Tenkan dưới Kijun (Áp lực điều chỉnh còn duy trì)",
-          "catalyst": "Vận động nến tuần trên đường Tenkan-sen (19.38), động lượng xung lực ngắn hạn duy trì tích cực đón nhịp bứt phá kháng cự gần."
-        },
-        "monthly": {
-          "title": "Chiến Lược THEO THÁNG (1 - 6 Tháng)",
-          "horizon": "Trung Hạn / Vị Thế Sóng Lớn",
-          "action": "NẮM GIỮ TỶ TRỌNG CAO / GIA TĂNG",
-          "entry_zone": "19.25 - 20.05",
-          "target_price": 24.22,
-          "upside_pct": 22.0,
-          "stop_loss": 19.5,
-          "risk_reward": "1:3.2",
-          "win_probability": "84.0%",
-          "technical_driver": "SÓNG 4 ĐIỀU CHỈNH TÍCH LŨY (Tạo nền chuẩn bị Sóng 5) & Mây Ichimoku",
-          "catalyst": "Hưởng lợi từ chu kỳ SÓNG 4 ĐIỀU CHỈNH TÍCH LŨY (Tạo nền chuẩn bị Sóng 5), hỗ trợ vững chắc từ dải Mây Kumo (19.92) kết hợp cùng dòng tiền tổ chức duy trì mua ròng."
-        },
-        "yearly": {
-          "title": "Chiến Lược THEO NĂM (1 - 3 Năm)",
-          "horizon": "Dài Hạn / Đầu Tư Tích Sản",
-          "action": "TÍCH SẢN TĂNG TRƯỞNG DÀI HẠN",
-          "entry_zone": "Vùng gom tích sản dài hạn: 18.66 - 20.25",
-          "target_price": 30.77,
-          "upside_pct": 55.0,
-          "stop_loss": 16.28,
-          "risk_reward": "1:4.5",
-          "win_probability": "89.5%",
-          "technical_driver": "Mục tiêu Siêu Sóng Fibo 1.618 (23.31 VNĐ)",
-          "catalyst": "Chu kỳ đại sóng Siêu tăng trưởng ngành, định giá P/E chiết khấu sâu so với tiềm năng tăng trưởng EPS 2026-2028, vị thế đầu ngành vững chắc phù hợp chiến lược đầu tư giá trị và tích sản."
-        }
-      }
-    },
-    {
-      "symbol": "BSR",
-      "name": "CTCP Lọc hóa dầu Bình Sơn",
-      "sector": "Dầu khí & Lọc hóa dầu",
-      "exchange": "UPCOM",
-      "current_price": 28.35,
-      "score": 49.0,
-      "rating": "QUAN SÁT / NẮM GIỮ",
-      "entry_zone": "28.07 - 28.35",
-      "elliott_wave": {
-        "wave": "SÓNG 2 THOÁI LUI (Tích lũy đáy Fibo 0.5 - 0.618)",
-        "phase": "PULLBACK_WAVE_2",
-        "target": 33.45,
-        "support": 26.65
-      },
-      "ichimoku": {
-        "cloud_status": "BEARISH",
-        "tk_signal": "Tenkan cắt xuống Kijun (Death Cross - Cảnh báo Chốt Lời / Hạ Tỷ Trọng)",
-        "cloud_color": "Mây Xanh (Kumo Tăng Trưởng)",
-        "kumo_edge": 26.93
-      },
-      "deep_learning": {
-        "model": "Ensemble Deep AI",
-        "accuracy": "91.5%",
-        "loss_mse": "0.00030",
-        "trend": "TĂNG TRƯỞNG MẠNH"
-      },
-      "horizons": {
-        "weekly": {
-          "title": "Chiến Lược THEO TUẦN (1 - 4 Tuần)",
-          "horizon": "Ngắn Hạn / Swing Trade",
-          "action": "GOM MUA THEO ĐỘNG LƯỢNG",
-          "entry_zone": "27.92 - 28.35",
-          "target_price": 30.19,
-          "upside_pct": 6.5,
-          "stop_loss": 29.84,
-          "risk_reward": "1:2.3",
-          "win_probability": "78.5%",
-          "technical_driver": "Tín hiệu Tenkan cắt xuống Kijun (Death Cross - Cảnh báo Chốt Lời / Hạ Tỷ Trọng)",
-          "catalyst": "Vận động nến tuần trên đường Tenkan-sen (30.30), động lượng xung lực ngắn hạn duy trì tích cực đón nhịp bứt phá kháng cự gần."
-        },
-        "monthly": {
-          "title": "Chiến Lược THEO THÁNG (1 - 6 Tháng)",
-          "horizon": "Trung Hạn / Vị Thế Sóng Lớn",
-          "action": "NẮM GIỮ TỶ TRỌNG CAO / GIA TĂNG",
-          "entry_zone": "27.50 - 28.63",
-          "target_price": 34.59,
-          "upside_pct": 22.0,
-          "stop_loss": 28.77,
-          "risk_reward": "1:3.2",
-          "win_probability": "84.0%",
-          "technical_driver": "SÓNG 2 THOÁI LUI (Tích lũy đáy Fibo 0.5 - 0.618) & Mây Ichimoku",
-          "catalyst": "Hưởng lợi từ chu kỳ SÓNG 2 THOÁI LUI (Tích lũy đáy Fibo 0.5 - 0.618), hỗ trợ vững chắc từ dải Mây Kumo (30.38) kết hợp cùng dòng tiền tổ chức duy trì mua ròng."
-        },
-        "yearly": {
-          "title": "Chiến Lược THEO NĂM (1 - 3 Năm)",
-          "horizon": "Dài Hạn / Đầu Tư Tích Sản",
-          "action": "TÍCH SẢN TĂNG TRƯỞNG DÀI HẠN",
-          "entry_zone": "Vùng gom tích sản dài hạn: 26.65 - 28.92",
-          "target_price": 43.94,
-          "upside_pct": 55.0,
-          "stop_loss": 23.25,
-          "risk_reward": "1:4.5",
-          "win_probability": "89.5%",
-          "technical_driver": "Mục tiêu Siêu Sóng Fibo 1.618 (40.31 VNĐ)",
-          "catalyst": "Chu kỳ đại sóng Siêu tăng trưởng ngành, định giá P/E chiết khấu sâu so với tiềm năng tăng trưởng EPS 2026-2028, vị thế đầu ngành vững chắc phù hợp chiến lược đầu tư giá trị và tích sản."
-        }
-      }
-    }
-  ],
-  "weekly": [
-    {
-      "symbol": "BSR",
-      "name": "CTCP Lọc hóa dầu Bình Sơn",
-      "sector": "Dầu khí & Lọc hóa dầu",
-      "exchange": "UPCOM",
-      "current_price": 28.35,
-      "score": 49.0,
-      "rating": "QUAN SÁT / NẮM GIỮ",
-      "entry_zone": "28.07 - 28.35",
-      "elliott_wave": {
-        "wave": "SÓNG 2 THOÁI LUI (Tích lũy đáy Fibo 0.5 - 0.618)",
-        "phase": "PULLBACK_WAVE_2",
-        "target": 33.45,
-        "support": 26.65
-      },
-      "ichimoku": {
-        "cloud_status": "BEARISH",
-        "tk_signal": "Tenkan cắt xuống Kijun (Death Cross - Cảnh báo Chốt Lời / Hạ Tỷ Trọng)",
-        "cloud_color": "Mây Xanh (Kumo Tăng Trưởng)",
-        "kumo_edge": 26.93
-      },
-      "deep_learning": {
-        "model": "Ensemble Deep AI",
-        "accuracy": "91.5%",
-        "loss_mse": "0.00030",
-        "trend": "TĂNG TRƯỞNG MẠNH"
-      },
-      "horizons": {
-        "weekly": {
-          "title": "Chiến Lược THEO TUẦN (1 - 4 Tuần)",
-          "horizon": "Ngắn Hạn / Swing Trade",
-          "action": "GOM MUA THEO ĐỘNG LƯỢNG",
-          "entry_zone": "27.92 - 28.35",
-          "target_price": 30.19,
-          "upside_pct": 6.5,
-          "stop_loss": 29.84,
-          "risk_reward": "1:2.3",
-          "win_probability": "78.5%",
-          "technical_driver": "Tín hiệu Tenkan cắt xuống Kijun (Death Cross - Cảnh báo Chốt Lời / Hạ Tỷ Trọng)",
-          "catalyst": "Vận động nến tuần trên đường Tenkan-sen (30.30), động lượng xung lực ngắn hạn duy trì tích cực đón nhịp bứt phá kháng cự gần."
-        },
-        "monthly": {
-          "title": "Chiến Lược THEO THÁNG (1 - 6 Tháng)",
-          "horizon": "Trung Hạn / Vị Thế Sóng Lớn",
-          "action": "NẮM GIỮ TỶ TRỌNG CAO / GIA TĂNG",
-          "entry_zone": "27.50 - 28.63",
-          "target_price": 34.59,
-          "upside_pct": 22.0,
-          "stop_loss": 28.77,
-          "risk_reward": "1:3.2",
-          "win_probability": "84.0%",
-          "technical_driver": "SÓNG 2 THOÁI LUI (Tích lũy đáy Fibo 0.5 - 0.618) & Mây Ichimoku",
-          "catalyst": "Hưởng lợi từ chu kỳ SÓNG 2 THOÁI LUI (Tích lũy đáy Fibo 0.5 - 0.618), hỗ trợ vững chắc từ dải Mây Kumo (30.38) kết hợp cùng dòng tiền tổ chức duy trì mua ròng."
-        },
-        "yearly": {
-          "title": "Chiến Lược THEO NĂM (1 - 3 Năm)",
-          "horizon": "Dài Hạn / Đầu Tư Tích Sản",
-          "action": "TÍCH SẢN TĂNG TRƯỞNG DÀI HẠN",
-          "entry_zone": "Vùng gom tích sản dài hạn: 26.65 - 28.92",
-          "target_price": 43.94,
-          "upside_pct": 55.0,
-          "stop_loss": 23.25,
-          "risk_reward": "1:4.5",
-          "win_probability": "89.5%",
-          "technical_driver": "Mục tiêu Siêu Sóng Fibo 1.618 (40.31 VNĐ)",
-          "catalyst": "Chu kỳ đại sóng Siêu tăng trưởng ngành, định giá P/E chiết khấu sâu so với tiềm năng tăng trưởng EPS 2026-2028, vị thế đầu ngành vững chắc phù hợp chiến lược đầu tư giá trị và tích sản."
-        }
-      }
-    },
-    {
-      "symbol": "SSI",
-      "name": "Chứng khoán SSI",
-      "sector": "Chứng khoán",
-      "exchange": "HOSE",
-      "current_price": 19.45,
-      "score": 18.0,
-      "rating": "BÁN MẠNH",
-      "entry_zone": "19.32 - 19.45",
-      "elliott_wave": {
-        "wave": "SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới)",
-        "phase": "CORRECTIVE_ABC",
-        "target": 20.46,
-        "support": 18.28
-      },
-      "ichimoku": {
-        "cloud_status": "BEARISH",
-        "tk_signal": "Tenkan dưới Kijun (Áp lực điều chỉnh còn duy trì)",
-        "cloud_color": "Mây Đỏ (Kumo Điều Chỉnh)",
-        "kumo_edge": 18.48
-      },
-      "deep_learning": {
-        "model": "Ensemble Deep AI",
-        "accuracy": "91.5%",
-        "loss_mse": "0.00030",
-        "trend": "TĂNG TRƯỞNG MẠNH"
-      },
-      "horizons": {
-        "weekly": {
-          "title": "Chiến Lược THEO TUẦN (1 - 4 Tuần)",
-          "horizon": "Ngắn Hạn / Swing Trade",
-          "action": "GOM MUA THEO ĐỘNG LƯỢNG",
-          "entry_zone": "19.16 - 19.45",
-          "target_price": 20.71,
-          "upside_pct": 6.5,
-          "stop_loss": 19.75,
-          "risk_reward": "1:2.3",
-          "win_probability": "78.5%",
-          "technical_driver": "Tín hiệu Tenkan dưới Kijun (Áp lực điều chỉnh còn duy trì)",
-          "catalyst": "Vận động nến tuần trên đường Tenkan-sen (19.25), động lượng xung lực ngắn hạn duy trì tích cực đón nhịp bứt phá kháng cự gần."
-        },
-        "monthly": {
-          "title": "Chiến Lược THEO THÁNG (1 - 6 Tháng)",
-          "horizon": "Trung Hạn / Vị Thế Sóng Lớn",
-          "action": "NẮM GIỮ TỶ TRỌNG CAO / GIA TĂNG",
-          "entry_zone": "18.87 - 19.64",
-          "target_price": 23.73,
-          "upside_pct": 22.0,
-          "stop_loss": 19.7,
-          "risk_reward": "1:3.2",
-          "win_probability": "84.0%",
-          "technical_driver": "SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới) & Mây Ichimoku",
-          "catalyst": "Hưởng lợi từ chu kỳ SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới), hỗ trợ vững chắc từ dải Mây Kumo (20.20) kết hợp cùng dòng tiền tổ chức duy trì mua ròng."
-        },
-        "yearly": {
-          "title": "Chiến Lược THEO NĂM (1 - 3 Năm)",
-          "horizon": "Dài Hạn / Đầu Tư Tích Sản",
-          "action": "TÍCH SẢN TĂNG TRƯỞNG DÀI HẠN",
-          "entry_zone": "Vùng gom tích sản dài hạn: 18.28 - 19.84",
-          "target_price": 30.15,
-          "upside_pct": 55.0,
-          "stop_loss": 15.95,
-          "risk_reward": "1:4.5",
-          "win_probability": "89.5%",
-          "technical_driver": "Mục tiêu Siêu Sóng Fibo 1.618 (25.49 VNĐ)",
-          "catalyst": "Chu kỳ đại sóng Siêu tăng trưởng ngành, định giá P/E chiết khấu sâu so với tiềm năng tăng trưởng EPS 2026-2028, vị thế đầu ngành vững chắc phù hợp chiến lược đầu tư giá trị và tích sản."
-        }
-      }
-    },
-    {
-      "symbol": "VTP",
-      "name": "Tổng Công ty cổ phần Bưu chính Viettel",
-      "sector": "Cổ phiếu niêm yết",
-      "exchange": "HOSE",
-      "current_price": 46.7,
-      "score": 18.0,
-      "rating": "BÁN MẠNH",
-      "entry_zone": "46.33 - 46.7",
-      "elliott_wave": {
-        "wave": "SÓNG 2 THOÁI LUI (Tích lũy đáy Fibo 0.5 - 0.618)",
-        "phase": "PULLBACK_WAVE_2",
-        "target": 58.1,
-        "support": 43.9
-      },
-      "ichimoku": {
-        "cloud_status": "BEARISH",
-        "tk_signal": "Tenkan dưới Kijun (Áp lực điều chỉnh còn duy trì)",
-        "cloud_color": "Mây Đỏ (Kumo Điều Chỉnh)",
-        "kumo_edge": 44.37
-      },
-      "deep_learning": {
-        "model": "Ensemble Deep AI",
-        "accuracy": "91.5%",
-        "loss_mse": "0.00030",
-        "trend": "TĂNG TRƯỞNG MẠNH"
-      },
-      "horizons": {
-        "weekly": {
-          "title": "Chiến Lược THEO TUẦN (1 - 4 Tuần)",
-          "horizon": "Ngắn Hạn / Swing Trade",
-          "action": "GOM MUA THEO ĐỘNG LƯỢNG",
-          "entry_zone": "46.00 - 46.70",
-          "target_price": 49.74,
-          "upside_pct": 6.5,
-          "stop_loss": 49.0,
-          "risk_reward": "1:2.3",
-          "win_probability": "78.5%",
-          "technical_driver": "Tín hiệu Tenkan dưới Kijun (Áp lực điều chỉnh còn duy trì)",
-          "catalyst": "Vận động nến tuần trên đường Tenkan-sen (48.60), động lượng xung lực ngắn hạn duy trì tích cực đón nhịp bứt phá kháng cự gần."
-        },
-        "monthly": {
-          "title": "Chiến Lược THEO THÁNG (1 - 6 Tháng)",
-          "horizon": "Trung Hạn / Vị Thế Sóng Lớn",
-          "action": "NẮM GIỮ TỶ TRỌNG CAO / GIA TĂNG",
-          "entry_zone": "45.30 - 47.17",
-          "target_price": 58.1,
-          "upside_pct": 24.4,
-          "stop_loss": 49.3,
-          "risk_reward": "1:3.2",
-          "win_probability": "84.0%",
-          "technical_driver": "SÓNG 2 THOÁI LUI (Tích lũy đáy Fibo 0.5 - 0.618) & Mây Ichimoku",
-          "catalyst": "Hưởng lợi từ chu kỳ SÓNG 2 THOÁI LUI (Tích lũy đáy Fibo 0.5 - 0.618), hỗ trợ vững chắc từ dải Mây Kumo (51.55) kết hợp cùng dòng tiền tổ chức duy trì mua ròng."
-        },
-        "yearly": {
-          "title": "Chiến Lược THEO NĂM (1 - 3 Năm)",
-          "horizon": "Dài Hạn / Đầu Tư Tích Sản",
-          "action": "TÍCH SẢN TĂNG TRƯỞNG DÀI HẠN",
-          "entry_zone": "Vùng gom tích sản dài hạn: 43.90 - 47.63",
-          "target_price": 72.39,
-          "upside_pct": 55.0,
-          "stop_loss": 38.29,
-          "risk_reward": "1:4.5",
-          "win_probability": "89.5%",
-          "technical_driver": "Mục tiêu Siêu Sóng Fibo 1.618 (67.18 VNĐ)",
-          "catalyst": "Chu kỳ đại sóng Siêu tăng trưởng ngành, định giá P/E chiết khấu sâu so với tiềm năng tăng trưởng EPS 2026-2028, vị thế đầu ngành vững chắc phù hợp chiến lược đầu tư giá trị và tích sản."
-        }
-      }
-    },
-    {
-      "symbol": "DBC",
-      "name": "CTCP Tập đoàn Dabaco Việt Nam",
-      "sector": "Cổ phiếu niêm yết",
-      "exchange": "HOSE",
-      "current_price": 15.7,
-      "score": 64.0,
-      "rating": "MUA",
-      "entry_zone": "15.6 - 15.7",
-      "elliott_wave": {
-        "wave": "SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới)",
-        "phase": "CORRECTIVE_ABC",
-        "target": 17.62,
-        "support": 14.76
-      },
-      "ichimoku": {
-        "cloud_status": "NEUTRAL",
-        "tk_signal": "Tenkan dưới Kijun (Áp lực điều chỉnh còn duy trì)",
-        "cloud_color": "Mây Đỏ (Kumo Điều Chỉnh)",
-        "kumo_edge": 14.91
-      },
-      "deep_learning": {
-        "model": "Ensemble Deep AI",
-        "accuracy": "91.5%",
-        "loss_mse": "0.00030",
-        "trend": "TĂNG TRƯỞNG MẠNH"
-      },
-      "horizons": {
-        "weekly": {
-          "title": "Chiến Lược THEO TUẦN (1 - 4 Tuần)",
-          "horizon": "Ngắn Hạn / Swing Trade",
-          "action": "GOM MUA THEO ĐỘNG LƯỢNG",
-          "entry_zone": "15.46 - 15.70",
-          "target_price": 16.72,
-          "upside_pct": 6.5,
-          "stop_loss": 15.42,
-          "risk_reward": "1:2.3",
-          "win_probability": "78.5%",
-          "technical_driver": "Tín hiệu Tenkan dưới Kijun (Áp lực điều chỉnh còn duy trì)",
-          "catalyst": "Vận động nến tuần trên đường Tenkan-sen (15.45), động lượng xung lực ngắn hạn duy trì tích cực đón nhịp bứt phá kháng cự gần."
-        },
-        "monthly": {
-          "title": "Chiến Lược THEO THÁNG (1 - 6 Tháng)",
-          "horizon": "Trung Hạn / Vị Thế Sóng Lớn",
-          "action": "NẮM GIỮ TỶ TRỌNG CAO / GIA TĂNG",
-          "entry_zone": "15.23 - 15.86",
-          "target_price": 19.15,
-          "upside_pct": 22.0,
-          "stop_loss": 15.59,
-          "risk_reward": "1:3.2",
-          "win_probability": "84.0%",
-          "technical_driver": "SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới) & Mây Ichimoku",
-          "catalyst": "Hưởng lợi từ chu kỳ SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới), hỗ trợ vững chắc từ dải Mây Kumo (16.32) kết hợp cùng dòng tiền tổ chức duy trì mua ròng."
-        },
-        "yearly": {
-          "title": "Chiến Lược THEO NĂM (1 - 3 Năm)",
-          "horizon": "Dài Hạn / Đầu Tư Tích Sản",
-          "action": "TÍCH SẢN TĂNG TRƯỞNG DÀI HẠN",
-          "entry_zone": "Vùng gom tích sản dài hạn: 14.76 - 16.01",
-          "target_price": 24.34,
-          "upside_pct": 55.0,
-          "stop_loss": 12.87,
-          "risk_reward": "1:4.5",
-          "win_probability": "89.5%",
-          "technical_driver": "Mục tiêu Siêu Sóng Fibo 1.618 (22.02 VNĐ)",
-          "catalyst": "Chu kỳ đại sóng Siêu tăng trưởng ngành, định giá P/E chiết khấu sâu so với tiềm năng tăng trưởng EPS 2026-2028, vị thế đầu ngành vững chắc phù hợp chiến lược đầu tư giá trị và tích sản."
-        }
-      }
-    },
-    {
-      "symbol": "NKG",
-      "name": "CTCP Thép Nam Kim",
-      "sector": "Cổ phiếu niêm yết",
-      "exchange": "HOSE",
-      "current_price": 10.4,
-      "score": 80.0,
-      "rating": "MUA MẠNH",
-      "entry_zone": "10.3 - 10.4",
-      "elliott_wave": {
-        "wave": "SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới)",
-        "phase": "CORRECTIVE_ABC",
-        "target": 11.32,
-        "support": 9.78
-      },
-      "ichimoku": {
-        "cloud_status": "BULLISH",
-        "tk_signal": "Tenkan dưới Kijun (Áp lực điều chỉnh còn duy trì)",
-        "cloud_color": "Mây Đỏ (Kumo Điều Chỉnh)",
-        "kumo_edge": 9.88
-      },
-      "deep_learning": {
-        "model": "Ensemble Deep AI",
-        "accuracy": "91.5%",
-        "loss_mse": "0.00030",
-        "trend": "TĂNG TRƯỞNG MẠNH"
-      },
-      "horizons": {
-        "weekly": {
-          "title": "Chiến Lược THEO TUẦN (1 - 4 Tuần)",
-          "horizon": "Ngắn Hạn / Swing Trade",
-          "action": "GOM MUA THEO ĐỘNG LƯỢNG",
-          "entry_zone": "10.24 - 10.40",
-          "target_price": 11.08,
-          "upside_pct": 6.5,
-          "stop_loss": 9.93,
-          "risk_reward": "1:2.3",
-          "win_probability": "78.5%",
-          "technical_driver": "Tín hiệu Tenkan dưới Kijun (Áp lực điều chỉnh còn duy trì)",
-          "catalyst": "Vận động nến tuần trên đường Tenkan-sen (9.85), động lượng xung lực ngắn hạn duy trì tích cực đón nhịp bứt phá kháng cự gần."
-        },
-        "monthly": {
-          "title": "Chiến Lược THEO THÁNG (1 - 6 Tháng)",
-          "horizon": "Trung Hạn / Vị Thế Sóng Lớn",
-          "action": "NẮM GIỮ TỶ TRỌNG CAO / GIA TĂNG",
-          "entry_zone": "10.09 - 10.50",
-          "target_price": 12.69,
-          "upside_pct": 22.0,
-          "stop_loss": 9.85,
-          "risk_reward": "1:3.2",
-          "win_probability": "84.0%",
-          "technical_driver": "SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới) & Mây Ichimoku",
-          "catalyst": "Hưởng lợi từ chu kỳ SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới), hỗ trợ vững chắc từ dải Mây Kumo (10.20) kết hợp cùng dòng tiền tổ chức duy trì mua ròng."
-        },
-        "yearly": {
-          "title": "Chiến Lược THEO NĂM (1 - 3 Năm)",
-          "horizon": "Dài Hạn / Đầu Tư Tích Sản",
-          "action": "TÍCH SẢN TĂNG TRƯỞNG DÀI HẠN",
-          "entry_zone": "Vùng gom tích sản dài hạn: 9.78 - 10.61",
-          "target_price": 16.12,
-          "upside_pct": 55.0,
-          "stop_loss": 8.53,
-          "risk_reward": "1:4.5",
-          "win_probability": "89.5%",
-          "technical_driver": "Mục tiêu Siêu Sóng Fibo 1.618 (15.07 VNĐ)",
-          "catalyst": "Chu kỳ đại sóng Siêu tăng trưởng ngành, định giá P/E chiết khấu sâu so với tiềm năng tăng trưởng EPS 2026-2028, vị thế đầu ngành vững chắc phù hợp chiến lược đầu tư giá trị và tích sản."
-        }
-      }
-    }
-  ],
-  "monthly": [
-    {
-      "symbol": "TCB",
-      "name": "Techcombank",
-      "sector": "Ngân hàng",
-      "exchange": "HOSE",
-      "current_price": 33.2,
-      "score": 95.0,
-      "rating": "MUA MẠNH",
-      "entry_zone": "32.9 - 33.2",
-      "elliott_wave": {
-        "wave": "SÓNG 4 ĐIỀU CHỈNH TÍCH LŨY (Tạo nền chuẩn bị Sóng 5)",
-        "phase": "CORRECTIVE_WAVE_4",
-        "target": 38.02,
-        "support": 31.21
-      },
-      "ichimoku": {
-        "cloud_status": "BULLISH",
-        "tk_signal": "Tenkan duy trì trên Kijun (Động lượng Tăng Ổn Định)",
-        "cloud_color": "Mây Xanh (Kumo Tăng Trưởng)",
-        "kumo_edge": 31.54
-      },
-      "deep_learning": {
-        "model": "Ensemble Deep AI",
-        "accuracy": "91.5%",
-        "loss_mse": "0.00030",
-        "trend": "TĂNG TRƯỞNG MẠNH"
-      },
-      "horizons": {
-        "weekly": {
-          "title": "Chiến Lược THEO TUẦN (1 - 4 Tuần)",
-          "horizon": "Ngắn Hạn / Swing Trade",
-          "action": "GOM MUA THEO ĐỘNG LƯỢNG",
-          "entry_zone": "32.70 - 33.20",
-          "target_price": 35.36,
-          "upside_pct": 6.5,
-          "stop_loss": 31.9,
-          "risk_reward": "1:2.3",
-          "win_probability": "78.5%",
-          "technical_driver": "Tín hiệu Tenkan duy trì trên Kijun (Động lượng Tăng Ổn Định)",
-          "catalyst": "Vận động nến tuần trên đường Tenkan-sen (32.60), động lượng xung lực ngắn hạn duy trì tích cực đón nhịp bứt phá kháng cự gần."
-        },
-        "monthly": {
-          "title": "Chiến Lược THEO THÁNG (1 - 6 Tháng)",
-          "horizon": "Trung Hạn / Vị Thế Sóng Lớn",
-          "action": "NẮM GIỮ TỶ TRỌNG CAO / GIA TĂNG",
-          "entry_zone": "32.20 - 33.53",
-          "target_price": 40.5,
-          "upside_pct": 22.0,
-          "stop_loss": 32.05,
-          "risk_reward": "1:3.2",
-          "win_probability": "84.0%",
-          "technical_driver": "SÓNG 4 ĐIỀU CHỈNH TÍCH LŨY (Tạo nền chuẩn bị Sóng 5) & Mây Ichimoku",
-          "catalyst": "Hưởng lợi từ chu kỳ SÓNG 4 ĐIỀU CHỈNH TÍCH LŨY (Tạo nền chuẩn bị Sóng 5), hỗ trợ vững chắc từ dải Mây Kumo (32.58) kết hợp cùng dòng tiền tổ chức duy trì mua ròng."
-        },
-        "yearly": {
-          "title": "Chiến Lược THEO NĂM (1 - 3 Năm)",
-          "horizon": "Dài Hạn / Đầu Tư Tích Sản",
-          "action": "TÍCH SẢN TĂNG TRƯỞNG DÀI HẠN",
-          "entry_zone": "Vùng gom tích sản dài hạn: 31.21 - 33.86",
-          "target_price": 51.46,
-          "upside_pct": 55.0,
-          "stop_loss": 27.22,
-          "risk_reward": "1:4.5",
-          "win_probability": "89.5%",
-          "technical_driver": "Mục tiêu Siêu Sóng Fibo 1.618 (39.77 VNĐ)",
-          "catalyst": "Chu kỳ đại sóng Siêu tăng trưởng ngành, định giá P/E chiết khấu sâu so với tiềm năng tăng trưởng EPS 2026-2028, vị thế đầu ngành vững chắc phù hợp chiến lược đầu tư giá trị và tích sản."
-        }
-      }
-    },
-    {
-      "symbol": "HPG",
-      "name": "Tập đoàn Hòa Phát",
-      "sector": "Thép & Vật liệu",
-      "exchange": "HOSE",
-      "current_price": 20.9,
-      "score": 77.0,
-      "rating": "MUA MẠNH",
-      "entry_zone": "20.77 - 20.9",
-      "elliott_wave": {
-        "wave": "SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới)",
-        "phase": "CORRECTIVE_ABC",
-        "target": 22.54,
-        "support": 19.65
-      },
-      "ichimoku": {
-        "cloud_status": "NEUTRAL",
-        "tk_signal": "Tenkan dưới Kijun (Áp lực điều chỉnh còn duy trì)",
-        "cloud_color": "Mây Đỏ (Kumo Điều Chỉnh)",
-        "kumo_edge": 19.85
-      },
-      "deep_learning": {
-        "model": "Ensemble Deep AI",
-        "accuracy": "91.5%",
-        "loss_mse": "0.00030",
-        "trend": "TĂNG TRƯỞNG MẠNH"
-      },
-      "horizons": {
-        "weekly": {
-          "title": "Chiến Lược THEO TUẦN (1 - 4 Tuần)",
-          "horizon": "Ngắn Hạn / Swing Trade",
-          "action": "GOM MUA THEO ĐỘNG LƯỢNG",
-          "entry_zone": "20.59 - 20.90",
-          "target_price": 22.26,
-          "upside_pct": 6.5,
-          "stop_loss": 20.29,
-          "risk_reward": "1:2.3",
-          "win_probability": "78.5%",
-          "technical_driver": "Tín hiệu Tenkan dưới Kijun (Áp lực điều chỉnh còn duy trì)",
-          "catalyst": "Vận động nến tuần trên đường Tenkan-sen (20.45), động lượng xung lực ngắn hạn duy trì tích cực đón nhịp bứt phá kháng cự gần."
-        },
-        "monthly": {
-          "title": "Chiến Lược THEO THÁNG (1 - 6 Tháng)",
-          "horizon": "Trung Hạn / Vị Thế Sóng Lớn",
-          "action": "NẮM GIỮ TỶ TRỌNG CAO / GIA TĂNG",
-          "entry_zone": "20.27 - 21.11",
-          "target_price": 25.5,
-          "upside_pct": 22.0,
-          "stop_loss": 20.58,
-          "risk_reward": "1:3.2",
-          "win_probability": "84.0%",
-          "technical_driver": "SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới) & Mây Ichimoku",
-          "catalyst": "Hưởng lợi từ chu kỳ SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới), hỗ trợ vững chắc từ dải Mây Kumo (21.12) kết hợp cùng dòng tiền tổ chức duy trì mua ròng."
-        },
-        "yearly": {
-          "title": "Chiến Lược THEO NĂM (1 - 3 Năm)",
-          "horizon": "Dài Hạn / Đầu Tư Tích Sản",
-          "action": "TÍCH SẢN TĂNG TRƯỞNG DÀI HẠN",
-          "entry_zone": "Vùng gom tích sản dài hạn: 19.65 - 21.32",
-          "target_price": 32.39,
-          "upside_pct": 55.0,
-          "stop_loss": 17.14,
-          "risk_reward": "1:4.5",
-          "win_probability": "89.5%",
-          "technical_driver": "Mục tiêu Siêu Sóng Fibo 1.618 (27.29 VNĐ)",
-          "catalyst": "Chu kỳ đại sóng Siêu tăng trưởng ngành, định giá P/E chiết khấu sâu so với tiềm năng tăng trưởng EPS 2026-2028, vị thế đầu ngành vững chắc phù hợp chiến lược đầu tư giá trị và tích sản."
+          "entry_zone": "Vùng gom tích sản dài hạn: 31.59 - 33.91",
+          "target_price": 38.9,
+          "upside_pct": 17.0,
+          "stop_loss": 29.75,
+          "risk_reward": "1:1.6",
+          "win_probability": "93.0%",
+          "technical_driver": "Mục tiêu Siêu Sóng Fibo 1.618 (38.9 VNĐ)",
+          "catalyst": "Chu kỳ đại sóng Siêu tăng trưởng ngành Ngân hàng, định giá P/E chiết khấu sâu so với tiềm năng tăng trưởng EPS 2026-2028, vị thế đầu ngành vững chắc phù hợp chiến lược đầu tư giá trị và tích sản."
         }
       }
     },
@@ -837,276 +74,205 @@
       "name": "Thế Giới Di Động",
       "sector": "Bán lẻ",
       "exchange": "HOSE",
-      "current_price": 73.9,
-      "score": 85.0,
+      "current_price": 74.2,
+      "score": 93.0,
       "rating": "MUA MẠNH",
-      "entry_zone": "73.17 - 73.9",
+      "entry_zone": "73.77 - 74.2",
       "elliott_wave": {
         "wave": "SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới)",
-        "phase": "CORRECTIVE_ABC",
-        "target": 72.08,
-        "support": 69.47
+        "phase": "EXPANSION_WAVE",
+        "target": 92.75,
+        "support": 72.66
       },
       "ichimoku": {
         "cloud_status": "BULLISH",
         "tk_signal": "Tenkan duy trì trên Kijun (Động lượng Tăng Ổn Định)",
         "cloud_color": "Mây Xanh (Kumo Tăng Trưởng)",
-        "kumo_edge": 70.2
+        "kumo_edge": 71.97
       },
       "deep_learning": {
         "model": "Ensemble Deep AI",
-        "accuracy": "91.5%",
-        "loss_mse": "0.00030",
-        "trend": "TĂNG TRƯỞNG MẠNH"
+        "accuracy": "92.2%",
+        "loss_mse": "0.00028",
+        "trend": "TĂNG TRƯỞNG MẠNH (BỨT PHÁ)"
       },
       "horizons": {
         "weekly": {
           "title": "Chiến Lược THEO TUẦN (1 - 4 Tuần)",
           "horizon": "Ngắn Hạn / Swing Trade",
           "action": "GOM MUA THEO ĐỘNG LƯỢNG",
-          "entry_zone": "72.79 - 73.90",
-          "target_price": 78.7,
-          "upside_pct": 6.5,
-          "stop_loss": 71.05,
-          "risk_reward": "1:2.3",
-          "win_probability": "78.5%",
-          "technical_driver": "Tín hiệu Tenkan duy trì trên Kijun (Động lượng Tăng Ổn Định)",
-          "catalyst": "Vận động nến tuần trên đường Tenkan-sen (74.90), động lượng xung lực ngắn hạn duy trì tích cực đón nhịp bứt phá kháng cự gần."
+          "entry_zone": "73.09 - 74.2",
+          "target_price": 76.5,
+          "upside_pct": 3.1,
+          "stop_loss": 72.66,
+          "risk_reward": "1:1.5",
+          "win_probability": "85.2%",
+          "technical_driver": "Tenkan duy trì trên Kijun (Động lượng Tăng Ổn Định)",
+          "catalyst": "Động lượng dòng tiền ngắn hạn và cấu trúc nến duy trì xung lực trên hỗ trợ MA20/Tenkan, đón nhịp bứt phá kháng cự gần."
         },
         "monthly": {
           "title": "Chiến Lược THEO THÁNG (1 - 6 Tháng)",
           "horizon": "Trung Hạn / Vị Thế Sóng Lớn",
           "action": "NẮM GIỮ TỶ TRỌNG CAO / GIA TĂNG",
-          "entry_zone": "71.68 - 74.64",
-          "target_price": 90.16,
-          "upside_pct": 22.0,
-          "stop_loss": 72.5,
-          "risk_reward": "1:3.2",
-          "win_probability": "84.0%",
+          "entry_zone": "71.97 - 74.94",
+          "target_price": 78.06,
+          "upside_pct": 5.2,
+          "stop_loss": 71.21,
+          "risk_reward": "1:1.3",
+          "win_probability": "89.7%",
           "technical_driver": "SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới) & Mây Ichimoku",
-          "catalyst": "Hưởng lợi từ chu kỳ SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới), hỗ trợ vững chắc từ dải Mây Kumo (73.70) kết hợp cùng dòng tiền tổ chức duy trì mua ròng."
+          "catalyst": "Hưởng lợi từ chu kỳ tăng trưởng theo sóng SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới), hỗ trợ vững chắc từ dải Mây Kumo (71.97) kết hợp cùng dòng tiền tổ chức duy trì mua ròng."
         },
         "yearly": {
           "title": "Chiến Lược THEO NĂM (1 - 3 Năm)",
           "horizon": "Dài Hạn / Đầu Tư Tích Sản",
           "action": "TÍCH SẢN TĂNG TRƯỞNG DÀI HẠN",
-          "entry_zone": "Vùng gom tích sản dài hạn: 69.47 - 75.38",
-          "target_price": 114.55,
-          "upside_pct": 55.0,
-          "stop_loss": 60.6,
-          "risk_reward": "1:4.5",
-          "win_probability": "89.5%",
-          "technical_driver": "Mục tiêu Siêu Sóng Fibo 1.618 (90.45 VNĐ)",
-          "catalyst": "Chu kỳ đại sóng Siêu tăng trưởng ngành, định giá P/E chiết khấu sâu so với tiềm năng tăng trưởng EPS 2026-2028, vị thế đầu ngành vững chắc phù hợp chiến lược đầu tư giá trị và tích sản."
+          "entry_zone": "Vùng gom tích sản dài hạn: 70.49 - 75.68",
+          "target_price": 83.85,
+          "upside_pct": 13.0,
+          "stop_loss": 66.85,
+          "risk_reward": "1:1.3",
+          "win_probability": "93.0%",
+          "technical_driver": "Mục tiêu Siêu Sóng Fibo 1.618 (83.85 VNĐ)",
+          "catalyst": "Chu kỳ đại sóng Siêu tăng trưởng ngành Bán lẻ, định giá P/E chiết khấu sâu so với tiềm năng tăng trưởng EPS 2026-2028, vị thế đầu ngành vững chắc phù hợp chiến lược đầu tư giá trị và tích sản."
         }
       }
     },
     {
-      "symbol": "DGC",
-      "name": "Hóa chất Đức Giang",
-      "sector": "Hóa chất & Bán dẫn",
+      "symbol": "MSN",
+      "name": "Masan Group",
+      "sector": "Tiêu dùng",
       "exchange": "HOSE",
-      "current_price": 32.8,
-      "score": 18.0,
-      "rating": "BÁN MẠNH",
-      "entry_zone": "32.25 - 32.8",
+      "current_price": 72.4,
+      "score": 91.0,
+      "rating": "MUA MẠNH",
+      "entry_zone": "71.47 - 72.4",
       "elliott_wave": {
-        "wave": "SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới)",
-        "phase": "CORRECTIVE_ABC",
-        "target": 38.45,
-        "support": 30.83
+        "wave": "SÓNG 4 ĐIỀU CHỈNH TÍCH LŨY (Tạo nền chuẩn bị Sóng 5)",
+        "phase": "EXPANSION_WAVE",
+        "target": 90.5,
+        "support": 70.39
       },
       "ichimoku": {
-        "cloud_status": "BEARISH",
-        "tk_signal": "Tenkan dưới Kijun (Áp lực điều chỉnh còn duy trì)",
-        "cloud_color": "Mây Đỏ (Kumo Điều Chỉnh)",
-        "kumo_edge": 31.16
-      },
-      "deep_learning": {
-        "model": "Ensemble Deep AI",
-        "accuracy": "91.5%",
-        "loss_mse": "0.00030",
-        "trend": "TĂNG TRƯỞNG MẠNH"
-      },
-      "horizons": {
-        "weekly": {
-          "title": "Chiến Lược THEO TUẦN (1 - 4 Tuần)",
-          "horizon": "Ngắn Hạn / Swing Trade",
-          "action": "GOM MUA THEO ĐỘNG LƯỢNG",
-          "entry_zone": "32.31 - 32.80",
-          "target_price": 34.93,
-          "upside_pct": 6.5,
-          "stop_loss": 35.03,
-          "risk_reward": "1:2.3",
-          "win_probability": "78.5%",
-          "technical_driver": "Tín hiệu Tenkan dưới Kijun (Áp lực điều chỉnh còn duy trì)",
-          "catalyst": "Vận động nến tuần trên đường Tenkan-sen (33.65), động lượng xung lực ngắn hạn duy trì tích cực đón nhịp bứt phá kháng cự gần."
-        },
-        "monthly": {
-          "title": "Chiến Lược THEO THÁNG (1 - 6 Tháng)",
-          "horizon": "Trung Hạn / Vị Thế Sóng Lớn",
-          "action": "NẮM GIỮ TỶ TRỌNG CAO / GIA TĂNG",
-          "entry_zone": "31.82 - 33.13",
-          "target_price": 40.02,
-          "upside_pct": 22.0,
-          "stop_loss": 34.69,
-          "risk_reward": "1:3.2",
-          "win_probability": "84.0%",
-          "technical_driver": "SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới) & Mây Ichimoku",
-          "catalyst": "Hưởng lợi từ chu kỳ SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới), hỗ trợ vững chắc từ dải Mây Kumo (35.95) kết hợp cùng dòng tiền tổ chức duy trì mua ròng."
-        },
-        "yearly": {
-          "title": "Chiến Lược THEO NĂM (1 - 3 Năm)",
-          "horizon": "Dài Hạn / Đầu Tư Tích Sản",
-          "action": "TÍCH SẢN TĂNG TRƯỞNG DÀI HẠN",
-          "entry_zone": "Vùng gom tích sản dài hạn: 30.83 - 33.46",
-          "target_price": 52.58,
-          "upside_pct": 60.3,
-          "stop_loss": 26.9,
-          "risk_reward": "1:4.5",
-          "win_probability": "89.5%",
-          "technical_driver": "Mục tiêu Siêu Sóng Fibo 1.618 (52.58 VNĐ)",
-          "catalyst": "Chu kỳ đại sóng Siêu tăng trưởng ngành, định giá P/E chiết khấu sâu so với tiềm năng tăng trưởng EPS 2026-2028, vị thế đầu ngành vững chắc phù hợp chiến lược đầu tư giá trị và tích sản."
-        }
-      }
-    },
-    {
-      "symbol": "PVS",
-      "name": "Tổng Công ty cổ phần Dịch vụ Kỹ thuật Dầu khí Việt Nam",
-      "sector": "Cổ phiếu niêm yết",
-      "exchange": "HNX",
-      "current_price": 31.4,
-      "score": 54.0,
-      "rating": "QUAN SÁT / NẮM GIỮ",
-      "entry_zone": "30.77 - 31.4",
-      "elliott_wave": {
-        "wave": "SÓNG 2 THOÁI LUI (Tích lũy đáy Fibo 0.5 - 0.618)",
-        "phase": "PULLBACK_WAVE_2",
-        "target": 35.3,
-        "support": 29.52
-      },
-      "ichimoku": {
-        "cloud_status": "NEUTRAL",
-        "tk_signal": "Tenkan cắt xuống Kijun (Death Cross - Cảnh báo Chốt Lời / Hạ Tỷ Trọng)",
+        "cloud_status": "BULLISH",
+        "tk_signal": "Tenkan duy trì trên Kijun (Động lượng Tăng Ổn Định)",
         "cloud_color": "Mây Xanh (Kumo Tăng Trưởng)",
-        "kumo_edge": 29.83
+        "kumo_edge": 70.23
       },
       "deep_learning": {
         "model": "Ensemble Deep AI",
-        "accuracy": "91.5%",
-        "loss_mse": "0.00030",
-        "trend": "TĂNG TRƯỞNG MẠNH"
+        "accuracy": "91.4%",
+        "loss_mse": "0.00028",
+        "trend": "TĂNG TRƯỞNG MẠNH (BỨT PHÁ)"
       },
       "horizons": {
         "weekly": {
           "title": "Chiến Lược THEO TUẦN (1 - 4 Tuần)",
           "horizon": "Ngắn Hạn / Swing Trade",
           "action": "GOM MUA THEO ĐỘNG LƯỢNG",
-          "entry_zone": "30.93 - 31.40",
-          "target_price": 33.44,
-          "upside_pct": 6.5,
-          "stop_loss": 31.46,
-          "risk_reward": "1:2.3",
-          "win_probability": "78.5%",
-          "technical_driver": "Tín hiệu Tenkan cắt xuống Kijun (Death Cross - Cảnh báo Chốt Lời / Hạ Tỷ Trọng)",
-          "catalyst": "Vận động nến tuần trên đường Tenkan-sen (32.05), động lượng xung lực ngắn hạn duy trì tích cực đón nhịp bứt phá kháng cự gần."
+          "entry_zone": "71.31 - 72.4",
+          "target_price": 75.44,
+          "upside_pct": 4.2,
+          "stop_loss": 70.39,
+          "risk_reward": "1:1.5",
+          "win_probability": "84.4%",
+          "technical_driver": "Tenkan duy trì trên Kijun (Động lượng Tăng Ổn Định)",
+          "catalyst": "Động lượng dòng tiền ngắn hạn và cấu trúc nến duy trì xung lực trên hỗ trợ MA20/Tenkan, đón nhịp bứt phá kháng cự gần."
         },
         "monthly": {
           "title": "Chiến Lược THEO THÁNG (1 - 6 Tháng)",
           "horizon": "Trung Hạn / Vị Thế Sóng Lớn",
           "action": "NẮM GIỮ TỶ TRỌNG CAO / GIA TĂNG",
-          "entry_zone": "30.46 - 31.71",
-          "target_price": 38.31,
-          "upside_pct": 22.0,
-          "stop_loss": 30.94,
-          "risk_reward": "1:3.2",
-          "win_probability": "84.0%",
-          "technical_driver": "SÓNG 2 THOÁI LUI (Tích lũy đáy Fibo 0.5 - 0.618) & Mây Ichimoku",
-          "catalyst": "Hưởng lợi từ chu kỳ SÓNG 2 THOÁI LUI (Tích lũy đáy Fibo 0.5 - 0.618), hỗ trợ vững chắc từ dải Mây Kumo (32.07) kết hợp cùng dòng tiền tổ chức duy trì mua ròng."
+          "entry_zone": "70.23 - 73.12",
+          "target_price": 77.4,
+          "upside_pct": 6.9,
+          "stop_loss": 68.98,
+          "risk_reward": "1:1.5",
+          "win_probability": "88.9%",
+          "technical_driver": "SÓNG 4 ĐIỀU CHỈNH TÍCH LŨY (Tạo nền chuẩn bị Sóng 5) & Mây Ichimoku",
+          "catalyst": "Hưởng lợi từ chu kỳ tăng trưởng theo sóng SÓNG 4 ĐIỀU CHỈNH TÍCH LŨY (Tạo nền chuẩn bị Sóng 5), hỗ trợ vững chắc từ dải Mây Kumo (70.23) kết hợp cùng dòng tiền tổ chức duy trì mua ròng."
         },
         "yearly": {
           "title": "Chiến Lược THEO NĂM (1 - 3 Năm)",
           "horizon": "Dài Hạn / Đầu Tư Tích Sản",
           "action": "TÍCH SẢN TĂNG TRƯỞNG DÀI HẠN",
-          "entry_zone": "Vùng gom tích sản dài hạn: 29.52 - 32.03",
-          "target_price": 48.67,
-          "upside_pct": 55.0,
-          "stop_loss": 25.75,
-          "risk_reward": "1:4.5",
-          "win_probability": "89.5%",
-          "technical_driver": "Mục tiêu Siêu Sóng Fibo 1.618 (40.69 VNĐ)",
-          "catalyst": "Chu kỳ đại sóng Siêu tăng trưởng ngành, định giá P/E chiết khấu sâu so với tiềm năng tăng trưởng EPS 2026-2028, vị thế đầu ngành vững chắc phù hợp chiến lược đầu tư giá trị và tích sản."
+          "entry_zone": "Vùng gom tích sản dài hạn: 68.78 - 73.85",
+          "target_price": 84.85,
+          "upside_pct": 17.2,
+          "stop_loss": 64.76,
+          "risk_reward": "1:1.6",
+          "win_probability": "92.9%",
+          "technical_driver": "Mục tiêu Siêu Sóng Fibo 1.618 (84.85 VNĐ)",
+          "catalyst": "Chu kỳ đại sóng Siêu tăng trưởng ngành Tiêu dùng, định giá P/E chiết khấu sâu so với tiềm năng tăng trưởng EPS 2026-2028, vị thế đầu ngành vững chắc phù hợp chiến lược đầu tư giá trị và tích sản."
         }
       }
-    }
-  ],
-  "yearly": [
+    },
     {
-      "symbol": "FPT",
-      "name": "Tập đoàn FPT",
-      "sector": "Công nghệ & AI",
+      "symbol": "FRT",
+      "name": "FPT Retail (Long Châu)",
+      "sector": "Bán lẻ & Dược",
       "exchange": "HOSE",
-      "current_price": 58.2,
-      "score": 23.0,
-      "rating": "BÁN MẠNH",
-      "entry_zone": "57.83 - 58.2",
+      "current_price": 146.0,
+      "score": 91.0,
+      "rating": "MUA MẠNH",
+      "entry_zone": "143.08 - 146.0",
       "elliott_wave": {
-        "wave": "SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới)",
-        "phase": "CORRECTIVE_ABC",
-        "target": 63.56,
-        "support": 54.71
+        "wave": "SÓNG 4 ĐIỀU CHỈNH TÍCH LŨY (Tạo nền chuẩn bị Sóng 5)",
+        "phase": "EXPANSION_WAVE",
+        "target": 182.5,
+        "support": 139.87
       },
       "ichimoku": {
-        "cloud_status": "BEARISH",
-        "tk_signal": "Tenkan dưới Kijun (Áp lực điều chỉnh còn duy trì)",
-        "cloud_color": "Mây Đỏ (Kumo Điều Chỉnh)",
-        "kumo_edge": 55.29
+        "cloud_status": "BULLISH",
+        "tk_signal": "Tenkan duy trì trên Kijun (Động lượng Tăng Ổn Định)",
+        "cloud_color": "Mây Xanh (Kumo Tăng Trưởng)",
+        "kumo_edge": 141.62
       },
       "deep_learning": {
         "model": "Ensemble Deep AI",
-        "accuracy": "91.5%",
-        "loss_mse": "0.00030",
-        "trend": "TĂNG TRƯỞNG MẠNH"
+        "accuracy": "91.2%",
+        "loss_mse": "0.00028",
+        "trend": "TĂNG TRƯỞNG MẠNH (BỨT PHÁ)"
       },
       "horizons": {
         "weekly": {
           "title": "Chiến Lược THEO TUẦN (1 - 4 Tuần)",
           "horizon": "Ngắn Hạn / Swing Trade",
           "action": "GOM MUA THEO ĐỘNG LƯỢNG",
-          "entry_zone": "57.33 - 58.20",
-          "target_price": 61.98,
-          "upside_pct": 6.5,
-          "stop_loss": 60.66,
-          "risk_reward": "1:2.3",
-          "win_probability": "78.5%",
-          "technical_driver": "Tín hiệu Tenkan dưới Kijun (Áp lực điều chỉnh còn duy trì)",
-          "catalyst": "Vận động nến tuần trên đường Tenkan-sen (59.00), động lượng xung lực ngắn hạn duy trì tích cực đón nhịp bứt phá kháng cự gần."
+          "entry_zone": "143.81 - 146.0",
+          "target_price": 155.2,
+          "upside_pct": 6.3,
+          "stop_loss": 139.87,
+          "risk_reward": "1:1.5",
+          "win_probability": "84.2%",
+          "technical_driver": "Tenkan duy trì trên Kijun (Động lượng Tăng Ổn Định)",
+          "catalyst": "Động lượng dòng tiền ngắn hạn và cấu trúc nến duy trì xung lực trên hỗ trợ MA20/Tenkan, đón nhịp bứt phá kháng cự gần."
         },
         "monthly": {
           "title": "Chiến Lược THEO THÁNG (1 - 6 Tháng)",
           "horizon": "Trung Hạn / Vị Thế Sóng Lớn",
           "action": "NẮM GIỮ TỶ TRỌNG CAO / GIA TĂNG",
-          "entry_zone": "56.45 - 58.78",
-          "target_price": 71.0,
-          "upside_pct": 22.0,
-          "stop_loss": 60.45,
-          "risk_reward": "1:3.2",
-          "win_probability": "84.0%",
-          "technical_driver": "SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới) & Mây Ichimoku",
-          "catalyst": "Hưởng lợi từ chu kỳ SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới), hỗ trợ vững chắc từ dải Mây Kumo (61.90) kết hợp cùng dòng tiền tổ chức duy trì mua ròng."
+          "entry_zone": "141.62 - 147.46",
+          "target_price": 161.33,
+          "upside_pct": 10.5,
+          "stop_loss": 137.07,
+          "risk_reward": "1:1.7",
+          "win_probability": "88.7%",
+          "technical_driver": "SÓNG 4 ĐIỀU CHỈNH TÍCH LŨY (Tạo nền chuẩn bị Sóng 5) & Mây Ichimoku",
+          "catalyst": "Hưởng lợi từ chu kỳ tăng trưởng theo sóng SÓNG 4 ĐIỀU CHỈNH TÍCH LŨY (Tạo nền chuẩn bị Sóng 5), hỗ trợ vững chắc từ dải Mây Kumo (141.62) kết hợp cùng dòng tiền tổ chức duy trì mua ròng."
         },
         "yearly": {
           "title": "Chiến Lược THEO NĂM (1 - 3 Năm)",
           "horizon": "Dài Hạn / Đầu Tư Tích Sản",
           "action": "TÍCH SẢN TĂNG TRƯỞNG DÀI HẠN",
-          "entry_zone": "Vùng gom tích sản dài hạn: 54.71 - 59.36",
-          "target_price": 90.21,
-          "upside_pct": 55.0,
-          "stop_loss": 47.72,
-          "risk_reward": "1:4.5",
-          "win_probability": "89.5%",
-          "technical_driver": "Mục tiêu Siêu Sóng Fibo 1.618 (76.12 VNĐ)",
-          "catalyst": "Chu kỳ đại sóng Siêu tăng trưởng ngành, định giá P/E chiết khấu sâu so với tiềm năng tăng trưởng EPS 2026-2028, vị thế đầu ngành vững chắc phù hợp chiến lược đầu tư giá trị và tích sản."
+          "entry_zone": "Vùng gom tích sản dài hạn: 138.7 - 148.92",
+          "target_price": 184.25,
+          "upside_pct": 26.2,
+          "stop_loss": 128.68,
+          "risk_reward": "1:2.2",
+          "win_probability": "92.7%",
+          "technical_driver": "Mục tiêu Siêu Sóng Fibo 1.618 (184.25 VNĐ)",
+          "catalyst": "Chu kỳ đại sóng Siêu tăng trưởng ngành Bán lẻ & Dược, định giá P/E chiết khấu sâu so với tiềm năng tăng trưởng EPS 2026-2028, vị thế đầu ngành vững chắc phù hợp chiến lược đầu tư giá trị và tích sản."
         }
       }
     },
@@ -1115,274 +281,1108 @@
       "name": "MBBank",
       "sector": "Ngân hàng",
       "exchange": "HOSE",
-      "current_price": 19.85,
-      "score": 75.0,
+      "current_price": 19.7,
+      "score": 77.0,
       "rating": "MUA MẠNH",
-      "entry_zone": "19.77 - 19.85",
+      "entry_zone": "19.55 - 19.7",
       "elliott_wave": {
-        "wave": "SÓNG 4 ĐIỀU CHỈNH TÍCH LŨY (Tạo nền chuẩn bị Sóng 5)",
-        "phase": "CORRECTIVE_WAVE_4",
-        "target": 22.9,
-        "support": 18.66
+        "wave": "SÓNG 2 THOÁI LUI (Tích lũy đáy Fibo 0.5 - 0.618)",
+        "phase": "EXPANSION_WAVE",
+        "target": 24.62,
+        "support": 19.26
       },
       "ichimoku": {
         "cloud_status": "NEUTRAL",
         "tk_signal": "Tenkan dưới Kijun (Áp lực điều chỉnh còn duy trì)",
         "cloud_color": "Mây Đỏ (Kumo Điều Chỉnh)",
-        "kumo_edge": 18.86
+        "kumo_edge": 19.11
       },
       "deep_learning": {
         "model": "Ensemble Deep AI",
-        "accuracy": "91.5%",
-        "loss_mse": "0.00030",
-        "trend": "TĂNG TRƯỞNG MẠNH"
+        "accuracy": "84.4%",
+        "loss_mse": "0.00028",
+        "trend": "TĂNG TRƯỞNG MẠNH (BỨT PHÁ)"
       },
       "horizons": {
         "weekly": {
           "title": "Chiến Lược THEO TUẦN (1 - 4 Tuần)",
           "horizon": "Ngắn Hạn / Swing Trade",
           "action": "GOM MUA THEO ĐỘNG LƯỢNG",
-          "entry_zone": "19.55 - 19.85",
-          "target_price": 21.14,
-          "upside_pct": 6.5,
-          "stop_loss": 19.23,
-          "risk_reward": "1:2.3",
-          "win_probability": "78.5%",
-          "technical_driver": "Tín hiệu Tenkan dưới Kijun (Áp lực điều chỉnh còn duy trì)",
-          "catalyst": "Vận động nến tuần trên đường Tenkan-sen (19.38), động lượng xung lực ngắn hạn duy trì tích cực đón nhịp bứt phá kháng cự gần."
+          "entry_zone": "19.4 - 19.7",
+          "target_price": 20.37,
+          "upside_pct": 3.4,
+          "stop_loss": 19.26,
+          "risk_reward": "1:1.5",
+          "win_probability": "77.4%",
+          "technical_driver": "Tenkan dưới Kijun (Áp lực điều chỉnh còn duy trì)",
+          "catalyst": "Động lượng dòng tiền ngắn hạn và cấu trúc nến duy trì xung lực trên hỗ trợ MA20/Tenkan, đón nhịp bứt phá kháng cự gần."
         },
         "monthly": {
           "title": "Chiến Lược THEO THÁNG (1 - 6 Tháng)",
           "horizon": "Trung Hạn / Vị Thế Sóng Lớn",
           "action": "NẮM GIỮ TỶ TRỌNG CAO / GIA TĂNG",
-          "entry_zone": "19.25 - 20.05",
-          "target_price": 24.22,
-          "upside_pct": 22.0,
-          "stop_loss": 19.5,
-          "risk_reward": "1:3.2",
-          "win_probability": "84.0%",
-          "technical_driver": "SÓNG 4 ĐIỀU CHỈNH TÍCH LŨY (Tạo nền chuẩn bị Sóng 5) & Mây Ichimoku",
-          "catalyst": "Hưởng lợi từ chu kỳ SÓNG 4 ĐIỀU CHỈNH TÍCH LŨY (Tạo nền chuẩn bị Sóng 5), hỗ trợ vững chắc từ dải Mây Kumo (19.92) kết hợp cùng dòng tiền tổ chức duy trì mua ròng."
+          "entry_zone": "19.11 - 19.9",
+          "target_price": 20.8,
+          "upside_pct": 5.6,
+          "stop_loss": 18.87,
+          "risk_reward": "1:1.3",
+          "win_probability": "81.9%",
+          "technical_driver": "SÓNG 2 THOÁI LUI (Tích lũy đáy Fibo 0.5 - 0.618) & Mây Ichimoku",
+          "catalyst": "Hưởng lợi từ chu kỳ tăng trưởng theo sóng SÓNG 2 THOÁI LUI (Tích lũy đáy Fibo 0.5 - 0.618), hỗ trợ vững chắc từ dải Mây Kumo (19.11) kết hợp cùng dòng tiền tổ chức duy trì mua ròng."
         },
         "yearly": {
           "title": "Chiến Lược THEO NĂM (1 - 3 Năm)",
           "horizon": "Dài Hạn / Đầu Tư Tích Sản",
           "action": "TÍCH SẢN TĂNG TRƯỞNG DÀI HẠN",
-          "entry_zone": "Vùng gom tích sản dài hạn: 18.66 - 20.25",
-          "target_price": 30.77,
-          "upside_pct": 55.0,
-          "stop_loss": 16.28,
-          "risk_reward": "1:4.5",
-          "win_probability": "89.5%",
-          "technical_driver": "Mục tiêu Siêu Sóng Fibo 1.618 (23.31 VNĐ)",
-          "catalyst": "Chu kỳ đại sóng Siêu tăng trưởng ngành, định giá P/E chiết khấu sâu so với tiềm năng tăng trưởng EPS 2026-2028, vị thế đầu ngành vững chắc phù hợp chiến lược đầu tư giá trị và tích sản."
+          "entry_zone": "Vùng gom tích sản dài hạn: 18.71 - 20.09",
+          "target_price": 22.46,
+          "upside_pct": 14.0,
+          "stop_loss": 17.72,
+          "risk_reward": "1:1.4",
+          "win_probability": "85.9%",
+          "technical_driver": "Mục tiêu Siêu Sóng Fibo 1.618 (22.46 VNĐ)",
+          "catalyst": "Chu kỳ đại sóng Siêu tăng trưởng ngành Ngân hàng, định giá P/E chiết khấu sâu so với tiềm năng tăng trưởng EPS 2026-2028, vị thế đầu ngành vững chắc phù hợp chiến lược đầu tư giá trị và tích sản."
         }
       }
-    },
+    }
+  ],
+  "weekly": [
     {
-      "symbol": "VCB",
-      "name": "Vietcombank",
-      "sector": "Ngân hàng",
-      "exchange": "HOSE",
-      "current_price": 56.9,
-      "score": 18.0,
-      "rating": "BÁN MẠNH",
-      "entry_zone": "56.57 - 56.9",
+      "symbol": "SHS",
+      "name": "Chứng khoán Sài Gòn - HN",
+      "sector": "Chứng khoán",
+      "exchange": "HNX",
+      "current_price": 12.5,
+      "score": 82.0,
+      "rating": "MUA MẠNH",
+      "entry_zone": "12.25 - 12.5",
       "elliott_wave": {
         "wave": "SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới)",
-        "phase": "CORRECTIVE_ABC",
-        "target": 58.77,
-        "support": 53.49
+        "phase": "EXPANSION_WAVE",
+        "target": 15.62,
+        "support": 12.05
       },
       "ichimoku": {
-        "cloud_status": "BEARISH",
+        "cloud_status": "NEUTRAL",
         "tk_signal": "Tenkan dưới Kijun (Áp lực điều chỉnh còn duy trì)",
         "cloud_color": "Mây Đỏ (Kumo Điều Chỉnh)",
-        "kumo_edge": 54.05
+        "kumo_edge": 12.12
       },
       "deep_learning": {
         "model": "Ensemble Deep AI",
-        "accuracy": "91.5%",
-        "loss_mse": "0.00030",
-        "trend": "TĂNG TRƯỞNG MẠNH"
+        "accuracy": "86.6%",
+        "loss_mse": "0.00028",
+        "trend": "TĂNG TRƯỞNG MẠNH (BỨT PHÁ)"
       },
       "horizons": {
         "weekly": {
           "title": "Chiến Lược THEO TUẦN (1 - 4 Tuần)",
           "horizon": "Ngắn Hạn / Swing Trade",
           "action": "GOM MUA THEO ĐỘNG LƯỢNG",
-          "entry_zone": "56.05 - 56.90",
-          "target_price": 60.6,
-          "upside_pct": 6.5,
-          "stop_loss": 57.33,
-          "risk_reward": "1:2.3",
-          "win_probability": "78.5%",
-          "technical_driver": "Tín hiệu Tenkan dưới Kijun (Áp lực điều chỉnh còn duy trì)",
-          "catalyst": "Vận động nến tuần trên đường Tenkan-sen (56.75), động lượng xung lực ngắn hạn duy trì tích cực đón nhịp bứt phá kháng cự gần."
+          "entry_zone": "12.31 - 12.5",
+          "target_price": 13.18,
+          "upside_pct": 5.4,
+          "stop_loss": 12.05,
+          "risk_reward": "1:1.5",
+          "win_probability": "79.6%",
+          "technical_driver": "Tenkan dưới Kijun (Áp lực điều chỉnh còn duy trì)",
+          "catalyst": "Động lượng dòng tiền ngắn hạn và cấu trúc nến duy trì xung lực trên hỗ trợ MA20/Tenkan, đón nhịp bứt phá kháng cự gần."
         },
         "monthly": {
           "title": "Chiến Lược THEO THÁNG (1 - 6 Tháng)",
           "horizon": "Trung Hạn / Vị Thế Sóng Lớn",
           "action": "NẮM GIỮ TỶ TRỌNG CAO / GIA TĂNG",
-          "entry_zone": "55.19 - 57.47",
-          "target_price": 69.42,
-          "upside_pct": 22.0,
-          "stop_loss": 57.62,
-          "risk_reward": "1:3.2",
-          "win_probability": "84.0%",
+          "entry_zone": "12.12 - 12.62",
+          "target_price": 13.63,
+          "upside_pct": 9.0,
+          "stop_loss": 11.81,
+          "risk_reward": "1:1.6",
+          "win_probability": "84.1%",
           "technical_driver": "SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới) & Mây Ichimoku",
-          "catalyst": "Hưởng lợi từ chu kỳ SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới), hỗ trợ vững chắc từ dải Mây Kumo (58.70) kết hợp cùng dòng tiền tổ chức duy trì mua ròng."
+          "catalyst": "Hưởng lợi từ chu kỳ tăng trưởng theo sóng SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới), hỗ trợ vững chắc từ dải Mây Kumo (12.12) kết hợp cùng dòng tiền tổ chức duy trì mua ròng."
         },
         "yearly": {
           "title": "Chiến Lược THEO NĂM (1 - 3 Năm)",
           "horizon": "Dài Hạn / Đầu Tư Tích Sản",
           "action": "TÍCH SẢN TĂNG TRƯỞNG DÀI HẠN",
-          "entry_zone": "Vùng gom tích sản dài hạn: 53.49 - 58.04",
-          "target_price": 88.2,
-          "upside_pct": 55.0,
-          "stop_loss": 46.66,
-          "risk_reward": "1:4.5",
-          "win_probability": "89.5%",
-          "technical_driver": "Mục tiêu Siêu Sóng Fibo 1.618 (68.75 VNĐ)",
-          "catalyst": "Chu kỳ đại sóng Siêu tăng trưởng ngành, định giá P/E chiết khấu sâu so với tiềm năng tăng trưởng EPS 2026-2028, vị thế đầu ngành vững chắc phù hợp chiến lược đầu tư giá trị và tích sản."
+          "entry_zone": "Vùng gom tích sản dài hạn: 11.88 - 12.75",
+          "target_price": 15.31,
+          "upside_pct": 22.5,
+          "stop_loss": 11.09,
+          "risk_reward": "1:2.0",
+          "win_probability": "88.1%",
+          "technical_driver": "Mục tiêu Siêu Sóng Fibo 1.618 (15.31 VNĐ)",
+          "catalyst": "Chu kỳ đại sóng Siêu tăng trưởng ngành Chứng khoán, định giá P/E chiết khấu sâu so với tiềm năng tăng trưởng EPS 2026-2028, vị thế đầu ngành vững chắc phù hợp chiến lược đầu tư giá trị và tích sản."
         }
       }
     },
     {
-      "symbol": "VHM",
-      "name": "Vinhomes",
+      "symbol": "DXG",
+      "name": "Đất Xanh Group",
       "sector": "Bất động sản",
       "exchange": "HOSE",
-      "current_price": 61.0,
-      "score": 23.0,
-      "rating": "BÁN MẠNH",
-      "entry_zone": "59.78 - 61.0",
+      "current_price": 10.25,
+      "score": 76.0,
+      "rating": "MUA MẠNH",
+      "entry_zone": "10.13 - 10.25",
       "elliott_wave": {
         "wave": "SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới)",
-        "phase": "CORRECTIVE_ABC",
-        "target": 72.95,
-        "support": 57.34
+        "phase": "EXPANSION_WAVE",
+        "target": 12.81,
+        "support": 9.98
       },
       "ichimoku": {
-        "cloud_status": "BEARISH",
+        "cloud_status": "NEUTRAL",
         "tk_signal": "Tenkan dưới Kijun (Áp lực điều chỉnh còn duy trì)",
         "cloud_color": "Mây Đỏ (Kumo Điều Chỉnh)",
-        "kumo_edge": 57.95
+        "kumo_edge": 9.94
       },
       "deep_learning": {
         "model": "Ensemble Deep AI",
-        "accuracy": "91.5%",
-        "loss_mse": "0.00030",
-        "trend": "TĂNG TRƯỞNG MẠNH"
+        "accuracy": "83.6%",
+        "loss_mse": "0.00028",
+        "trend": "TĂNG TRƯỞNG MẠNH (BỨT PHÁ)"
       },
       "horizons": {
         "weekly": {
           "title": "Chiến Lược THEO TUẦN (1 - 4 Tuần)",
           "horizon": "Ngắn Hạn / Swing Trade",
           "action": "GOM MUA THEO ĐỘNG LƯỢNG",
-          "entry_zone": "60.09 - 61.00",
-          "target_price": 64.97,
-          "upside_pct": 6.5,
-          "stop_loss": 65.02,
-          "risk_reward": "1:2.3",
-          "win_probability": "78.5%",
-          "technical_driver": "Tín hiệu Tenkan dưới Kijun (Áp lực điều chỉnh còn duy trì)",
-          "catalyst": "Vận động nến tuần trên đường Tenkan-sen (64.40), động lượng xung lực ngắn hạn duy trì tích cực đón nhịp bứt phá kháng cự gần."
+          "entry_zone": "10.1 - 10.25",
+          "target_price": 10.65,
+          "upside_pct": 3.9,
+          "stop_loss": 9.98,
+          "risk_reward": "1:1.5",
+          "win_probability": "76.6%",
+          "technical_driver": "Tenkan dưới Kijun (Áp lực điều chỉnh còn duy trì)",
+          "catalyst": "Động lượng dòng tiền ngắn hạn và cấu trúc nến duy trì xung lực trên hỗ trợ MA20/Tenkan, đón nhịp bứt phá kháng cự gần."
         },
         "monthly": {
           "title": "Chiến Lược THEO THÁNG (1 - 6 Tháng)",
           "horizon": "Trung Hạn / Vị Thế Sóng Lớn",
           "action": "NẮM GIỮ TỶ TRỌNG CAO / GIA TĂNG",
-          "entry_zone": "59.17 - 61.61",
-          "target_price": 74.42,
-          "upside_pct": 22.0,
-          "stop_loss": 65.38,
-          "risk_reward": "1:3.2",
-          "win_probability": "84.0%",
+          "entry_zone": "9.94 - 10.35",
+          "target_price": 10.92,
+          "upside_pct": 6.5,
+          "stop_loss": 9.78,
+          "risk_reward": "1:1.4",
+          "win_probability": "81.1%",
           "technical_driver": "SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới) & Mây Ichimoku",
-          "catalyst": "Hưởng lợi từ chu kỳ SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới), hỗ trợ vững chắc từ dải Mây Kumo (70.25) kết hợp cùng dòng tiền tổ chức duy trì mua ròng."
+          "catalyst": "Hưởng lợi từ chu kỳ tăng trưởng theo sóng SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới), hỗ trợ vững chắc từ dải Mây Kumo (9.94) kết hợp cùng dòng tiền tổ chức duy trì mua ròng."
         },
         "yearly": {
           "title": "Chiến Lược THEO NĂM (1 - 3 Năm)",
           "horizon": "Dài Hạn / Đầu Tư Tích Sản",
           "action": "TÍCH SẢN TĂNG TRƯỞNG DÀI HẠN",
-          "entry_zone": "Vùng gom tích sản dài hạn: 57.34 - 62.22",
-          "target_price": 95.85,
-          "upside_pct": 57.1,
-          "stop_loss": 50.02,
-          "risk_reward": "1:4.5",
-          "win_probability": "89.5%",
-          "technical_driver": "Mục tiêu Siêu Sóng Fibo 1.618 (95.85 VNĐ)",
-          "catalyst": "Chu kỳ đại sóng Siêu tăng trưởng ngành, định giá P/E chiết khấu sâu so với tiềm năng tăng trưởng EPS 2026-2028, vị thế đầu ngành vững chắc phù hợp chiến lược đầu tư giá trị và tích sản."
+          "entry_zone": "Vùng gom tích sản dài hạn: 9.74 - 10.46",
+          "target_price": 11.91,
+          "upside_pct": 16.2,
+          "stop_loss": 9.18,
+          "risk_reward": "1:1.6",
+          "win_probability": "85.1%",
+          "technical_driver": "Mục tiêu Siêu Sóng Fibo 1.618 (11.91 VNĐ)",
+          "catalyst": "Chu kỳ đại sóng Siêu tăng trưởng ngành Bất động sản, định giá P/E chiết khấu sâu so với tiềm năng tăng trưởng EPS 2026-2028, vị thế đầu ngành vững chắc phù hợp chiến lược đầu tư giá trị và tích sản."
         }
       }
     },
     {
-      "symbol": "GVR",
-      "name": "Tập đoàn Công nghiệp Cao su Việt Nam - CTCP",
-      "sector": "Cổ phiếu niêm yết",
+      "symbol": "TCB",
+      "name": "Techcombank",
+      "sector": "Ngân hàng",
       "exchange": "HOSE",
-      "current_price": 31.25,
-      "score": 35.0,
-      "rating": "BÁN / HẠ TỶ TRỌNG",
-      "entry_zone": "30.93 - 31.25",
+      "current_price": 33.25,
+      "score": 95.0,
+      "rating": "MUA MẠNH",
+      "entry_zone": "32.83 - 33.25",
       "elliott_wave": {
-        "wave": "SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới)",
-        "phase": "CORRECTIVE_ABC",
-        "target": 32.13,
-        "support": 29.38
+        "wave": "SÓNG 4 ĐIỀU CHỈNH TÍCH LŨY (Tạo nền chuẩn bị Sóng 5)",
+        "phase": "EXPANSION_WAVE",
+        "target": 41.56,
+        "support": 32.34
       },
       "ichimoku": {
-        "cloud_status": "BEARISH",
+        "cloud_status": "BULLISH",
         "tk_signal": "Tenkan duy trì trên Kijun (Động lượng Tăng Ổn Định)",
         "cloud_color": "Mây Xanh (Kumo Tăng Trưởng)",
-        "kumo_edge": 29.69
+        "kumo_edge": 32.25
       },
       "deep_learning": {
         "model": "Ensemble Deep AI",
-        "accuracy": "91.5%",
-        "loss_mse": "0.00030",
-        "trend": "TĂNG TRƯỞNG MẠNH"
+        "accuracy": "93.8%",
+        "loss_mse": "0.00028",
+        "trend": "TĂNG TRƯỞNG MẠNH (BỨT PHÁ)"
       },
       "horizons": {
         "weekly": {
           "title": "Chiến Lược THEO TUẦN (1 - 4 Tuần)",
           "horizon": "Ngắn Hạn / Swing Trade",
           "action": "GOM MUA THEO ĐỘNG LƯỢNG",
-          "entry_zone": "30.78 - 31.25",
-          "target_price": 33.28,
-          "upside_pct": 6.5,
-          "stop_loss": 31.68,
-          "risk_reward": "1:2.3",
-          "win_probability": "78.5%",
-          "technical_driver": "Tín hiệu Tenkan duy trì trên Kijun (Động lượng Tăng Ổn Định)",
-          "catalyst": "Vận động nến tuần trên đường Tenkan-sen (32.77), động lượng xung lực ngắn hạn duy trì tích cực đón nhịp bứt phá kháng cự gần."
+          "entry_zone": "32.75 - 33.25",
+          "target_price": 34.61,
+          "upside_pct": 4.1,
+          "stop_loss": 32.34,
+          "risk_reward": "1:1.5",
+          "win_probability": "86.8%",
+          "technical_driver": "Tenkan duy trì trên Kijun (Động lượng Tăng Ổn Định)",
+          "catalyst": "Động lượng dòng tiền ngắn hạn và cấu trúc nến duy trì xung lực trên hỗ trợ MA20/Tenkan, đón nhịp bứt phá kháng cự gần."
         },
         "monthly": {
           "title": "Chiến Lược THEO THÁNG (1 - 6 Tháng)",
           "horizon": "Trung Hạn / Vị Thế Sóng Lớn",
           "action": "NẮM GIỮ TỶ TRỌNG CAO / GIA TĂNG",
-          "entry_zone": "30.31 - 31.56",
-          "target_price": 38.12,
-          "upside_pct": 22.0,
-          "stop_loss": 31.27,
-          "risk_reward": "1:3.2",
-          "win_probability": "84.0%",
-          "technical_driver": "SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới) & Mây Ichimoku",
-          "catalyst": "Hưởng lợi từ chu kỳ SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới), hỗ trợ vững chắc từ dải Mây Kumo (32.55) kết hợp cùng dòng tiền tổ chức duy trì mua ròng."
+          "entry_zone": "32.25 - 33.58",
+          "target_price": 35.51,
+          "upside_pct": 6.8,
+          "stop_loss": 31.69,
+          "risk_reward": "1:1.5",
+          "win_probability": "91.3%",
+          "technical_driver": "SÓNG 4 ĐIỀU CHỈNH TÍCH LŨY (Tạo nền chuẩn bị Sóng 5) & Mây Ichimoku",
+          "catalyst": "Hưởng lợi từ chu kỳ tăng trưởng theo sóng SÓNG 4 ĐIỀU CHỈNH TÍCH LŨY (Tạo nền chuẩn bị Sóng 5), hỗ trợ vững chắc từ dải Mây Kumo (32.25) kết hợp cùng dòng tiền tổ chức duy trì mua ròng."
         },
         "yearly": {
           "title": "Chiến Lược THEO NĂM (1 - 3 Năm)",
           "horizon": "Dài Hạn / Đầu Tư Tích Sản",
           "action": "TÍCH SẢN TĂNG TRƯỞNG DÀI HẠN",
-          "entry_zone": "Vùng gom tích sản dài hạn: 29.38 - 31.88",
-          "target_price": 48.44,
-          "upside_pct": 55.0,
-          "stop_loss": 25.62,
-          "risk_reward": "1:4.5",
-          "win_probability": "89.5%",
-          "technical_driver": "Mục tiêu Siêu Sóng Fibo 1.618 (42.78 VNĐ)",
-          "catalyst": "Chu kỳ đại sóng Siêu tăng trưởng ngành, định giá P/E chiết khấu sâu so với tiềm năng tăng trưởng EPS 2026-2028, vị thế đầu ngành vững chắc phù hợp chiến lược đầu tư giá trị và tích sản."
+          "entry_zone": "Vùng gom tích sản dài hạn: 31.59 - 33.91",
+          "target_price": 38.9,
+          "upside_pct": 17.0,
+          "stop_loss": 29.75,
+          "risk_reward": "1:1.6",
+          "win_probability": "93.0%",
+          "technical_driver": "Mục tiêu Siêu Sóng Fibo 1.618 (38.9 VNĐ)",
+          "catalyst": "Chu kỳ đại sóng Siêu tăng trưởng ngành Ngân hàng, định giá P/E chiết khấu sâu so với tiềm năng tăng trưởng EPS 2026-2028, vị thế đầu ngành vững chắc phù hợp chiến lược đầu tư giá trị và tích sản."
+        }
+      }
+    },
+    {
+      "symbol": "MWG",
+      "name": "Thế Giới Di Động",
+      "sector": "Bán lẻ",
+      "exchange": "HOSE",
+      "current_price": 74.2,
+      "score": 93.0,
+      "rating": "MUA MẠNH",
+      "entry_zone": "73.77 - 74.2",
+      "elliott_wave": {
+        "wave": "SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới)",
+        "phase": "EXPANSION_WAVE",
+        "target": 92.75,
+        "support": 72.66
+      },
+      "ichimoku": {
+        "cloud_status": "BULLISH",
+        "tk_signal": "Tenkan duy trì trên Kijun (Động lượng Tăng Ổn Định)",
+        "cloud_color": "Mây Xanh (Kumo Tăng Trưởng)",
+        "kumo_edge": 71.97
+      },
+      "deep_learning": {
+        "model": "Ensemble Deep AI",
+        "accuracy": "92.2%",
+        "loss_mse": "0.00028",
+        "trend": "TĂNG TRƯỞNG MẠNH (BỨT PHÁ)"
+      },
+      "horizons": {
+        "weekly": {
+          "title": "Chiến Lược THEO TUẦN (1 - 4 Tuần)",
+          "horizon": "Ngắn Hạn / Swing Trade",
+          "action": "GOM MUA THEO ĐỘNG LƯỢNG",
+          "entry_zone": "73.09 - 74.2",
+          "target_price": 76.5,
+          "upside_pct": 3.1,
+          "stop_loss": 72.66,
+          "risk_reward": "1:1.5",
+          "win_probability": "85.2%",
+          "technical_driver": "Tenkan duy trì trên Kijun (Động lượng Tăng Ổn Định)",
+          "catalyst": "Động lượng dòng tiền ngắn hạn và cấu trúc nến duy trì xung lực trên hỗ trợ MA20/Tenkan, đón nhịp bứt phá kháng cự gần."
+        },
+        "monthly": {
+          "title": "Chiến Lược THEO THÁNG (1 - 6 Tháng)",
+          "horizon": "Trung Hạn / Vị Thế Sóng Lớn",
+          "action": "NẮM GIỮ TỶ TRỌNG CAO / GIA TĂNG",
+          "entry_zone": "71.97 - 74.94",
+          "target_price": 78.06,
+          "upside_pct": 5.2,
+          "stop_loss": 71.21,
+          "risk_reward": "1:1.3",
+          "win_probability": "89.7%",
+          "technical_driver": "SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới) & Mây Ichimoku",
+          "catalyst": "Hưởng lợi từ chu kỳ tăng trưởng theo sóng SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới), hỗ trợ vững chắc từ dải Mây Kumo (71.97) kết hợp cùng dòng tiền tổ chức duy trì mua ròng."
+        },
+        "yearly": {
+          "title": "Chiến Lược THEO NĂM (1 - 3 Năm)",
+          "horizon": "Dài Hạn / Đầu Tư Tích Sản",
+          "action": "TÍCH SẢN TĂNG TRƯỞNG DÀI HẠN",
+          "entry_zone": "Vùng gom tích sản dài hạn: 70.49 - 75.68",
+          "target_price": 83.85,
+          "upside_pct": 13.0,
+          "stop_loss": 66.85,
+          "risk_reward": "1:1.3",
+          "win_probability": "93.0%",
+          "technical_driver": "Mục tiêu Siêu Sóng Fibo 1.618 (83.85 VNĐ)",
+          "catalyst": "Chu kỳ đại sóng Siêu tăng trưởng ngành Bán lẻ, định giá P/E chiết khấu sâu so với tiềm năng tăng trưởng EPS 2026-2028, vị thế đầu ngành vững chắc phù hợp chiến lược đầu tư giá trị và tích sản."
+        }
+      }
+    },
+    {
+      "symbol": "DIG",
+      "name": "Tổng CTCP DIC",
+      "sector": "Bất động sản",
+      "exchange": "HOSE",
+      "current_price": 9.54,
+      "score": 64.0,
+      "rating": "MUA",
+      "entry_zone": "9.47 - 9.54",
+      "elliott_wave": {
+        "wave": "SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới)",
+        "phase": "EXPANSION_WAVE",
+        "target": 11.92,
+        "support": 9.33
+      },
+      "ichimoku": {
+        "cloud_status": "NEUTRAL",
+        "tk_signal": "Tenkan dưới Kijun (Áp lực điều chỉnh còn duy trì)",
+        "cloud_color": "Mây Đỏ (Kumo Điều Chỉnh)",
+        "kumo_edge": 9.25
+      },
+      "deep_learning": {
+        "model": "Ensemble Deep AI",
+        "accuracy": "75.5%",
+        "loss_mse": "0.00028",
+        "trend": "TĂNG TRƯỞNG KỸ THUẬT"
+      },
+      "horizons": {
+        "weekly": {
+          "title": "Chiến Lược THEO TUẦN (1 - 4 Tuần)",
+          "horizon": "Ngắn Hạn / Swing Trade",
+          "action": "GOM MUA THEO ĐỘNG LƯỢNG",
+          "entry_zone": "9.4 - 9.54",
+          "target_price": 9.85,
+          "upside_pct": 3.2,
+          "stop_loss": 9.33,
+          "risk_reward": "1:1.5",
+          "win_probability": "68.5%",
+          "technical_driver": "Tenkan dưới Kijun (Áp lực điều chỉnh còn duy trì)",
+          "catalyst": "Động lượng dòng tiền ngắn hạn và cấu trúc nến duy trì xung lực trên hỗ trợ MA20/Tenkan, đón nhịp bứt phá kháng cự gần."
+        },
+        "monthly": {
+          "title": "Chiến Lược THEO THÁNG (1 - 6 Tháng)",
+          "horizon": "Trung Hạn / Vị Thế Sóng Lớn",
+          "action": "NẮM GIỮ TỶ TRỌNG CAO / GIA TĂNG",
+          "entry_zone": "9.25 - 9.64",
+          "target_price": 10.06,
+          "upside_pct": 5.5,
+          "stop_loss": 9.14,
+          "risk_reward": "1:1.3",
+          "win_probability": "73.0%",
+          "technical_driver": "SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới) & Mây Ichimoku",
+          "catalyst": "Hưởng lợi từ chu kỳ tăng trưởng theo sóng SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới), hỗ trợ vững chắc từ dải Mây Kumo (9.25) kết hợp cùng dòng tiền tổ chức duy trì mua ròng."
+        },
+        "yearly": {
+          "title": "Chiến Lược THEO NĂM (1 - 3 Năm)",
+          "horizon": "Dài Hạn / Đầu Tư Tích Sản",
+          "action": "TÍCH SẢN TĂNG TRƯỞNG DÀI HẠN",
+          "entry_zone": "Vùng gom tích sản dài hạn: 9.06 - 9.73",
+          "target_price": 10.86,
+          "upside_pct": 13.8,
+          "stop_loss": 8.58,
+          "risk_reward": "1:1.4",
+          "win_probability": "77.0%",
+          "technical_driver": "Mục tiêu Siêu Sóng Fibo 1.618 (10.86 VNĐ)",
+          "catalyst": "Chu kỳ đại sóng Siêu tăng trưởng ngành Bất động sản, định giá P/E chiết khấu sâu so với tiềm năng tăng trưởng EPS 2026-2028, vị thế đầu ngành vững chắc phù hợp chiến lược đầu tư giá trị và tích sản."
+        }
+      }
+    }
+  ],
+  "monthly": [
+    {
+      "symbol": "MWG",
+      "name": "Thế Giới Di Động",
+      "sector": "Bán lẻ",
+      "exchange": "HOSE",
+      "current_price": 74.2,
+      "score": 93.0,
+      "rating": "MUA MẠNH",
+      "entry_zone": "73.77 - 74.2",
+      "elliott_wave": {
+        "wave": "SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới)",
+        "phase": "EXPANSION_WAVE",
+        "target": 92.75,
+        "support": 72.66
+      },
+      "ichimoku": {
+        "cloud_status": "BULLISH",
+        "tk_signal": "Tenkan duy trì trên Kijun (Động lượng Tăng Ổn Định)",
+        "cloud_color": "Mây Xanh (Kumo Tăng Trưởng)",
+        "kumo_edge": 71.97
+      },
+      "deep_learning": {
+        "model": "Ensemble Deep AI",
+        "accuracy": "92.2%",
+        "loss_mse": "0.00028",
+        "trend": "TĂNG TRƯỞNG MẠNH (BỨT PHÁ)"
+      },
+      "horizons": {
+        "weekly": {
+          "title": "Chiến Lược THEO TUẦN (1 - 4 Tuần)",
+          "horizon": "Ngắn Hạn / Swing Trade",
+          "action": "GOM MUA THEO ĐỘNG LƯỢNG",
+          "entry_zone": "73.09 - 74.2",
+          "target_price": 76.5,
+          "upside_pct": 3.1,
+          "stop_loss": 72.66,
+          "risk_reward": "1:1.5",
+          "win_probability": "85.2%",
+          "technical_driver": "Tenkan duy trì trên Kijun (Động lượng Tăng Ổn Định)",
+          "catalyst": "Động lượng dòng tiền ngắn hạn và cấu trúc nến duy trì xung lực trên hỗ trợ MA20/Tenkan, đón nhịp bứt phá kháng cự gần."
+        },
+        "monthly": {
+          "title": "Chiến Lược THEO THÁNG (1 - 6 Tháng)",
+          "horizon": "Trung Hạn / Vị Thế Sóng Lớn",
+          "action": "NẮM GIỮ TỶ TRỌNG CAO / GIA TĂNG",
+          "entry_zone": "71.97 - 74.94",
+          "target_price": 78.06,
+          "upside_pct": 5.2,
+          "stop_loss": 71.21,
+          "risk_reward": "1:1.3",
+          "win_probability": "89.7%",
+          "technical_driver": "SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới) & Mây Ichimoku",
+          "catalyst": "Hưởng lợi từ chu kỳ tăng trưởng theo sóng SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới), hỗ trợ vững chắc từ dải Mây Kumo (71.97) kết hợp cùng dòng tiền tổ chức duy trì mua ròng."
+        },
+        "yearly": {
+          "title": "Chiến Lược THEO NĂM (1 - 3 Năm)",
+          "horizon": "Dài Hạn / Đầu Tư Tích Sản",
+          "action": "TÍCH SẢN TĂNG TRƯỞNG DÀI HẠN",
+          "entry_zone": "Vùng gom tích sản dài hạn: 70.49 - 75.68",
+          "target_price": 83.85,
+          "upside_pct": 13.0,
+          "stop_loss": 66.85,
+          "risk_reward": "1:1.3",
+          "win_probability": "93.0%",
+          "technical_driver": "Mục tiêu Siêu Sóng Fibo 1.618 (83.85 VNĐ)",
+          "catalyst": "Chu kỳ đại sóng Siêu tăng trưởng ngành Bán lẻ, định giá P/E chiết khấu sâu so với tiềm năng tăng trưởng EPS 2026-2028, vị thế đầu ngành vững chắc phù hợp chiến lược đầu tư giá trị và tích sản."
+        }
+      }
+    },
+    {
+      "symbol": "MSN",
+      "name": "Masan Group",
+      "sector": "Tiêu dùng",
+      "exchange": "HOSE",
+      "current_price": 72.4,
+      "score": 91.0,
+      "rating": "MUA MẠNH",
+      "entry_zone": "71.47 - 72.4",
+      "elliott_wave": {
+        "wave": "SÓNG 4 ĐIỀU CHỈNH TÍCH LŨY (Tạo nền chuẩn bị Sóng 5)",
+        "phase": "EXPANSION_WAVE",
+        "target": 90.5,
+        "support": 70.39
+      },
+      "ichimoku": {
+        "cloud_status": "BULLISH",
+        "tk_signal": "Tenkan duy trì trên Kijun (Động lượng Tăng Ổn Định)",
+        "cloud_color": "Mây Xanh (Kumo Tăng Trưởng)",
+        "kumo_edge": 70.23
+      },
+      "deep_learning": {
+        "model": "Ensemble Deep AI",
+        "accuracy": "91.4%",
+        "loss_mse": "0.00028",
+        "trend": "TĂNG TRƯỞNG MẠNH (BỨT PHÁ)"
+      },
+      "horizons": {
+        "weekly": {
+          "title": "Chiến Lược THEO TUẦN (1 - 4 Tuần)",
+          "horizon": "Ngắn Hạn / Swing Trade",
+          "action": "GOM MUA THEO ĐỘNG LƯỢNG",
+          "entry_zone": "71.31 - 72.4",
+          "target_price": 75.44,
+          "upside_pct": 4.2,
+          "stop_loss": 70.39,
+          "risk_reward": "1:1.5",
+          "win_probability": "84.4%",
+          "technical_driver": "Tenkan duy trì trên Kijun (Động lượng Tăng Ổn Định)",
+          "catalyst": "Động lượng dòng tiền ngắn hạn và cấu trúc nến duy trì xung lực trên hỗ trợ MA20/Tenkan, đón nhịp bứt phá kháng cự gần."
+        },
+        "monthly": {
+          "title": "Chiến Lược THEO THÁNG (1 - 6 Tháng)",
+          "horizon": "Trung Hạn / Vị Thế Sóng Lớn",
+          "action": "NẮM GIỮ TỶ TRỌNG CAO / GIA TĂNG",
+          "entry_zone": "70.23 - 73.12",
+          "target_price": 77.4,
+          "upside_pct": 6.9,
+          "stop_loss": 68.98,
+          "risk_reward": "1:1.5",
+          "win_probability": "88.9%",
+          "technical_driver": "SÓNG 4 ĐIỀU CHỈNH TÍCH LŨY (Tạo nền chuẩn bị Sóng 5) & Mây Ichimoku",
+          "catalyst": "Hưởng lợi từ chu kỳ tăng trưởng theo sóng SÓNG 4 ĐIỀU CHỈNH TÍCH LŨY (Tạo nền chuẩn bị Sóng 5), hỗ trợ vững chắc từ dải Mây Kumo (70.23) kết hợp cùng dòng tiền tổ chức duy trì mua ròng."
+        },
+        "yearly": {
+          "title": "Chiến Lược THEO NĂM (1 - 3 Năm)",
+          "horizon": "Dài Hạn / Đầu Tư Tích Sản",
+          "action": "TÍCH SẢN TĂNG TRƯỞNG DÀI HẠN",
+          "entry_zone": "Vùng gom tích sản dài hạn: 68.78 - 73.85",
+          "target_price": 84.85,
+          "upside_pct": 17.2,
+          "stop_loss": 64.76,
+          "risk_reward": "1:1.6",
+          "win_probability": "92.9%",
+          "technical_driver": "Mục tiêu Siêu Sóng Fibo 1.618 (84.85 VNĐ)",
+          "catalyst": "Chu kỳ đại sóng Siêu tăng trưởng ngành Tiêu dùng, định giá P/E chiết khấu sâu so với tiềm năng tăng trưởng EPS 2026-2028, vị thế đầu ngành vững chắc phù hợp chiến lược đầu tư giá trị và tích sản."
+        }
+      }
+    },
+    {
+      "symbol": "FRT",
+      "name": "FPT Retail (Long Châu)",
+      "sector": "Bán lẻ & Dược",
+      "exchange": "HOSE",
+      "current_price": 146.0,
+      "score": 91.0,
+      "rating": "MUA MẠNH",
+      "entry_zone": "143.08 - 146.0",
+      "elliott_wave": {
+        "wave": "SÓNG 4 ĐIỀU CHỈNH TÍCH LŨY (Tạo nền chuẩn bị Sóng 5)",
+        "phase": "EXPANSION_WAVE",
+        "target": 182.5,
+        "support": 139.87
+      },
+      "ichimoku": {
+        "cloud_status": "BULLISH",
+        "tk_signal": "Tenkan duy trì trên Kijun (Động lượng Tăng Ổn Định)",
+        "cloud_color": "Mây Xanh (Kumo Tăng Trưởng)",
+        "kumo_edge": 141.62
+      },
+      "deep_learning": {
+        "model": "Ensemble Deep AI",
+        "accuracy": "91.2%",
+        "loss_mse": "0.00028",
+        "trend": "TĂNG TRƯỞNG MẠNH (BỨT PHÁ)"
+      },
+      "horizons": {
+        "weekly": {
+          "title": "Chiến Lược THEO TUẦN (1 - 4 Tuần)",
+          "horizon": "Ngắn Hạn / Swing Trade",
+          "action": "GOM MUA THEO ĐỘNG LƯỢNG",
+          "entry_zone": "143.81 - 146.0",
+          "target_price": 155.2,
+          "upside_pct": 6.3,
+          "stop_loss": 139.87,
+          "risk_reward": "1:1.5",
+          "win_probability": "84.2%",
+          "technical_driver": "Tenkan duy trì trên Kijun (Động lượng Tăng Ổn Định)",
+          "catalyst": "Động lượng dòng tiền ngắn hạn và cấu trúc nến duy trì xung lực trên hỗ trợ MA20/Tenkan, đón nhịp bứt phá kháng cự gần."
+        },
+        "monthly": {
+          "title": "Chiến Lược THEO THÁNG (1 - 6 Tháng)",
+          "horizon": "Trung Hạn / Vị Thế Sóng Lớn",
+          "action": "NẮM GIỮ TỶ TRỌNG CAO / GIA TĂNG",
+          "entry_zone": "141.62 - 147.46",
+          "target_price": 161.33,
+          "upside_pct": 10.5,
+          "stop_loss": 137.07,
+          "risk_reward": "1:1.7",
+          "win_probability": "88.7%",
+          "technical_driver": "SÓNG 4 ĐIỀU CHỈNH TÍCH LŨY (Tạo nền chuẩn bị Sóng 5) & Mây Ichimoku",
+          "catalyst": "Hưởng lợi từ chu kỳ tăng trưởng theo sóng SÓNG 4 ĐIỀU CHỈNH TÍCH LŨY (Tạo nền chuẩn bị Sóng 5), hỗ trợ vững chắc từ dải Mây Kumo (141.62) kết hợp cùng dòng tiền tổ chức duy trì mua ròng."
+        },
+        "yearly": {
+          "title": "Chiến Lược THEO NĂM (1 - 3 Năm)",
+          "horizon": "Dài Hạn / Đầu Tư Tích Sản",
+          "action": "TÍCH SẢN TĂNG TRƯỞNG DÀI HẠN",
+          "entry_zone": "Vùng gom tích sản dài hạn: 138.7 - 148.92",
+          "target_price": 184.25,
+          "upside_pct": 26.2,
+          "stop_loss": 128.68,
+          "risk_reward": "1:2.2",
+          "win_probability": "92.7%",
+          "technical_driver": "Mục tiêu Siêu Sóng Fibo 1.618 (184.25 VNĐ)",
+          "catalyst": "Chu kỳ đại sóng Siêu tăng trưởng ngành Bán lẻ & Dược, định giá P/E chiết khấu sâu so với tiềm năng tăng trưởng EPS 2026-2028, vị thế đầu ngành vững chắc phù hợp chiến lược đầu tư giá trị và tích sản."
+        }
+      }
+    },
+    {
+      "symbol": "MBB",
+      "name": "MBBank",
+      "sector": "Ngân hàng",
+      "exchange": "HOSE",
+      "current_price": 19.7,
+      "score": 77.0,
+      "rating": "MUA MẠNH",
+      "entry_zone": "19.55 - 19.7",
+      "elliott_wave": {
+        "wave": "SÓNG 2 THOÁI LUI (Tích lũy đáy Fibo 0.5 - 0.618)",
+        "phase": "EXPANSION_WAVE",
+        "target": 24.62,
+        "support": 19.26
+      },
+      "ichimoku": {
+        "cloud_status": "NEUTRAL",
+        "tk_signal": "Tenkan dưới Kijun (Áp lực điều chỉnh còn duy trì)",
+        "cloud_color": "Mây Đỏ (Kumo Điều Chỉnh)",
+        "kumo_edge": 19.11
+      },
+      "deep_learning": {
+        "model": "Ensemble Deep AI",
+        "accuracy": "84.4%",
+        "loss_mse": "0.00028",
+        "trend": "TĂNG TRƯỞNG MẠNH (BỨT PHÁ)"
+      },
+      "horizons": {
+        "weekly": {
+          "title": "Chiến Lược THEO TUẦN (1 - 4 Tuần)",
+          "horizon": "Ngắn Hạn / Swing Trade",
+          "action": "GOM MUA THEO ĐỘNG LƯỢNG",
+          "entry_zone": "19.4 - 19.7",
+          "target_price": 20.37,
+          "upside_pct": 3.4,
+          "stop_loss": 19.26,
+          "risk_reward": "1:1.5",
+          "win_probability": "77.4%",
+          "technical_driver": "Tenkan dưới Kijun (Áp lực điều chỉnh còn duy trì)",
+          "catalyst": "Động lượng dòng tiền ngắn hạn và cấu trúc nến duy trì xung lực trên hỗ trợ MA20/Tenkan, đón nhịp bứt phá kháng cự gần."
+        },
+        "monthly": {
+          "title": "Chiến Lược THEO THÁNG (1 - 6 Tháng)",
+          "horizon": "Trung Hạn / Vị Thế Sóng Lớn",
+          "action": "NẮM GIỮ TỶ TRỌNG CAO / GIA TĂNG",
+          "entry_zone": "19.11 - 19.9",
+          "target_price": 20.8,
+          "upside_pct": 5.6,
+          "stop_loss": 18.87,
+          "risk_reward": "1:1.3",
+          "win_probability": "81.9%",
+          "technical_driver": "SÓNG 2 THOÁI LUI (Tích lũy đáy Fibo 0.5 - 0.618) & Mây Ichimoku",
+          "catalyst": "Hưởng lợi từ chu kỳ tăng trưởng theo sóng SÓNG 2 THOÁI LUI (Tích lũy đáy Fibo 0.5 - 0.618), hỗ trợ vững chắc từ dải Mây Kumo (19.11) kết hợp cùng dòng tiền tổ chức duy trì mua ròng."
+        },
+        "yearly": {
+          "title": "Chiến Lược THEO NĂM (1 - 3 Năm)",
+          "horizon": "Dài Hạn / Đầu Tư Tích Sản",
+          "action": "TÍCH SẢN TĂNG TRƯỞNG DÀI HẠN",
+          "entry_zone": "Vùng gom tích sản dài hạn: 18.71 - 20.09",
+          "target_price": 22.46,
+          "upside_pct": 14.0,
+          "stop_loss": 17.72,
+          "risk_reward": "1:1.4",
+          "win_probability": "85.9%",
+          "technical_driver": "Mục tiêu Siêu Sóng Fibo 1.618 (22.46 VNĐ)",
+          "catalyst": "Chu kỳ đại sóng Siêu tăng trưởng ngành Ngân hàng, định giá P/E chiết khấu sâu so với tiềm năng tăng trưởng EPS 2026-2028, vị thế đầu ngành vững chắc phù hợp chiến lược đầu tư giá trị và tích sản."
+        }
+      }
+    },
+    {
+      "symbol": "CTG",
+      "name": "VietinBank",
+      "sector": "Ngân hàng",
+      "exchange": "HOSE",
+      "current_price": 30.5,
+      "score": 65.0,
+      "rating": "MUA",
+      "entry_zone": "30.0 - 30.5",
+      "elliott_wave": {
+        "wave": "SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới)",
+        "phase": "EXPANSION_WAVE",
+        "target": 38.12,
+        "support": 29.55
+      },
+      "ichimoku": {
+        "cloud_status": "NEUTRAL",
+        "tk_signal": "Tenkan dưới Kijun (Áp lực điều chỉnh còn duy trì)",
+        "cloud_color": "Mây Đỏ (Kumo Điều Chỉnh)",
+        "kumo_edge": 29.59
+      },
+      "deep_learning": {
+        "model": "Ensemble Deep AI",
+        "accuracy": "76.3%",
+        "loss_mse": "0.00028",
+        "trend": "TĂNG TRƯỞNG KỸ THUẬT"
+      },
+      "horizons": {
+        "weekly": {
+          "title": "Chiến Lược THEO TUẦN (1 - 4 Tuần)",
+          "horizon": "Ngắn Hạn / Swing Trade",
+          "action": "GOM MUA THEO ĐỘNG LƯỢNG",
+          "entry_zone": "30.04 - 30.5",
+          "target_price": 31.93,
+          "upside_pct": 4.7,
+          "stop_loss": 29.55,
+          "risk_reward": "1:1.5",
+          "win_probability": "69.3%",
+          "technical_driver": "Tenkan dưới Kijun (Áp lực điều chỉnh còn duy trì)",
+          "catalyst": "Động lượng dòng tiền ngắn hạn và cấu trúc nến duy trì xung lực trên hỗ trợ MA20/Tenkan, đón nhịp bứt phá kháng cự gần."
+        },
+        "monthly": {
+          "title": "Chiến Lược THEO THÁNG (1 - 6 Tháng)",
+          "horizon": "Trung Hạn / Vị Thế Sóng Lớn",
+          "action": "NẮM GIỮ TỶ TRỌNG CAO / GIA TĂNG",
+          "entry_zone": "29.59 - 30.8",
+          "target_price": 32.88,
+          "upside_pct": 7.8,
+          "stop_loss": 28.96,
+          "risk_reward": "1:1.5",
+          "win_probability": "73.8%",
+          "technical_driver": "SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới) & Mây Ichimoku",
+          "catalyst": "Hưởng lợi từ chu kỳ tăng trưởng theo sóng SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới), hỗ trợ vững chắc từ dải Mây Kumo (29.59) kết hợp cùng dòng tiền tổ chức duy trì mua ròng."
+        },
+        "yearly": {
+          "title": "Chiến Lược THEO NĂM (1 - 3 Năm)",
+          "horizon": "Dài Hạn / Đầu Tư Tích Sản",
+          "action": "TÍCH SẢN TĂNG TRƯỞNG DÀI HẠN",
+          "entry_zone": "Vùng gom tích sản dài hạn: 28.97 - 31.11",
+          "target_price": 36.45,
+          "upside_pct": 19.5,
+          "stop_loss": 27.19,
+          "risk_reward": "1:1.8",
+          "win_probability": "77.8%",
+          "technical_driver": "Mục tiêu Siêu Sóng Fibo 1.618 (36.45 VNĐ)",
+          "catalyst": "Chu kỳ đại sóng Siêu tăng trưởng ngành Ngân hàng, định giá P/E chiết khấu sâu so với tiềm năng tăng trưởng EPS 2026-2028, vị thế đầu ngành vững chắc phù hợp chiến lược đầu tư giá trị và tích sản."
+        }
+      }
+    }
+  ],
+  "yearly": [
+    {
+      "symbol": "TCB",
+      "name": "Techcombank",
+      "sector": "Ngân hàng",
+      "exchange": "HOSE",
+      "current_price": 33.25,
+      "score": 95.0,
+      "rating": "MUA MẠNH",
+      "entry_zone": "32.83 - 33.25",
+      "elliott_wave": {
+        "wave": "SÓNG 4 ĐIỀU CHỈNH TÍCH LŨY (Tạo nền chuẩn bị Sóng 5)",
+        "phase": "EXPANSION_WAVE",
+        "target": 41.56,
+        "support": 32.34
+      },
+      "ichimoku": {
+        "cloud_status": "BULLISH",
+        "tk_signal": "Tenkan duy trì trên Kijun (Động lượng Tăng Ổn Định)",
+        "cloud_color": "Mây Xanh (Kumo Tăng Trưởng)",
+        "kumo_edge": 32.25
+      },
+      "deep_learning": {
+        "model": "Ensemble Deep AI",
+        "accuracy": "93.8%",
+        "loss_mse": "0.00028",
+        "trend": "TĂNG TRƯỞNG MẠNH (BỨT PHÁ)"
+      },
+      "horizons": {
+        "weekly": {
+          "title": "Chiến Lược THEO TUẦN (1 - 4 Tuần)",
+          "horizon": "Ngắn Hạn / Swing Trade",
+          "action": "GOM MUA THEO ĐỘNG LƯỢNG",
+          "entry_zone": "32.75 - 33.25",
+          "target_price": 34.61,
+          "upside_pct": 4.1,
+          "stop_loss": 32.34,
+          "risk_reward": "1:1.5",
+          "win_probability": "86.8%",
+          "technical_driver": "Tenkan duy trì trên Kijun (Động lượng Tăng Ổn Định)",
+          "catalyst": "Động lượng dòng tiền ngắn hạn và cấu trúc nến duy trì xung lực trên hỗ trợ MA20/Tenkan, đón nhịp bứt phá kháng cự gần."
+        },
+        "monthly": {
+          "title": "Chiến Lược THEO THÁNG (1 - 6 Tháng)",
+          "horizon": "Trung Hạn / Vị Thế Sóng Lớn",
+          "action": "NẮM GIỮ TỶ TRỌNG CAO / GIA TĂNG",
+          "entry_zone": "32.25 - 33.58",
+          "target_price": 35.51,
+          "upside_pct": 6.8,
+          "stop_loss": 31.69,
+          "risk_reward": "1:1.5",
+          "win_probability": "91.3%",
+          "technical_driver": "SÓNG 4 ĐIỀU CHỈNH TÍCH LŨY (Tạo nền chuẩn bị Sóng 5) & Mây Ichimoku",
+          "catalyst": "Hưởng lợi từ chu kỳ tăng trưởng theo sóng SÓNG 4 ĐIỀU CHỈNH TÍCH LŨY (Tạo nền chuẩn bị Sóng 5), hỗ trợ vững chắc từ dải Mây Kumo (32.25) kết hợp cùng dòng tiền tổ chức duy trì mua ròng."
+        },
+        "yearly": {
+          "title": "Chiến Lược THEO NĂM (1 - 3 Năm)",
+          "horizon": "Dài Hạn / Đầu Tư Tích Sản",
+          "action": "TÍCH SẢN TĂNG TRƯỞNG DÀI HẠN",
+          "entry_zone": "Vùng gom tích sản dài hạn: 31.59 - 33.91",
+          "target_price": 38.9,
+          "upside_pct": 17.0,
+          "stop_loss": 29.75,
+          "risk_reward": "1:1.6",
+          "win_probability": "93.0%",
+          "technical_driver": "Mục tiêu Siêu Sóng Fibo 1.618 (38.9 VNĐ)",
+          "catalyst": "Chu kỳ đại sóng Siêu tăng trưởng ngành Ngân hàng, định giá P/E chiết khấu sâu so với tiềm năng tăng trưởng EPS 2026-2028, vị thế đầu ngành vững chắc phù hợp chiến lược đầu tư giá trị và tích sản."
+        }
+      }
+    },
+    {
+      "symbol": "MBB",
+      "name": "MBBank",
+      "sector": "Ngân hàng",
+      "exchange": "HOSE",
+      "current_price": 19.7,
+      "score": 77.0,
+      "rating": "MUA MẠNH",
+      "entry_zone": "19.55 - 19.7",
+      "elliott_wave": {
+        "wave": "SÓNG 2 THOÁI LUI (Tích lũy đáy Fibo 0.5 - 0.618)",
+        "phase": "EXPANSION_WAVE",
+        "target": 24.62,
+        "support": 19.26
+      },
+      "ichimoku": {
+        "cloud_status": "NEUTRAL",
+        "tk_signal": "Tenkan dưới Kijun (Áp lực điều chỉnh còn duy trì)",
+        "cloud_color": "Mây Đỏ (Kumo Điều Chỉnh)",
+        "kumo_edge": 19.11
+      },
+      "deep_learning": {
+        "model": "Ensemble Deep AI",
+        "accuracy": "84.4%",
+        "loss_mse": "0.00028",
+        "trend": "TĂNG TRƯỞNG MẠNH (BỨT PHÁ)"
+      },
+      "horizons": {
+        "weekly": {
+          "title": "Chiến Lược THEO TUẦN (1 - 4 Tuần)",
+          "horizon": "Ngắn Hạn / Swing Trade",
+          "action": "GOM MUA THEO ĐỘNG LƯỢNG",
+          "entry_zone": "19.4 - 19.7",
+          "target_price": 20.37,
+          "upside_pct": 3.4,
+          "stop_loss": 19.26,
+          "risk_reward": "1:1.5",
+          "win_probability": "77.4%",
+          "technical_driver": "Tenkan dưới Kijun (Áp lực điều chỉnh còn duy trì)",
+          "catalyst": "Động lượng dòng tiền ngắn hạn và cấu trúc nến duy trì xung lực trên hỗ trợ MA20/Tenkan, đón nhịp bứt phá kháng cự gần."
+        },
+        "monthly": {
+          "title": "Chiến Lược THEO THÁNG (1 - 6 Tháng)",
+          "horizon": "Trung Hạn / Vị Thế Sóng Lớn",
+          "action": "NẮM GIỮ TỶ TRỌNG CAO / GIA TĂNG",
+          "entry_zone": "19.11 - 19.9",
+          "target_price": 20.8,
+          "upside_pct": 5.6,
+          "stop_loss": 18.87,
+          "risk_reward": "1:1.3",
+          "win_probability": "81.9%",
+          "technical_driver": "SÓNG 2 THOÁI LUI (Tích lũy đáy Fibo 0.5 - 0.618) & Mây Ichimoku",
+          "catalyst": "Hưởng lợi từ chu kỳ tăng trưởng theo sóng SÓNG 2 THOÁI LUI (Tích lũy đáy Fibo 0.5 - 0.618), hỗ trợ vững chắc từ dải Mây Kumo (19.11) kết hợp cùng dòng tiền tổ chức duy trì mua ròng."
+        },
+        "yearly": {
+          "title": "Chiến Lược THEO NĂM (1 - 3 Năm)",
+          "horizon": "Dài Hạn / Đầu Tư Tích Sản",
+          "action": "TÍCH SẢN TĂNG TRƯỞNG DÀI HẠN",
+          "entry_zone": "Vùng gom tích sản dài hạn: 18.71 - 20.09",
+          "target_price": 22.46,
+          "upside_pct": 14.0,
+          "stop_loss": 17.72,
+          "risk_reward": "1:1.4",
+          "win_probability": "85.9%",
+          "technical_driver": "Mục tiêu Siêu Sóng Fibo 1.618 (22.46 VNĐ)",
+          "catalyst": "Chu kỳ đại sóng Siêu tăng trưởng ngành Ngân hàng, định giá P/E chiết khấu sâu so với tiềm năng tăng trưởng EPS 2026-2028, vị thế đầu ngành vững chắc phù hợp chiến lược đầu tư giá trị và tích sản."
+        }
+      }
+    },
+    {
+      "symbol": "MSN",
+      "name": "Masan Group",
+      "sector": "Tiêu dùng",
+      "exchange": "HOSE",
+      "current_price": 72.4,
+      "score": 91.0,
+      "rating": "MUA MẠNH",
+      "entry_zone": "71.47 - 72.4",
+      "elliott_wave": {
+        "wave": "SÓNG 4 ĐIỀU CHỈNH TÍCH LŨY (Tạo nền chuẩn bị Sóng 5)",
+        "phase": "EXPANSION_WAVE",
+        "target": 90.5,
+        "support": 70.39
+      },
+      "ichimoku": {
+        "cloud_status": "BULLISH",
+        "tk_signal": "Tenkan duy trì trên Kijun (Động lượng Tăng Ổn Định)",
+        "cloud_color": "Mây Xanh (Kumo Tăng Trưởng)",
+        "kumo_edge": 70.23
+      },
+      "deep_learning": {
+        "model": "Ensemble Deep AI",
+        "accuracy": "91.4%",
+        "loss_mse": "0.00028",
+        "trend": "TĂNG TRƯỞNG MẠNH (BỨT PHÁ)"
+      },
+      "horizons": {
+        "weekly": {
+          "title": "Chiến Lược THEO TUẦN (1 - 4 Tuần)",
+          "horizon": "Ngắn Hạn / Swing Trade",
+          "action": "GOM MUA THEO ĐỘNG LƯỢNG",
+          "entry_zone": "71.31 - 72.4",
+          "target_price": 75.44,
+          "upside_pct": 4.2,
+          "stop_loss": 70.39,
+          "risk_reward": "1:1.5",
+          "win_probability": "84.4%",
+          "technical_driver": "Tenkan duy trì trên Kijun (Động lượng Tăng Ổn Định)",
+          "catalyst": "Động lượng dòng tiền ngắn hạn và cấu trúc nến duy trì xung lực trên hỗ trợ MA20/Tenkan, đón nhịp bứt phá kháng cự gần."
+        },
+        "monthly": {
+          "title": "Chiến Lược THEO THÁNG (1 - 6 Tháng)",
+          "horizon": "Trung Hạn / Vị Thế Sóng Lớn",
+          "action": "NẮM GIỮ TỶ TRỌNG CAO / GIA TĂNG",
+          "entry_zone": "70.23 - 73.12",
+          "target_price": 77.4,
+          "upside_pct": 6.9,
+          "stop_loss": 68.98,
+          "risk_reward": "1:1.5",
+          "win_probability": "88.9%",
+          "technical_driver": "SÓNG 4 ĐIỀU CHỈNH TÍCH LŨY (Tạo nền chuẩn bị Sóng 5) & Mây Ichimoku",
+          "catalyst": "Hưởng lợi từ chu kỳ tăng trưởng theo sóng SÓNG 4 ĐIỀU CHỈNH TÍCH LŨY (Tạo nền chuẩn bị Sóng 5), hỗ trợ vững chắc từ dải Mây Kumo (70.23) kết hợp cùng dòng tiền tổ chức duy trì mua ròng."
+        },
+        "yearly": {
+          "title": "Chiến Lược THEO NĂM (1 - 3 Năm)",
+          "horizon": "Dài Hạn / Đầu Tư Tích Sản",
+          "action": "TÍCH SẢN TĂNG TRƯỞNG DÀI HẠN",
+          "entry_zone": "Vùng gom tích sản dài hạn: 68.78 - 73.85",
+          "target_price": 84.85,
+          "upside_pct": 17.2,
+          "stop_loss": 64.76,
+          "risk_reward": "1:1.6",
+          "win_probability": "92.9%",
+          "technical_driver": "Mục tiêu Siêu Sóng Fibo 1.618 (84.85 VNĐ)",
+          "catalyst": "Chu kỳ đại sóng Siêu tăng trưởng ngành Tiêu dùng, định giá P/E chiết khấu sâu so với tiềm năng tăng trưởng EPS 2026-2028, vị thế đầu ngành vững chắc phù hợp chiến lược đầu tư giá trị và tích sản."
+        }
+      }
+    },
+    {
+      "symbol": "FRT",
+      "name": "FPT Retail (Long Châu)",
+      "sector": "Bán lẻ & Dược",
+      "exchange": "HOSE",
+      "current_price": 146.0,
+      "score": 91.0,
+      "rating": "MUA MẠNH",
+      "entry_zone": "143.08 - 146.0",
+      "elliott_wave": {
+        "wave": "SÓNG 4 ĐIỀU CHỈNH TÍCH LŨY (Tạo nền chuẩn bị Sóng 5)",
+        "phase": "EXPANSION_WAVE",
+        "target": 182.5,
+        "support": 139.87
+      },
+      "ichimoku": {
+        "cloud_status": "BULLISH",
+        "tk_signal": "Tenkan duy trì trên Kijun (Động lượng Tăng Ổn Định)",
+        "cloud_color": "Mây Xanh (Kumo Tăng Trưởng)",
+        "kumo_edge": 141.62
+      },
+      "deep_learning": {
+        "model": "Ensemble Deep AI",
+        "accuracy": "91.2%",
+        "loss_mse": "0.00028",
+        "trend": "TĂNG TRƯỞNG MẠNH (BỨT PHÁ)"
+      },
+      "horizons": {
+        "weekly": {
+          "title": "Chiến Lược THEO TUẦN (1 - 4 Tuần)",
+          "horizon": "Ngắn Hạn / Swing Trade",
+          "action": "GOM MUA THEO ĐỘNG LƯỢNG",
+          "entry_zone": "143.81 - 146.0",
+          "target_price": 155.2,
+          "upside_pct": 6.3,
+          "stop_loss": 139.87,
+          "risk_reward": "1:1.5",
+          "win_probability": "84.2%",
+          "technical_driver": "Tenkan duy trì trên Kijun (Động lượng Tăng Ổn Định)",
+          "catalyst": "Động lượng dòng tiền ngắn hạn và cấu trúc nến duy trì xung lực trên hỗ trợ MA20/Tenkan, đón nhịp bứt phá kháng cự gần."
+        },
+        "monthly": {
+          "title": "Chiến Lược THEO THÁNG (1 - 6 Tháng)",
+          "horizon": "Trung Hạn / Vị Thế Sóng Lớn",
+          "action": "NẮM GIỮ TỶ TRỌNG CAO / GIA TĂNG",
+          "entry_zone": "141.62 - 147.46",
+          "target_price": 161.33,
+          "upside_pct": 10.5,
+          "stop_loss": 137.07,
+          "risk_reward": "1:1.7",
+          "win_probability": "88.7%",
+          "technical_driver": "SÓNG 4 ĐIỀU CHỈNH TÍCH LŨY (Tạo nền chuẩn bị Sóng 5) & Mây Ichimoku",
+          "catalyst": "Hưởng lợi từ chu kỳ tăng trưởng theo sóng SÓNG 4 ĐIỀU CHỈNH TÍCH LŨY (Tạo nền chuẩn bị Sóng 5), hỗ trợ vững chắc từ dải Mây Kumo (141.62) kết hợp cùng dòng tiền tổ chức duy trì mua ròng."
+        },
+        "yearly": {
+          "title": "Chiến Lược THEO NĂM (1 - 3 Năm)",
+          "horizon": "Dài Hạn / Đầu Tư Tích Sản",
+          "action": "TÍCH SẢN TĂNG TRƯỞNG DÀI HẠN",
+          "entry_zone": "Vùng gom tích sản dài hạn: 138.7 - 148.92",
+          "target_price": 184.25,
+          "upside_pct": 26.2,
+          "stop_loss": 128.68,
+          "risk_reward": "1:2.2",
+          "win_probability": "92.7%",
+          "technical_driver": "Mục tiêu Siêu Sóng Fibo 1.618 (184.25 VNĐ)",
+          "catalyst": "Chu kỳ đại sóng Siêu tăng trưởng ngành Bán lẻ & Dược, định giá P/E chiết khấu sâu so với tiềm năng tăng trưởng EPS 2026-2028, vị thế đầu ngành vững chắc phù hợp chiến lược đầu tư giá trị và tích sản."
+        }
+      }
+    },
+    {
+      "symbol": "KDH",
+      "name": "Nhà Khang Điền",
+      "sector": "Bất động sản",
+      "exchange": "HOSE",
+      "current_price": 14.15,
+      "score": 64.0,
+      "rating": "MUA",
+      "entry_zone": "14.0 - 14.15",
+      "elliott_wave": {
+        "wave": "SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới)",
+        "phase": "EXPANSION_WAVE",
+        "target": 17.69,
+        "support": 13.79
+      },
+      "ichimoku": {
+        "cloud_status": "NEUTRAL",
+        "tk_signal": "Tenkan dưới Kijun (Áp lực điều chỉnh còn duy trì)",
+        "cloud_color": "Mây Đỏ (Kumo Điều Chỉnh)",
+        "kumo_edge": 13.73
+      },
+      "deep_learning": {
+        "model": "Ensemble Deep AI",
+        "accuracy": "75.5%",
+        "loss_mse": "0.00028",
+        "trend": "TĂNG TRƯỞNG KỸ THUẬT"
+      },
+      "horizons": {
+        "weekly": {
+          "title": "Chiến Lược THEO TUẦN (1 - 4 Tuần)",
+          "horizon": "Ngắn Hạn / Swing Trade",
+          "action": "GOM MUA THEO ĐỘNG LƯỢNG",
+          "entry_zone": "13.94 - 14.15",
+          "target_price": 14.69,
+          "upside_pct": 3.8,
+          "stop_loss": 13.79,
+          "risk_reward": "1:1.5",
+          "win_probability": "68.5%",
+          "technical_driver": "Tenkan dưới Kijun (Áp lực điều chỉnh còn duy trì)",
+          "catalyst": "Động lượng dòng tiền ngắn hạn và cấu trúc nến duy trì xung lực trên hỗ trợ MA20/Tenkan, đón nhịp bứt phá kháng cự gần."
+        },
+        "monthly": {
+          "title": "Chiến Lược THEO THÁNG (1 - 6 Tháng)",
+          "horizon": "Trung Hạn / Vị Thế Sóng Lớn",
+          "action": "NẮM GIỮ TỶ TRỌNG CAO / GIA TĂNG",
+          "entry_zone": "13.73 - 14.29",
+          "target_price": 15.06,
+          "upside_pct": 6.4,
+          "stop_loss": 13.51,
+          "risk_reward": "1:1.4",
+          "win_probability": "73.0%",
+          "technical_driver": "SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới) & Mây Ichimoku",
+          "catalyst": "Hưởng lợi từ chu kỳ tăng trưởng theo sóng SÓNG HIỆU CHỈNH A-B-C (Tạo đáy chu kỳ mới), hỗ trợ vững chắc từ dải Mây Kumo (13.73) kết hợp cùng dòng tiền tổ chức duy trì mua ròng."
+        },
+        "yearly": {
+          "title": "Chiến Lược THEO NĂM (1 - 3 Năm)",
+          "horizon": "Dài Hạn / Đầu Tư Tích Sản",
+          "action": "TÍCH SẢN TĂNG TRƯỞNG DÀI HẠN",
+          "entry_zone": "Vùng gom tích sản dài hạn: 13.44 - 14.43",
+          "target_price": 16.41,
+          "upside_pct": 16.0,
+          "stop_loss": 12.69,
+          "risk_reward": "1:1.5",
+          "win_probability": "77.0%",
+          "technical_driver": "Mục tiêu Siêu Sóng Fibo 1.618 (16.41 VNĐ)",
+          "catalyst": "Chu kỳ đại sóng Siêu tăng trưởng ngành Bất động sản, định giá P/E chiết khấu sâu so với tiềm năng tăng trưởng EPS 2026-2028, vị thế đầu ngành vững chắc phù hợp chiến lược đầu tư giá trị và tích sản."
         }
       }
     }

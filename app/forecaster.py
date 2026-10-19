@@ -101,28 +101,29 @@ def predict_daily_path(
     expected_gain_t10 = round(((target_t10 - last_price) / last_price) * 100, 2)
 
     # Contextual Trend Classification
-    t_score = technical_context.get("score", 50.0) if technical_context else 50.0
-    if expected_gain_t10 >= 2.5:
-        if len(m_base) > 1 and m_base[1] <= last_price:
-            trend_forecast = "TÍCH LŨY BỨT PHÁ (VÙNG GOM SÓNG 3)"
-            trend_color = "#10b981"
-            win_prob = round(max(78.0, min(89.5, 76.0 + expected_gain_t10 * 2.0)), 1)
-        else:
-            trend_forecast = "TĂNG TRƯỞNG MẠNH"
-            trend_color = "#10b981"
-            win_prob = round(max(76.0, min(92.0, 75.0 + expected_gain_t10 * 2.2)), 1)
-    elif expected_gain_t10 >= 0.5:
+    t_score = float(technical_context.get("score", 50.0)) if technical_context else 50.0
+    t_rating = str(technical_context.get("rating", "")).upper() if technical_context else ""
+
+    if t_score <= 40.0 or ("BÁN" in t_rating) or expected_gain_t10 < -1.5:
+        trend_forecast = "ĐIỀU CHỈNH GIẢM (RỦI RO)"
+        trend_color = "#ef4444"
+        win_prob = round(max(28.0, min(45.0, 35.0 + (t_score - 20.0) * 0.4)), 1)
+    elif t_score >= 70.0 or ("MUA MẠNH" in t_rating):
+        trend_forecast = "TĂNG TRƯỞNG MẠNH (BỨT PHÁ)"
+        trend_color = "#10b981"
+        win_prob = round(max(78.0, min(92.0, 74.0 + (t_score - 70.0) * 0.5 + max(0.0, expected_gain_t10) * 1.2)), 1)
+    elif t_score >= 55.0 or ("MUA" in t_rating):
         trend_forecast = "TĂNG TRƯỞNG KỸ THUẬT"
         trend_color = "#34d399"
-        win_prob = round(max(68.0, min(82.0, 68.0 + expected_gain_t10 * 3.0)), 1)
-    elif expected_gain_t10 >= -1.5:
+        win_prob = round(max(65.0, min(77.0, 62.0 + (t_score - 55.0) * 0.8 + max(0.0, expected_gain_t10) * 1.0)), 1)
+    elif expected_gain_t10 >= 0.8:
+        trend_forecast = "TÍCH LŨY HỒI PHỤC"
+        trend_color = "#38bdf8"
+        win_prob = round(max(55.0, min(66.0, 55.0 + expected_gain_t10 * 1.8)), 1)
+    else:
         trend_forecast = "TÍCH LŨY ĐI NGANG (TEST HỖ TRỢ)"
         trend_color = "#f59e0b"
-        win_prob = 62.5
-    else:
-        trend_forecast = "ĐIỀU CHỈNH GIẢM"
-        trend_color = "#ef4444"
-        win_prob = round(max(35.0, min(50.0, 50.0 + expected_gain_t10 * 1.5)), 1)
+        win_prob = 52.5
 
     for step, f_date in enumerate(future_dates):
         step_idx = step + 1

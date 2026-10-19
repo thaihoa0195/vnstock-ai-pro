@@ -184,7 +184,7 @@
       </div>
     </div>
 
-    <!-- AI TOP 5 PICKS BANNER -->
+    <!-- AI TOP PICKS BANNER: 3 BẢNG LIÊN KẾT ĐA KHUNG THỜI GIAN -->
     <div class="glass-card rounded-2xl p-4 border border-emerald-500/30 bg-gradient-to-r from-emerald-950/30 via-gray-900/60 to-cyan-950/30 space-y-3">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-2 border-b border-gray-800 gap-2">
         <div class="flex items-center space-x-2">
@@ -193,20 +193,20 @@
             <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
           </span>
           <h2 class="text-xs sm:text-sm font-extrabold text-white tracking-wide uppercase flex items-center">
-            🏆 TOP 5 CỔ PHIẾU ĐẦU TƯ: SÓNG ELLIOTT + MÂY ICHIMOKU + DEEP LEARNING
+            🏆 TOP CỔ PHIẾU ĐẦU TƯ AI: SÓNG ELLIOTT + MÂY ICHIMOKU + DEEP LEARNING (3 BẢNG LIÊN KẾT)
           </h2>
         </div>
         <!-- Horizon Filters -->
         <div class="flex items-center space-x-1 text-xs">
-          <button onclick="setTopPicksHorizon('all')" id="picks-tab-all" class="picks-tab-btn px-2.5 py-1 rounded-lg font-bold bg-emerald-500 text-black shadow-sm">⚡ Tổng Hợp</button>
-          <button onclick="setTopPicksHorizon('weekly')" id="picks-tab-weekly" class="picks-tab-btn px-2.5 py-1 rounded-lg font-medium text-gray-400 hover:text-white bg-gray-900 border border-gray-800">🗓️ Theo Tuần</button>
-          <button onclick="setTopPicksHorizon('monthly')" id="picks-tab-monthly" class="picks-tab-btn px-2.5 py-1 rounded-lg font-medium text-gray-400 hover:text-white bg-gray-900 border border-gray-800">📅 Theo Tháng</button>
-          <button onclick="setTopPicksHorizon('yearly')" id="picks-tab-yearly" class="picks-tab-btn px-2.5 py-1 rounded-lg font-medium text-gray-400 hover:text-white bg-gray-900 border border-gray-800">📈 Theo Năm</button>
+          <button onclick="setTopPicksHorizon('all')" id="picks-tab-all" class="picks-tab-btn px-2.5 py-1 rounded-lg font-bold bg-emerald-500 text-black shadow-sm">⚡ Xem Cả 3 Bảng</button>
+          <button onclick="setTopPicksHorizon('weekly')" id="picks-tab-weekly" class="picks-tab-btn px-2.5 py-1 rounded-lg font-medium text-gray-400 hover:text-white bg-gray-900 border border-gray-800">🗓️ Bảng Theo Tuần</button>
+          <button onclick="setTopPicksHorizon('monthly')" id="picks-tab-monthly" class="picks-tab-btn px-2.5 py-1 rounded-lg font-medium text-gray-400 hover:text-white bg-gray-900 border border-gray-800">📅 Bảng Theo Tháng</button>
+          <button onclick="setTopPicksHorizon('yearly')" id="picks-tab-yearly" class="picks-tab-btn px-2.5 py-1 rounded-lg font-medium text-gray-400 hover:text-white bg-gray-900 border border-gray-800">📈 Bảng Theo Năm</button>
         </div>
       </div>
 
-      <!-- 5 Cards Horizontal Grid -->
-      <div id="top-picks-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+      <!-- Container: If 'all', displays 3 side-by-side linked panels; if a single tab, displays full cards grid -->
+      <div id="top-picks-container">
         <!-- Rendered dynamically -->
       </div>
     </div>
@@ -496,6 +496,89 @@
       </div>
     </div>
 
+    <!-- HỆ THỐNG 3 BẢNG PHÂN TÍCH AI LIÊN KẾT (SÓNG ELLIOTT • MÂY ICHIMOKU • ĐA KHUNG THỜI GIAN) -->
+    <div class="glass-card rounded-2xl p-5 space-y-4 border border-purple-500/30 bg-gradient-to-br from-gray-900/95 via-purple-950/20 to-gray-900/95 shadow-xl shadow-purple-950/20">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-gray-800 gap-3">
+        <div class="flex items-center space-x-3">
+          <div class="w-9 h-9 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center shadow-lg shadow-purple-500/20">
+            <i data-lucide="layers" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="flex items-center space-x-2">
+              <h2 class="text-base font-extrabold text-white tracking-wide">
+                HỆ THỐNG 3 BẢNG PHÂN TÍCH AI LIÊN KẾT (SÓNG ELLIOTT • MÂY ICHIMOKU • ĐA KHUNG THỜI GIAN)
+              </h2>
+              <span id="active-symbol-analysis-badge" class="px-2 py-0.5 rounded text-[10px] font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30 uppercase mono">FPT</span>
+            </div>
+            <p class="text-xs text-gray-400">Đồng bộ liên kết thời gian thực giữa Cấu trúc Sóng Elliott, Mây Kumo Ichimoku và Kế hoạch đầu tư 3 khung thời gian Tuần • Tháng • Năm</p>
+          </div>
+        </div>
+
+        <!-- Strategy Horizon Tabs -->
+        <div class="flex items-center space-x-1.5 bg-gray-900/90 p-1 rounded-xl border border-gray-800 text-xs">
+          <button onclick="setStrategyTab('weekly')" id="strat-tab-weekly" class="strat-tab-btn px-3 py-1.5 rounded-lg font-bold bg-purple-500 text-white shadow-md shadow-purple-500/20">🗓️ Theo Tuần (1-4 Tuần)</button>
+          <button onclick="setStrategyTab('monthly')" id="strat-tab-monthly" class="strat-tab-btn px-3 py-1.5 rounded-lg font-medium text-gray-400 hover:text-white">📅 Theo Tháng (1-6 Tháng)</button>
+          <button onclick="setStrategyTab('yearly')" id="strat-tab-yearly" class="strat-tab-btn px-3 py-1.5 rounded-lg font-medium text-gray-400 hover:text-white">📈 Theo Năm (1-3 Năm)</button>
+        </div>
+      </div>
+
+      <!-- 3 LINKED PANELS GRID (3 BẢNG LIÊN KẾT) -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <!-- BẢNG 1: CẤU TRÚC SÓNG ELLIOTT & FIBONACCI -->
+        <div class="bg-gray-900/80 border border-cyan-500/20 p-4 rounded-xl space-y-2.5 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between pb-2 border-b border-gray-800">
+              <span class="text-xs font-bold text-gray-300 flex items-center space-x-1.5">
+                <i data-lucide="activity" class="w-4 h-4 text-cyan-400"></i>
+                <span>BẢNG 1: SÓNG ELLIOTT & FIBO</span>
+              </span>
+              <span id="elliott-wave-title" class="px-2.5 py-0.5 rounded text-xs font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">Sóng 3 Mở Rộng</span>
+            </div>
+            <p id="elliott-wave-desc" class="text-xs text-gray-300 leading-relaxed mt-2.5 min-h-[45px]">Đang tải phân tích sóng...</p>
+          </div>
+          <div class="space-y-1.5 pt-2 border-t border-gray-800/80 text-xs">
+            <div class="flex items-center justify-between">
+              <span class="text-gray-400">Mục tiêu Fibo Kế Tiếp:</span>
+              <span id="elliott-target-val" class="font-extrabold text-emerald-400 mono">-- VNĐ</span>
+            </div>
+            <div class="flex items-center justify-between text-[11px]">
+              <span class="text-gray-500">Hỗ trợ then chốt sóng:</span>
+              <span id="elliott-support-val" class="font-semibold text-rose-300 mono">-- VNĐ</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- BẢNG 2: MÂY ICHIMOKU KINKO HYO (MOCHI) -->
+        <div class="bg-gray-900/80 border border-purple-500/20 p-4 rounded-xl space-y-2.5 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between pb-2 border-b border-gray-800">
+              <span class="text-xs font-bold text-gray-300 flex items-center space-x-1.5">
+                <i data-lucide="cloud" class="w-4 h-4 text-purple-400"></i>
+                <span>BẢNG 2: MÂY ICHIMOKU (MOCHI)</span>
+              </span>
+              <span id="ichimoku-cloud-title" class="px-2.5 py-0.5 rounded text-xs font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30">Trên Mây Kumo</span>
+            </div>
+            <p id="ichimoku-cloud-desc" class="text-xs text-gray-300 leading-relaxed mt-2.5 min-h-[45px]">Đang tải trạng thái mây...</p>
+          </div>
+          <div class="space-y-1.5 pt-2 border-t border-gray-800/80 text-xs">
+            <div class="flex items-center justify-between">
+              <span class="text-gray-400">Tín hiệu Tenkan / Kijun:</span>
+              <span id="ichimoku-tk-val" class="font-extrabold text-purple-300 mono">Tenkan > Kijun</span>
+            </div>
+            <div class="flex items-center justify-between text-[11px]">
+              <span class="text-gray-500">Dải Kumo Đệm Đỡ:</span>
+              <span id="ichimoku-kumo-val" class="font-semibold text-cyan-300 mono">-- VNĐ</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- BẢNG 3: KẾ HOẠCH ĐẦU TƯ 3 KHUNG THỜI GIAN -->
+        <div id="horizon-strategy-card" class="bg-gray-900/80 border border-emerald-500/20 rounded-xl p-4 space-y-2.5 flex flex-col justify-between">
+          <!-- Rendered dynamically based on active tab (weekly/monthly/yearly) -->
+        </div>
+      </div>
+    </div>
+
     <!-- INTERACTIVE CHART SECTION -->
     <div class="glass-card rounded-2xl p-4 space-y-3">
       <!-- Chart Controls Header -->
@@ -705,70 +788,7 @@
       </div>
     </div>
 
-    <!-- ELLIOTT WAVE, ICHIMOKU CLOUD (MÂY MOCHI) & MULTI-TIMEFRAME STRATEGY PANEL -->
-    <div class="glass-card rounded-2xl p-5 space-y-4 border border-purple-500/30 bg-gradient-to-br from-gray-900/95 via-purple-950/20 to-gray-900/95 shadow-xl shadow-purple-950/20">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-gray-800 gap-3">
-        <div class="flex items-center space-x-3">
-          <div class="w-9 h-9 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center shadow-lg shadow-purple-500/20">
-            <i data-lucide="layers" class="w-5 h-5"></i>
-          </div>
-          <div>
-            <div class="flex items-center space-x-2">
-              <h2 class="text-base font-extrabold text-white tracking-wide">Chiến Lược Sóng Elliott & Mây Ichimoku Kinko Hyo (Mây Mochi)</h2>
-              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30">TUẦN • THÁNG • NĂM</span>
-            </div>
-            <p class="text-xs text-gray-400">Kết hợp toàn diện Sóng Elliott 1-2-3-4-5, Mây Kumo Ichimoku và Dự phóng Deep Learning đa khung thời gian</p>
-          </div>
-        </div>
 
-        <!-- Strategy Horizon Tabs -->
-        <div class="flex items-center space-x-1.5 bg-gray-900/90 p-1 rounded-xl border border-gray-800 text-xs">
-          <button onclick="setStrategyTab('weekly')" id="strat-tab-weekly" class="strat-tab-btn px-3 py-1.5 rounded-lg font-bold bg-purple-500 text-white shadow-md shadow-purple-500/20">🗓️ Theo Tuần (1-4 Tuần)</button>
-          <button onclick="setStrategyTab('monthly')" id="strat-tab-monthly" class="strat-tab-btn px-3 py-1.5 rounded-lg font-medium text-gray-400 hover:text-white">📅 Theo Tháng (1-6 Tháng)</button>
-          <button onclick="setStrategyTab('yearly')" id="strat-tab-yearly" class="strat-tab-btn px-3 py-1.5 rounded-lg font-medium text-gray-400 hover:text-white">📈 Theo Năm (1-3 Năm)</button>
-        </div>
-      </div>
-
-      <!-- Elliott & Ichimoku Technical Badges Row -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <!-- Elliott Wave Status Box -->
-        <div class="bg-gray-900/70 border border-gray-800 p-4 rounded-xl space-y-2.5">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-bold text-gray-400 flex items-center space-x-1.5">
-              <i data-lucide="activity" class="w-4 h-4 text-cyan-400"></i>
-              <span>CẤU TRÚC SÓNG ELLIOTT</span>
-            </span>
-            <span id="elliott-wave-title" class="px-2.5 py-0.5 rounded text-xs font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">Sóng 3 Mở Rộng</span>
-          </div>
-          <p id="elliott-wave-desc" class="text-xs text-gray-300 leading-relaxed min-h-[40px]">Đang tải phân tích sóng...</p>
-          <div class="pt-2 border-t border-gray-800/60 flex items-center justify-between text-xs">
-            <span class="text-gray-400">Mục tiêu Fibo Sóng Kế Tiếp:</span>
-            <span id="elliott-target-val" class="font-extrabold text-emerald-400 mono">-- VNĐ</span>
-          </div>
-        </div>
-
-        <!-- Ichimoku Cloud Status Box -->
-        <div class="bg-gray-900/70 border border-gray-800 p-4 rounded-xl space-y-2.5">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-bold text-gray-400 flex items-center space-x-1.5">
-              <i data-lucide="cloud" class="w-4 h-4 text-purple-400"></i>
-              <span>MÂY ICHIMOKU KINKO HYO (MOCHI)</span>
-            </span>
-            <span id="ichimoku-cloud-title" class="px-2.5 py-0.5 rounded text-xs font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30">Trên Mây Kumo</span>
-          </div>
-          <p id="ichimoku-cloud-desc" class="text-xs text-gray-300 leading-relaxed min-h-[40px]">Đang tải trạng thái mây...</p>
-          <div class="pt-2 border-t border-gray-800/60 flex items-center justify-between text-xs">
-            <span class="text-gray-400">Tín hiệu Tenkan / Kijun:</span>
-            <span id="ichimoku-tk-val" class="font-extrabold text-purple-300 mono">Tenkan > Kijun</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Active Horizon Strategy Detail Card -->
-      <div id="horizon-strategy-card" class="bg-purple-950/20 border border-purple-500/30 rounded-xl p-4 space-y-3">
-        <!-- Rendered dynamically based on active tab (weekly/monthly/yearly) -->
-      </div>
-    </div>
 
     <!-- LOWER SECTION: AI REPORT & INTERACTIVE AI ASSISTANT -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
@@ -977,91 +997,159 @@
       renderTopPicksUI();
     }
 
+    function renderStockPickCard(p, hKey, isAllView = false) {
+      const priceDisplay = formatVND(p.current_price);
+      const h = p.horizons || {};
+      const activeH = h[hKey] || h.weekly || h.monthly || h.yearly || {};
+      const targetDisplay = formatVND(activeH.target_price);
+      const isSelected = (p.symbol === currentSymbol);
+
+      const ew = p.elliott_wave || {};
+      const ewWave = (ew.wave || 'Sóng Đẩy').split('(')[0].trim();
+      const ichi = p.ichimoku || {};
+      const ichiCloud = (ichi.cloud_status || 'Trên Mây').split('(')[0].trim();
+
+      const borderClass = isSelected
+        ? 'border-emerald-400 bg-emerald-950/30 ring-1 ring-emerald-400/50 shadow-lg shadow-emerald-500/20'
+        : 'border-gray-800 hover:border-emerald-500/50 bg-gray-900/90 hover:bg-gray-800/90 shadow-md hover:shadow-emerald-500/10';
+
+      return `
+        <div onclick="selectStock('${p.symbol}')" class="${borderClass} rounded-xl p-3 cursor-pointer transition flex flex-col justify-between space-y-2 group">
+          <div>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-1.5">
+                <span class="font-black text-white text-base mono group-hover:text-emerald-400 transition">${p.symbol}</span>
+                <span class="text-xs text-gray-400 mono font-semibold">(${priceDisplay})</span>
+              </div>
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold ${isSelected ? 'bg-emerald-500 text-black' : 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'} uppercase">
+                ${p.rating || 'MUA MẠNH'}
+              </span>
+            </div>
+            <div class="text-[11px] text-gray-400 truncate mt-0.5">${p.name || ''} • <span class="text-gray-500">${p.sector || p.exchange}</span></div>
+          </div>
+
+          <!-- Elliott Wave & Ichimoku Badges -->
+          <div class="grid grid-cols-2 gap-1.5 text-[10px]">
+            <div class="bg-cyan-950/40 border border-cyan-500/25 px-1.5 py-1 rounded text-cyan-300 font-semibold truncate flex items-center space-x-1" title="${ew.wave || ''}">
+              <span class="shrink-0">🌊</span>
+              <span class="truncate">${ewWave}</span>
+            </div>
+            <div class="bg-purple-950/40 border border-purple-500/25 px-1.5 py-1 rounded text-purple-300 font-semibold truncate flex items-center space-x-1" title="${ichi.cloud_status || ''}">
+              <span class="shrink-0">☁️</span>
+              <span class="truncate">${ichiCloud}</span>
+            </div>
+          </div>
+
+          <!-- Deep Learning Target & Stop Loss -->
+          <div class="bg-gray-950/60 p-2 rounded-lg border border-gray-800/80 space-y-1">
+            <div class="flex items-baseline justify-between text-[11px]">
+              <span class="text-gray-400">Mục tiêu TP:</span>
+              <span class="font-extrabold text-emerald-400 mono">${targetDisplay} (+${activeH.upside_pct || 0}%)</span>
+            </div>
+            <div class="flex items-baseline justify-between text-[10px]">
+              <span class="text-gray-400">Vùng gom:</span>
+              <span class="font-bold text-purple-300 mono">${activeH.entry_zone || p.entry_zone || '--'}</span>
+            </div>
+            <div class="flex items-baseline justify-between text-[10px]">
+              <span class="text-gray-400">Cắt lỗ / R:R:</span>
+              <span class="font-bold text-rose-400 mono">${formatVND(activeH.stop_loss)} <span class="text-cyan-300">(${activeH.risk_reward || '1:2.5'})</span></span>
+            </div>
+          </div>
+
+          <!-- AI Catalyst Commentary -->
+          <div class="text-[10px] text-gray-300 line-clamp-1 border-t border-gray-800/60 pt-1" title="${activeH.catalyst || ''}">
+            <span class="text-emerald-400 font-semibold">AI:</span> ${activeH.catalyst || 'Động lượng tích cực theo sóng và mây Kumo.'}
+          </div>
+        </div>
+      `;
+    }
+
     function renderTopPicksUI() {
       const container = document.getElementById('top-picks-container');
       if (!container || !topPicksData) return;
 
       const horizon = currentPicksHorizon || 'all';
-      let list = [];
-      if (Array.isArray(topPicksData)) {
-        list = topPicksData;
-      } else if (typeof topPicksData === 'object') {
-        list = topPicksData[horizon] || topPicksData['all'] || [];
-      }
 
-      if (list.length === 0) return;
+      if (horizon === 'all') {
+        const weeklyList = topPicksData.weekly || [];
+        const monthlyList = topPicksData.monthly || [];
+        const yearlyList = topPicksData.yearly || [];
 
-      container.innerHTML = list.map((p, idx) => {
-        const priceDisplay = formatVND(p.current_price);
-        const h = p.horizons || {};
-        const w = h.weekly || {};
-        const m = h.monthly || {};
-        const y = h.yearly || {};
-
-        if (horizon === 'all') {
-          return `
-            <div onclick="selectStock('${p.symbol}')" class="bg-gray-900/90 hover:bg-gray-800/90 border border-gray-800 hover:border-emerald-500/50 rounded-xl p-3 cursor-pointer transition flex flex-col justify-between space-y-2 group shadow-md hover:shadow-emerald-500/10">
-              <div>
-                <div class="flex items-center justify-between">
-                  <span class="font-black text-white text-base mono group-hover:text-emerald-400 transition">${p.symbol}</span>
-                  <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">#${idx+1} TOP PICK</span>
-                </div>
-                <div class="text-[11px] text-gray-400 truncate mt-0.5">${p.name}</div>
-              </div>
-              <div class="space-y-1">
-                <div class="flex items-center justify-between">
-                  <span class="text-xs font-bold text-gray-200 mono">${priceDisplay}</span>
-                  <span class="text-[10px] px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300 font-bold border border-cyan-500/30 truncate max-w-[110px]">${p.elliott_wave?.wave?.split('(')[0] || 'Sóng 3'}</span>
-                </div>
-                <div class="flex items-center justify-between text-[10px]">
-                  <span class="text-purple-300 font-semibold truncate max-w-[100px]">${p.ichimoku?.cloud_status?.split('(')[0] || 'Trên Mây'}</span>
-                  <span class="text-emerald-400 font-extrabold mono">Tuần: +${w.upside_pct || 0}% | Tháng: +${m.upside_pct || 0}%</span>
-                </div>
-              </div>
-              <div class="text-[10px] text-gray-400 flex justify-between border-t border-gray-800/60 pt-1.5">
-                <span>Vùng gom:</span>
-                <span class="font-bold text-emerald-300 mono">${w.entry_zone || p.entry_zone || '--'}</span>
-              </div>
-            </div>
-          `;
-        } else {
-          const activeH = h[horizon] || w;
-          const targetDisplay = formatVND(activeH.target_price);
-          const horizonLabels = {
-            weekly: 'Tuần (1-4W)',
-            monthly: 'Tháng (1-6M)',
-            yearly: 'Năm (1-3Y)'
-          };
-
-          return `
-            <div onclick="selectStock('${p.symbol}')" class="bg-gray-900/90 hover:bg-gray-800/90 border border-gray-800 hover:border-purple-500/50 rounded-xl p-3 cursor-pointer transition flex flex-col justify-between space-y-2 group shadow-md hover:shadow-purple-500/10">
-              <div>
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center space-x-1.5">
-                    <span class="font-black text-white text-base mono group-hover:text-purple-300 transition">${p.symbol}</span>
-                    <span class="text-[10px] text-gray-400">(${priceDisplay})</span>
+        container.innerHTML = `
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <!-- BẢNG 1: THEO TUẦN (1 - 4 TUẦN) -->
+            <div class="bg-gradient-to-b from-gray-900/90 to-gray-950/90 border border-cyan-500/30 rounded-2xl p-3.5 space-y-3 shadow-lg shadow-cyan-950/20">
+              <div class="flex items-center justify-between pb-2 border-b border-gray-800">
+                <div class="flex items-center space-x-2">
+                  <span class="text-base">🗓️</span>
+                  <div>
+                    <h3 class="text-xs font-black text-cyan-300 tracking-wide uppercase">BẢNG 1: THEO TUẦN (1 - 4 TUẦN)</h3>
+                    <p class="text-[10px] text-gray-400">Động lượng Swing • Điểm nổ Tenkan / Kijun</p>
                   </div>
-                  <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30 uppercase">${horizonLabels[horizon] || horizon}</span>
                 </div>
-                <div class="text-[11px] text-gray-400 truncate mt-0.5">${p.name}</div>
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 mono">5 MÃ SWING</span>
               </div>
-              <div class="bg-purple-950/30 p-2 rounded-lg border border-purple-500/20 space-y-1">
-                <div class="flex items-baseline justify-between">
-                  <span class="text-[10px] text-gray-400">Mục tiêu TP:</span>
-                  <span class="text-xs font-black text-emerald-400 mono">${targetDisplay} (+${activeH.upside_pct}%)</span>
-                </div>
-                <div class="flex items-baseline justify-between text-[10px]">
-                  <span class="text-gray-400">Cắt lỗ / R:R:</span>
-                  <span class="font-bold text-rose-400 mono">${formatVND(activeH.stop_loss)} <span class="text-cyan-300">(${activeH.risk_reward})</span></span>
-                </div>
-              </div>
-              <div class="text-[10px] text-gray-300 line-clamp-1 border-t border-gray-800/60 pt-1">
-                <span class="text-emerald-400 font-semibold">AI:</span> ${activeH.catalyst || ''}
+              <div class="space-y-2.5">
+                ${weeklyList.map(p => renderStockPickCard(p, 'weekly', true)).join('')}
               </div>
             </div>
-          `;
-        }
-      }).join('');
+
+            <!-- BẢNG 2: THEO THÁNG (1 - 6 THÁNG) -->
+            <div class="bg-gradient-to-b from-gray-900/90 to-gray-950/90 border border-purple-500/30 rounded-2xl p-3.5 space-y-3 shadow-lg shadow-purple-950/20">
+              <div class="flex items-center justify-between pb-2 border-b border-gray-800">
+                <div class="flex items-center space-x-2">
+                  <span class="text-base">📅</span>
+                  <div>
+                    <h3 class="text-xs font-black text-purple-300 tracking-wide uppercase">BẢNG 2: THEO THÁNG (1 - 6 THÁNG)</h3>
+                    <p class="text-[10px] text-gray-400">Sóng 3 Elliott chủ đạo • Đệm mây Kumo dày</p>
+                  </div>
+                </div>
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30 mono">5 MÃ VỊ THẾ</span>
+              </div>
+              <div class="space-y-2.5">
+                ${monthlyList.map(p => renderStockPickCard(p, 'monthly', true)).join('')}
+              </div>
+            </div>
+
+            <!-- BẢNG 3: THEO NĂM (1 - 3 NĂM) -->
+            <div class="bg-gradient-to-b from-gray-900/90 to-gray-950/90 border border-emerald-500/30 rounded-2xl p-3.5 space-y-3 shadow-lg shadow-emerald-950/20">
+              <div class="flex items-center justify-between pb-2 border-b border-gray-800">
+                <div class="flex items-center space-x-2">
+                  <span class="text-base">📈</span>
+                  <div>
+                    <h3 class="text-xs font-black text-emerald-300 tracking-wide uppercase">BẢNG 3: THEO NĂM (1 - 3 NĂM)</h3>
+                    <p class="text-[10px] text-gray-400">Siêu sóng chu kỳ lớn • Tích sản tăng trưởng</p>
+                  </div>
+                </div>
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 mono">5 MÃ TÍCH SẢN</span>
+              </div>
+              <div class="space-y-2.5">
+                ${yearlyList.map(p => renderStockPickCard(p, 'yearly', true)).join('')}
+              </div>
+            </div>
+          </div>
+        `;
+      } else {
+        const list = topPicksData[horizon] || [];
+        const horizonTitles = {
+          weekly: '🗓️ BẢNG THEO TUẦN (1 - 4 TUẦN) - ĐỘNG LƯỢNG NGẮN HẠN',
+          monthly: '📅 BẢNG THEO THÁNG (1 - 6 THÁNG) - SÓNG LỚN & VỊ THẾ TRUNG HẠN',
+          yearly: '📈 BẢNG THEO NĂM (1 - 3 NĂM) - TÍCH SẢN TĂNG TRƯỞNG DÀI HẠN'
+        };
+
+        container.innerHTML = `
+          <div class="space-y-3">
+            <div class="flex items-center justify-between pb-2 border-b border-gray-800">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">${horizonTitles[horizon] || horizon}</span>
+              <span class="text-[11px] text-gray-400">Nhấp vào mã bất kỳ để phân tích chuyên sâu</span>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5">
+              ${list.map(p => renderStockPickCard(p, horizon, false)).join('')}
+            </div>
+          </div>
+        `;
+      }
+      lucide.createIcons();
     }
 
     // 1. Initialize TradingView Lightweight Charts
@@ -1304,6 +1392,13 @@
       // Update titles immediately
       document.getElementById('stock-symbol-title').innerText = symbol;
       document.getElementById('chat-symbol-badge').innerText = symbol;
+      const analysisBadge = document.getElementById('active-symbol-analysis-badge');
+      if (analysisBadge) analysisBadge.innerText = symbol;
+
+      // Re-render Top Picks to update selected active highlight border
+      if (typeof renderTopPicksUI === 'function') {
+        renderTopPicksUI();
+      }
 
       // Instant optimistic UI feedback from 1523 stocks database
       if (allStocks && allStocks.length > 0) {
@@ -1339,11 +1434,19 @@
             document.getElementById('elliott-wave-title').innerText = cached.elliott_wave.wave || 'Sóng Đẩy';
             document.getElementById('elliott-wave-desc').innerText = cached.elliott_wave.phase || '';
             document.getElementById('elliott-target-val').innerText = formatVND(cached.elliott_wave.target);
+            const suppElem = document.getElementById('elliott-support-val');
+            if (suppElem && cached.elliott_wave.support) suppElem.innerText = formatVND(cached.elliott_wave.support);
           }
           if (cached.ichimoku) {
             document.getElementById('ichimoku-cloud-title').innerText = cached.ichimoku.cloud_status || 'Trên Mây';
             document.getElementById('ichimoku-cloud-desc').innerText = `${cached.ichimoku.cloud_color || ''}`;
             document.getElementById('ichimoku-tk-val').innerText = cached.ichimoku.tk_signal || '';
+            const kumoElem = document.getElementById('ichimoku-kumo-val');
+            if (kumoElem && cached.ichimoku.kumo_edge) kumoElem.innerText = formatVND(cached.ichimoku.kumo_edge);
+          }
+          if (cached.horizons) {
+            currentStrategyData = cached.horizons;
+            renderActiveStrategyCard(activeStrategyTab);
           }
         }
       }
@@ -1678,9 +1781,11 @@
       if (data.elliott_wave) {
         const ew = data.elliott_wave;
         document.getElementById('elliott-wave-title').innerText = ew.current_wave || 'Sóng Đẩy Tăng Trưởng';
-        document.getElementById('elliott-wave-desc').innerText = ew.wave_phase || 'Cấu trúc sóng đẩy tiếp diễn xu hướng tăng.';
+        document.getElementById('elliott-wave-desc').innerText = ew.wave_description || ew.wave_phase || 'Cấu trúc sóng đẩy tiếp diễn xu hướng tăng.';
         const targetPrice = ew.next_wave_target || 0;
         document.getElementById('elliott-target-val').innerText = formatVND(targetPrice);
+        const suppElem = document.getElementById('elliott-support-val');
+        if (suppElem) suppElem.innerText = formatVND(ew.key_wave_support || ew.support || 0);
       }
 
       // Ichimoku Cloud status
@@ -1689,6 +1794,16 @@
         document.getElementById('ichimoku-cloud-title').innerText = ichi.cloud_status || 'Trên Mây Kumo';
         document.getElementById('ichimoku-cloud-desc').innerText = `${ichi.cloud_position || 'Nến nằm trên mây Kumo'}. ${ichi.cloud_color || 'Mây xanh mở rộng đệm hỗ trợ'}`;
         document.getElementById('ichimoku-tk-val').innerText = ichi.tk_signal || 'Tenkan-sen > Kijun-sen';
+        const kumoElem = document.getElementById('ichimoku-kumo-val');
+        if (kumoElem) {
+          if (ichi.cloud_top && ichi.cloud_bottom) {
+            kumoElem.innerText = `${formatVND(ichi.cloud_bottom)} - ${formatVND(ichi.cloud_top)}`;
+          } else if (ichi.kumo_edge) {
+            kumoElem.innerText = formatVND(ichi.kumo_edge);
+          } else {
+            kumoElem.innerText = 'Dày 2.5%';
+          }
+        }
       }
 
       // Investment Strategy multi-timeframe
@@ -1713,57 +1828,69 @@
         yearly: '📈'
       };
 
-      container.innerHTML = `
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-2 border-b border-purple-500/20 gap-2">
-          <div class="flex items-center space-x-2">
-            <span class="text-base">${horizonIcons[tab] || '🎯'}</span>
-            <span class="text-sm font-black text-purple-200 tracking-wide uppercase">${strat.horizon || tab.toUpperCase()}</span>
-          </div>
-          <div class="flex items-center space-x-2 text-xs">
-            <span class="text-gray-400">Xác Suất Thắng Dự Kiến (AI Deep Learning):</span>
-            <span class="font-extrabold text-emerald-400 mono">${strat.win_probability || '78%'}</span>
-          </div>
-        </div>
+      const horizonNames = {
+        weekly: 'THEO TUẦN (1 - 4 TUẦN)',
+        monthly: 'THEO THÁNG (1 - 6 THÁNG)',
+        yearly: 'THEO NĂM (1 - 3 NĂM)'
+      };
 
-        <!-- Strategy Key Metrics Grid -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-1">
-          <div class="bg-gray-900/80 p-2.5 rounded-lg border border-purple-500/20">
-            <span class="text-[10px] text-gray-400 block font-medium">Vùng Mua Gom Khuyến Nghị</span>
-            <span class="text-xs font-black text-purple-300 mono">${strat.entry_zone || '--'}</span>
+      const elliottNote = strat.elliott_context || strat.technical_driver || '';
+      const ichiNote = strat.ichimoku_context || '';
+      const actionNote = strat.action_advice || strat.action || strat.catalyst || '';
+
+      container.innerHTML = `
+        <div class="space-y-2.5">
+          <div class="flex items-center justify-between pb-2 border-b border-gray-800">
+            <span class="text-xs font-bold text-gray-300 flex items-center space-x-1.5">
+              <i data-lucide="target" class="w-4 h-4 text-emerald-400"></i>
+              <span>BẢNG 3: ${horizonNames[tab] || (strat.horizon ? strat.horizon.toUpperCase() : tab.toUpperCase())}</span>
+            </span>
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+              Thắng: ${strat.win_probability || '78%'}
+            </span>
           </div>
-          <div class="bg-gray-900/80 p-2.5 rounded-lg border border-purple-500/20">
-            <span class="text-[10px] text-gray-400 block font-medium">Giá Mục Tiêu Chốt Lời</span>
-            <div class="flex items-baseline space-x-1">
-              <span class="text-xs font-black text-emerald-400 mono">${formatVND(strat.target_price)}</span>
-              <span class="text-[10px] font-bold text-emerald-400 mono">(+${strat.upside_pct}%)</span>
+
+          <!-- Strategy Key Metrics Grid (2x2 for clean responsive fit in 1/3 column) -->
+          <div class="grid grid-cols-2 gap-2 pt-1 text-xs">
+            <div class="bg-gray-950/70 p-2 rounded-lg border border-gray-800/80">
+              <span class="text-[10px] text-gray-400 block font-medium">Vùng Mua Gom</span>
+              <span class="text-xs font-black text-purple-300 mono">${strat.entry_zone || '--'}</span>
             </div>
-          </div>
-          <div class="bg-gray-900/80 p-2.5 rounded-lg border border-purple-500/20">
-            <span class="text-[10px] text-gray-400 block font-medium">Ngưỡng Cắt Lỗ Kỷ Luật</span>
-            <span class="text-xs font-black text-rose-400 mono">${formatVND(strat.stop_loss)}</span>
-          </div>
-          <div class="bg-gray-900/80 p-2.5 rounded-lg border border-purple-500/20">
-            <span class="text-[10px] text-gray-400 block font-medium">Tỷ Lệ Lợi Nhuận / Rủi Ro (R:R)</span>
-            <span class="text-xs font-black text-cyan-300 mono">${strat.risk_reward || '1:2.5'}</span>
+            <div class="bg-gray-950/70 p-2 rounded-lg border border-gray-800/80">
+              <span class="text-[10px] text-gray-400 block font-medium">Mục Tiêu TP</span>
+              <div class="flex items-baseline space-x-1">
+                <span class="text-xs font-black text-emerald-400 mono">${formatVND(strat.target_price)}</span>
+                <span class="text-[10px] font-bold text-emerald-400 mono">(+${strat.upside_pct || 0}%)</span>
+              </div>
+            </div>
+            <div class="bg-gray-950/70 p-2 rounded-lg border border-gray-800/80">
+              <span class="text-[10px] text-gray-400 block font-medium">Cắt Lỗ Kỷ Luật</span>
+              <span class="text-xs font-black text-rose-400 mono">${formatVND(strat.stop_loss)}</span>
+            </div>
+            <div class="bg-gray-950/70 p-2 rounded-lg border border-gray-800/80">
+              <span class="text-[10px] text-gray-400 block font-medium">Tỷ lệ R:R</span>
+              <span class="text-xs font-black text-cyan-300 mono">${strat.risk_reward || '1:2.5'}</span>
+            </div>
           </div>
         </div>
 
         <!-- Strategy Synthesis Commentary -->
-        <div class="space-y-1.5 pt-1 text-xs">
-          <div class="flex items-start space-x-2 text-gray-300">
-            <span class="text-cyan-400 font-bold shrink-0">🌊 Sóng Elliott:</span>
-            <span class="text-gray-300">${strat.elliott_context || ''}</span>
-          </div>
-          <div class="flex items-start space-x-2 text-gray-300">
-            <span class="text-purple-400 font-bold shrink-0">☁️ Mây Ichimoku:</span>
-            <span class="text-gray-300">${strat.ichimoku_context || ''}</span>
-          </div>
-          <div class="flex items-start space-x-2 text-emerald-300 bg-emerald-950/20 p-2 rounded-lg border border-emerald-500/20">
-            <span class="font-bold shrink-0">💡 Hành Động:</span>
-            <span>${strat.action_advice || ''}</span>
-          </div>
+        <div class="space-y-1.5 pt-2 border-t border-gray-800/80 text-[11px] leading-relaxed">
+          ${elliottNote ? `
+            <div class="text-gray-300 line-clamp-2">
+              <span class="text-cyan-400 font-bold">🌊 Elliott:</span> ${elliottNote}
+            </div>` : ''}
+          ${ichiNote ? `
+            <div class="text-gray-300 line-clamp-2">
+              <span class="text-purple-400 font-bold">☁️ Mây:</span> ${ichiNote}
+            </div>` : ''}
+          ${actionNote ? `
+            <div class="text-emerald-300 bg-emerald-950/30 p-2 rounded-lg border border-emerald-500/20 text-[11px] leading-snug">
+              <span class="font-bold">💡 Hành Động:</span> ${actionNote}
+            </div>` : ''}
         </div>
       `;
+      lucide.createIcons();
     }
 
     // 9. AI Deep Learning Daily Price Path Forecasting Functions

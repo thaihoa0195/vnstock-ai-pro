@@ -118,8 +118,15 @@
           </div>
         </div>
 
-        <!-- Online Link & Settings -->
-        <div class="flex items-center space-x-3">
+        <!-- Online Link & Settings & Smart Money Radar -->
+        <div class="flex items-center space-x-2 sm:space-x-3">
+          <!-- Smart Money Radar Button -->
+          <button onclick="toggleSmartMoneyModal()" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-emerald-500/20 via-cyan-500/20 to-emerald-500/20 hover:from-emerald-500/30 hover:to-cyan-500/30 text-emerald-300 border border-emerald-500/40 text-xs font-bold transition shadow-lg shadow-emerald-950/20 group" title="Mở Radar 10 Cổ Phiếu Dòng Tiền Lớn">
+            <i data-lucide="radar" class="w-4 h-4 text-emerald-400 group-hover:rotate-45 transition duration-300"></i>
+            <span class="hidden sm:inline">Radar Dòng Tiền Lớn</span>
+            <span class="px-1.5 py-0.2 rounded bg-emerald-500/30 text-[10px] text-emerald-300 border border-emerald-500/40 font-black">TOP 10</span>
+          </button>
+
           <!-- Public Online Link Badge -->
           <div id="online-link-pill" class="flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-emerald-950/40 border border-emerald-500/30 text-xs">
             <i data-lucide="globe" class="w-4 h-4 text-emerald-400 animate-spin-slow"></i>
@@ -392,9 +399,15 @@
                   <i data-lucide="activity" class="w-4 h-4 text-emerald-400"></i>
                   <span class="text-xs font-bold text-white uppercase tracking-wide">Radar Dòng Tiền Lớn (VSA)</span>
                 </div>
-                <span id="vsa-badge" class="px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                  BÙNG NỔ (SOS)
-                </span>
+                <div class="flex items-center space-x-1.5">
+                  <button onclick="toggleSmartMoneyModal()" class="text-[10px] text-cyan-400 hover:text-cyan-300 font-bold underline flex items-center space-x-0.5">
+                    <span>Xem Top 10</span>
+                    <i data-lucide="arrow-right" class="w-3 h-3"></i>
+                  </button>
+                  <span id="vsa-badge" class="px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                    BÙNG NỔ (SOS)
+                  </span>
+                </div>
               </div>
 
               <div>
@@ -914,6 +927,46 @@
       <div class="flex justify-end space-x-2 pt-2">
         <button onclick="toggleSettingsModal()" class="px-4 py-2 rounded-xl bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs font-semibold">Đóng</button>
         <button onclick="saveSettings()" class="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-black text-xs font-bold">Lưu Cấu Hình</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SMART MONEY RADAR MODAL (Top 10 Cổ Phiếu Dòng Tiền Lớn) -->
+  <div id="smart-money-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-3 sm:p-5 hidden">
+    <div class="glass-card rounded-2xl max-w-5xl w-full p-5 sm:p-6 border border-emerald-500/30 bg-gradient-to-br from-gray-900 via-gray-950 to-emerald-950/20 max-h-[90vh] flex flex-col space-y-4 shadow-2xl shadow-emerald-950/40">
+      
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between pb-3 border-b border-gray-800">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center border border-emerald-500/30 shadow-lg shadow-emerald-500/20">
+            <i data-lucide="radar" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <div class="flex items-center space-x-2">
+              <h3 class="font-extrabold text-white text-base sm:text-lg tracking-wide uppercase">
+                📡 RADAR TOP 10 CỔ PHIẾU CÓ DÒNG TIỀN LỚN (SMART MONEY VSA)
+              </h3>
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 mono animate-pulse">LIVE RADAR</span>
+            </div>
+            <p class="text-xs text-gray-400">Phát hiện dấu chân tổ chức, cá mập gom hàng, bùng nổ khối lượng và kiểm định cạn cung VSA</p>
+          </div>
+        </div>
+        <button onclick="toggleSmartMoneyModal()" class="text-gray-400 hover:text-white p-1.5 rounded-lg hover:bg-gray-800 transition">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Radar Content / Table -->
+      <div class="flex-1 overflow-y-auto space-y-3 pr-1">
+        <div id="smart-money-radar-table-container">
+          <div class="text-center py-10 text-gray-400 text-xs">Đang quét dòng tiền thị trường...</div>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="flex items-center justify-between pt-3 border-t border-gray-800 text-xs text-gray-400">
+        <span>💡 Nhấp vào bất kỳ mã cổ phiếu nào để phân tích toàn diện trên biểu đồ</span>
+        <button onclick="toggleSmartMoneyModal()" class="px-4 py-2 rounded-xl bg-gray-800 hover:bg-gray-700 text-gray-300 font-bold transition">Đóng Radar</button>
       </div>
     </div>
   </div>
@@ -2118,6 +2171,121 @@
     function loadSettings() {
       const key = localStorage.getItem('vnstock_gemini_key') || '';
       document.getElementById('gemini-key-input').value = key;
+    }
+
+    // 12. Smart Money Radar Modal Functions
+    async function toggleSmartMoneyModal() {
+      const modal = document.getElementById('smart-money-modal');
+      if (!modal) return;
+      const isHidden = modal.classList.contains('hidden');
+      if (isHidden) {
+        modal.classList.remove('hidden');
+        await loadSmartMoneyRadar();
+      } else {
+        modal.classList.add('hidden');
+      }
+    }
+
+    async function loadSmartMoneyRadar() {
+      const container = document.getElementById('smart-money-radar-table-container');
+      if (!container) return;
+      try {
+        const res = await fetch('/api/market/smart-money-radar');
+        const list = await res.json();
+        if (!list || list.length === 0) {
+          container.innerHTML = '<div class="text-center py-8 text-gray-400 text-xs italic">Không tìm thấy dữ liệu dòng tiền lớn.</div>';
+          return;
+        }
+
+        container.innerHTML = `
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr class="border-b border-gray-800 text-gray-400 uppercase text-[10px] bg-gray-900/60">
+                  <th class="py-2.5 px-3">Hạng / Mã CP</th>
+                  <th class="py-2.5 px-3">Giá & Biến động</th>
+                  <th class="py-2.5 px-3">Dấu Chân Smart Money (VSA)</th>
+                  <th class="py-2.5 px-3">Vol / TB20</th>
+                  <th class="py-2.5 px-3">Khối Ngoại</th>
+                  <th class="py-2.5 px-3">Sóng Elliott & Mây Mochi</th>
+                  <th class="py-2.5 px-3">Mục Tiêu TP & Cắt Lỗ</th>
+                  <th class="py-2.5 px-3 text-right">Thao Tác</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-800/60">
+                ${list.map((s, idx) => {
+                  const isCurrent = s.symbol === currentSymbol;
+                  const price = formatVND(s.price);
+                  const chgSign = s.change_pct >= 0 ? '+' : '';
+                  const chgColor = s.change_pct >= 0 ? 'text-emerald-400' : 'text-rose-400';
+                  const volColor = s.vol_ratio >= 1.5 ? 'text-emerald-400 font-extrabold' : (s.vol_ratio < 0.6 ? 'text-purple-300 font-extrabold' : 'text-gray-300');
+                  
+                  return `
+                    <tr class="hover:bg-gray-800/50 transition cursor-pointer ${isCurrent ? 'bg-emerald-950/20 border-l-2 border-emerald-500' : ''}" onclick="selectStockAndCloseRadar('${s.symbol}')">
+                      <td class="py-3 px-3">
+                        <div class="flex items-center space-x-2">
+                          <span class="w-5 h-5 rounded-full ${idx < 3 ? 'bg-emerald-500 text-black' : 'bg-gray-800 text-gray-400'} flex items-center justify-center font-black text-[10px] mono">#${idx + 1}</span>
+                          <div>
+                            <span class="font-black text-white text-sm mono hover:text-emerald-400 transition">${s.symbol}</span>
+                            <span class="text-[10px] text-gray-400 block truncate max-w-[120px]">${s.name}</span>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="py-3 px-3">
+                        <span class="font-extrabold text-white mono">${price}</span>
+                        <span class="text-[10px] ${chgColor} block mono font-bold">${chgSign}${s.change_pct}%</span>
+                      </td>
+                      <td class="py-3 px-3">
+                        <span class="px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                          ${s.vsa_type || 'GOM HÀNG VSA'}
+                        </span>
+                        <span class="text-[11px] text-gray-300 block mt-1 line-clamp-1 max-w-[200px]" title="${s.vsa_desc || ''}">${s.vsa_title || ''}</span>
+                      </td>
+                      <td class="py-3 px-3">
+                        <span class="mono text-xs ${volColor}">${s.vol_ratio}x</span>
+                        <span class="text-[10px] text-gray-500 block">Điểm: <strong class="text-emerald-400 mono">${s.smart_money_score}</strong></span>
+                      </td>
+                      <td class="py-3 px-3">
+                        <span class="font-bold mono ${s.foreign_flow?.includes('+') ? 'text-emerald-400' : 'text-rose-400'}">${s.foreign_flow || '--'}</span>
+                        <span class="text-[10px] text-gray-500 block">P/E: ${s.pe || '--'}x</span>
+                      </td>
+                      <td class="py-3 px-3">
+                        <span class="text-cyan-300 text-[11px] font-semibold block truncate max-w-[140px]" title="${s.wave || ''}">🌊 ${(s.wave || '').split('(')[0]}</span>
+                        <span class="text-purple-300 text-[10px] font-medium block truncate max-w-[140px]" title="${s.tk_signal || ''}">☁️ ${s.cloud_status || ''}</span>
+                      </td>
+                      <td class="py-3 px-3 text-xs">
+                        <div class="flex items-center space-x-1">
+                          <span class="text-gray-400 text-[10px]">TP:</span>
+                          <span class="font-black text-emerald-400 mono">${formatVND(s.tp1)}</span>
+                        </div>
+                        <div class="flex items-center space-x-1 text-[10px]">
+                          <span class="text-gray-500">SL:</span>
+                          <span class="text-rose-400 mono font-semibold">${formatVND(s.stop_loss)}</span>
+                        </div>
+                      </td>
+                      <td class="py-3 px-3 text-right">
+                        <button onclick="event.stopPropagation(); selectStockAndCloseRadar('${s.symbol}')" class="px-2.5 py-1 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-black font-extrabold text-[11px] transition shadow-md shadow-emerald-500/20">
+                          Phân Tích
+                        </button>
+                      </td>
+                    </tr>
+                  `;
+                }).join('')}
+              </tbody>
+            </table>
+          </div>
+        `;
+        lucide.createIcons();
+      } catch (err) {
+        console.error('Error loading smart money radar:', err);
+        container.innerHTML = '<div class="text-center py-8 text-rose-400 text-xs">Không thể tải dữ liệu radar. Vui lòng thử lại.</div>';
+      }
+    }
+
+    function selectStockAndCloseRadar(symbol) {
+      selectStock(symbol);
+      const modal = document.getElementById('smart-money-modal');
+      if (modal) modal.classList.add('hidden');
     }
   </script>
 </body>

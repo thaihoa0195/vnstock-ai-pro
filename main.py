@@ -261,6 +261,20 @@ def get_top_picks(horizon: Optional[str] = Query(None)):
             pass
     return []
 
+@app.get("/api/market/smart-money-radar")
+def get_smart_money_radar():
+    """
+    Return Top 10 Stocks with Highest Smart Money Flow (VSA SOS, Absorption, No Supply Test)
+    """
+    radar_path = "smart_money_top10.json"
+    if os.path.exists(radar_path):
+        try:
+            with open(radar_path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            pass
+    return []
+
 @app.get("/api/tunnel-status")
 def get_tunnel_status():
     """

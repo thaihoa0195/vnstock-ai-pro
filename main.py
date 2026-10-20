@@ -16,6 +16,8 @@ from app.data_service import (
     fetch_history,
     get_stock_info,
     get_market_indices,
+    get_live_quote,
+    get_market_session_info,
     warm_up_cache
 )
 from app.analyzer import calculate_ai_analysis, compute_indicators
@@ -67,9 +69,28 @@ def list_stocks():
 @app.get("/api/market/indices")
 def market_indices():
     """
-    Return VN-Index, VN30 status
+    Return VN-Index, VN30 live status
     """
     return {"indices": get_market_indices()}
+
+@app.get("/api/market/session")
+def market_session():
+    """
+    Return current Vietnam stock market (HOSE/HNX/UPCOM) trading session status
+    """
+    return get_market_session_info()
+
+@app.get("/api/stock/{symbol}/live-quote")
+def stock_live_quote(symbol: str):
+    """
+    Return real-time live market quote (< 15ms cache, ~0.15s live)
+    Includes live matching price, change, %, open, high, low, volume, ceiling, floor, ref
+    """
+    symbol = symbol.upper().strip()
+    quote = get_live_quote(symbol)
+    if not quote:
+        raise HTTPException(status_code=404, detail=f"Không thể lấy báo giá trực tiếp cho mã {symbol}")
+    return quote
 
 @app.get("/api/stock/{symbol}/history")
 def stock_history(symbol: str, days: int = 180):

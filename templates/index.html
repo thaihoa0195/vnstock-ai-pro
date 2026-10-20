@@ -238,13 +238,68 @@
             </div>
           </div>
 
-          <!-- Price & Change -->
-          <div class="mt-4 flex items-baseline space-x-3">
-            <div id="stock-current-price" class="text-3xl font-extrabold text-white mono">33,250</div>
-            <span class="text-xs text-gray-400 font-medium">VNĐ</span>
-            <div id="stock-price-change" class="flex items-center text-sm font-bold text-emerald-400 mono">
-              <i data-lucide="arrow-up-right" class="w-4 h-4 mr-0.5"></i>
-              +700 (+2.15%)
+          <!-- Live Session Status & Last Update Time -->
+          <div class="mt-3 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+              <span id="market-session-badge" class="inline-flex items-center space-x-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                <span id="session-ping-dot" class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                <span id="session-status-text">Khớp lệnh trực tiếp</span>
+              </span>
+              <span id="live-quote-time" class="text-[11px] text-gray-400 font-mono">--:--:--</span>
+            </div>
+            <span class="inline-flex items-center space-x-1 px-2 py-0.5 rounded text-[10px] font-bold bg-gray-900 border border-gray-800 text-cyan-400" title="Cập nhật trực tiếp tự động 3 giây">
+              <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+              <span>LIVE TRONG PHIÊN</span>
+            </span>
+          </div>
+
+          <!-- Price & Change Box with Live Ticking -->
+          <div id="price-card-box" class="mt-2.5 p-3 rounded-xl bg-gray-900/70 border border-gray-800 transition-all duration-300">
+            <div class="flex items-baseline space-x-3">
+              <div id="stock-current-price" class="text-3xl font-black text-white mono tracking-tight transition-colors duration-300">33,950</div>
+              <span class="text-xs text-gray-400 font-medium">VNĐ</span>
+              <div id="stock-price-change" class="flex items-center text-sm font-extrabold text-emerald-400 mono">
+                <i data-lucide="arrow-up-right" class="w-4 h-4 mr-0.5"></i>
+                +700 (+2.11%)
+              </div>
+            </div>
+
+            <!-- Price Board: Trần (Tím), Tham Chiếu (Vàng), Sàn (Xanh Lơ), Khối Lượng -->
+            <div class="mt-2.5 grid grid-cols-4 gap-1.5 text-[11px] font-mono">
+              <div class="bg-purple-950/40 px-2 py-1.5 rounded-lg border border-purple-500/30 text-center">
+                <span class="text-purple-400 block text-[9px] font-sans font-bold">GIÁ TRẦN</span>
+                <span id="stock-ceiling-price" class="text-purple-300 font-bold mono">35,580</span>
+              </div>
+              <div class="bg-amber-950/40 px-2 py-1.5 rounded-lg border border-amber-500/30 text-center">
+                <span class="text-amber-400 block text-[9px] font-sans font-bold">THAM CHIẾU</span>
+                <span id="stock-ref-price" class="text-amber-300 font-bold mono">33,250</span>
+              </div>
+              <div class="bg-cyan-950/40 px-2 py-1.5 rounded-lg border border-cyan-500/30 text-center">
+                <span class="text-cyan-400 block text-[9px] font-sans font-bold">GIÁ SÀN</span>
+                <span id="stock-floor-price" class="text-cyan-300 font-bold mono">30,920</span>
+              </div>
+              <div class="bg-gray-950/80 px-2 py-1.5 rounded-lg border border-gray-800 text-center">
+                <span class="text-gray-400 block text-[9px] font-sans font-bold">KHỐI LƯỢNG</span>
+                <span id="stock-live-volume" class="text-white font-bold mono">30.40M</span>
+              </div>
+            </div>
+
+            <!-- Intraday Range: Low - Open - High -->
+            <div class="mt-2 flex items-center justify-between text-[10px] text-gray-400 font-mono pt-1.5 border-t border-gray-800/80">
+              <span class="flex items-center space-x-1">
+                <span class="text-gray-500 font-sans font-medium">Thấp:</span>
+                <strong id="stock-live-low" class="text-rose-400 font-bold">33,050</strong>
+              </span>
+              <span class="text-gray-600">|</span>
+              <span class="flex items-center space-x-1">
+                <span class="text-gray-500 font-sans font-medium">Mở:</span>
+                <strong id="stock-live-open" class="text-amber-300 font-bold">33,300</strong>
+              </span>
+              <span class="text-gray-600">|</span>
+              <span class="flex items-center space-x-1">
+                <span class="text-gray-500 font-sans font-medium">Cao:</span>
+                <strong id="stock-live-high" class="text-emerald-400 font-bold">33,950</strong>
+              </span>
             </div>
           </div>
 
@@ -990,6 +1045,8 @@
     let topPicksData = [];
     let currentPicksHorizon = 'all';
     let allStocks = [];
+    let liveStreamInterval = null;
+    let lastKnownPrice = null;
 
     // Helper: Number / Price Formatter
     function formatPriceNum(val) {
@@ -1020,7 +1077,7 @@
 
       // Periodically poll tunnel status until link is resolved
       setInterval(fetchTunnelStatus, 8000);
-      setInterval(fetchIndices, 30000); // 30s market refresh
+      setInterval(fetchIndices, 6000); // 6s live market indices refresh
     });
 
     // 0. Fetch & Filter Top 5 AI Picks (Sóng Elliott + Ichimoku Mochi + Deep Learning)
@@ -1421,11 +1478,143 @@
       });
     }
 
+    // 4.5 Live Real-Time Intraday Quote Streaming (3-second polling & chart tick)
+    function startLiveQuoteStream(symbol) {
+      if (liveStreamInterval) {
+        clearInterval(liveStreamInterval);
+        liveStreamInterval = null;
+      }
+      lastKnownPrice = null;
+
+      // Immediate fetch
+      pollLiveQuote(symbol);
+
+      // Start 3-second live polling loop
+      liveStreamInterval = setInterval(() => {
+        if (currentSymbol === symbol) {
+          pollLiveQuote(symbol);
+        }
+      }, 3000);
+    }
+
+    async function pollLiveQuote(symbol) {
+      if (currentSymbol !== symbol) return;
+      try {
+        const res = await fetch(`/api/stock/${symbol}/live-quote`);
+        if (!res.ok) return;
+        const q = await res.json();
+        if (currentSymbol !== symbol || !q) return;
+
+        // 1. Session Status & Time
+        const session = q.session || {};
+        const sessionText = document.getElementById('session-status-text');
+        const sessionDot = document.getElementById('session-ping-dot');
+        const sessionBadge = document.getElementById('market-session-badge');
+        const quoteTime = document.getElementById('live-quote-time');
+
+        if (sessionText) sessionText.innerText = session.status_text || 'Khớp lệnh trực tiếp';
+        if (quoteTime) quoteTime.innerText = q.updated_at || session.time || '';
+
+        if (sessionBadge && sessionDot) {
+          if (session.is_live) {
+            sessionBadge.className = 'inline-flex items-center space-x-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/40';
+            sessionDot.className = 'w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping';
+          } else {
+            sessionBadge.className = 'inline-flex items-center space-x-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-gray-800 text-gray-400 border border-gray-700';
+            sessionDot.className = 'w-1.5 h-1.5 rounded-full bg-gray-500';
+          }
+        }
+
+        // 2. Price Flash Animation on Real-Time Tick
+        const priceElem = document.getElementById('stock-current-price');
+        const priceCardBox = document.getElementById('price-card-box');
+        const chgElem = document.getElementById('stock-price-change');
+
+        if (priceElem) {
+          if (lastKnownPrice !== null && q.price !== lastKnownPrice) {
+            if (q.price > lastKnownPrice) {
+              if (priceCardBox) {
+                priceCardBox.classList.add('bg-emerald-500/20', 'ring-1', 'ring-emerald-400');
+                setTimeout(() => priceCardBox.classList.remove('bg-emerald-500/20', 'ring-1', 'ring-emerald-400'), 700);
+              }
+            } else if (q.price < lastKnownPrice) {
+              if (priceCardBox) {
+                priceCardBox.classList.add('bg-rose-500/20', 'ring-1', 'ring-rose-400');
+                setTimeout(() => priceCardBox.classList.remove('bg-rose-500/20', 'ring-1', 'ring-rose-400'), 700);
+              }
+            }
+          }
+          lastKnownPrice = q.price;
+          priceElem.innerText = formatPriceNum(q.price);
+        }
+
+        // 3. Price Change & Color
+        if (chgElem) {
+          const isUp = q.change >= 0;
+          const isRef = q.change === 0;
+          const sign = isUp && !isRef ? '+' : '';
+          chgElem.className = isRef
+            ? 'flex items-center text-sm font-extrabold text-amber-400 mono'
+            : (isUp ? 'flex items-center text-sm font-extrabold text-emerald-400 mono' : 'flex items-center text-sm font-extrabold text-rose-400 mono');
+          chgElem.innerHTML = `
+            <i data-lucide="${isUp ? 'arrow-up-right' : 'arrow-down-right'}" class="w-4 h-4 mr-0.5"></i>
+            ${sign}${formatPriceNum(q.change)} (${sign}${q.change_pct}%)
+          `;
+          lucide.createIcons();
+        }
+
+        // 4. Board Stats: Trần, Tham Chiếu, Sàn, Khối lượng
+        const ceilElem = document.getElementById('stock-ceiling-price');
+        if (ceilElem && q.ceiling) ceilElem.innerText = formatPriceNum(q.ceiling);
+        const refElem = document.getElementById('stock-ref-price');
+        if (refElem && q.reference) refElem.innerText = formatPriceNum(q.reference);
+        const floorElem = document.getElementById('stock-floor-price');
+        if (floorElem && q.floor) floorElem.innerText = formatPriceNum(q.floor);
+
+        const volElem = document.getElementById('stock-live-volume');
+        if (volElem && q.volume !== undefined) {
+          const volM = q.volume >= 1000000 ? (q.volume / 1000000).toFixed(2) + 'M' : (q.volume / 1000).toFixed(1) + 'k';
+          volElem.innerText = volM;
+        }
+
+        // 5. Intraday Range: Low, Open, High
+        const lowElem = document.getElementById('stock-live-low');
+        if (lowElem && q.low) lowElem.innerText = formatPriceNum(q.low);
+        const openElem = document.getElementById('stock-live-open');
+        if (openElem && q.open) openElem.innerText = formatPriceNum(q.open);
+        const highElem = document.getElementById('stock-live-high');
+        if (highElem && q.high) highElem.innerText = formatPriceNum(q.high);
+
+        // 6. Live Active Candlestick Update on TradingView Chart
+        if (candleSeries && q.date) {
+          candleSeries.update({
+            time: q.date,
+            open: q.open,
+            high: q.high,
+            low: q.low,
+            close: q.price
+          });
+        }
+        if (volumeSeries && q.date && q.volume) {
+          volumeSeries.update({
+            time: q.date,
+            value: q.volume,
+            color: q.price >= q.open ? 'rgba(16, 185, 129, 0.6)' : 'rgba(239, 68, 68, 0.6)'
+          });
+        }
+      } catch (err) {
+        // Silent catch for live poll
+      }
+    }
+
     // 5. Select Stock & Load Everything (Parallel & Instantaneous UI Feedback)
     async function selectStock(symbol) {
       if (!symbol) return;
       symbol = symbol.trim().toUpperCase();
       currentSymbol = symbol;
+
+      // Start live real-time quote streaming immediately
+      startLiveQuoteStream(symbol);
 
       // Close dropdown
       const searchDropdown = document.getElementById('search-dropdown');

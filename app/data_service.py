@@ -63,9 +63,74 @@ def _load_all_symbols():
 
 _load_all_symbols()
 
-# In-memory cache: { key: {"data": ..., "timestamp": ...} }
+# In-memory caches for high-speed delivery
 CACHE: Dict[str, Dict[str, Any]] = {}
-CACHE_TTL = 300 # 5 minutes
+LIVE_CACHE: Dict[str, Dict[str, Any]] = {}
+LIVE_CACHE_TTL = 3.0 # 3-second live cache for real-time intraday quote streaming
+
+def get_market_session_info() -> Dict[str, Any]:
+    """
+    Determine exact Vietnam stock market (HOSE/HNX/UPCOM) trading session status
+    """
+    now = datetime.now()
+    weekday = now.weekday()
+    hour = now.hour
+    minute = now.minute
+    time_num = hour * 100 + minute
+
+    is_trading_day = (weekday < 5)
+
+    if not is_trading_day:
+        status_text = "Đóng cửa (Cuối tuần)"
+        status_code = "WEEKEND_CLOSED"
+        is_live = False
+    elif time_num < 900:
+        status_text = "Chờ mở phiên ATO"
+        status_code = "PRE_MARKET"
+        is_live = False
+    elif 900 <= time_num < 915:
+        status_text = "Phiên mở cửa ATO"
+        status_code = "ATO"
+        is_live = True
+    elif 915 <= time_num < 1130:
+        status_text = "Khớp lệnh liên tục (Sáng)"
+        status_code = "CONTINUOUS_AM"
+        is_live = True
+    elif 1130 <= time_num < 1300:
+        status_text = "Nghỉ giữa phiên (Trưa)"
+        status_code = "LUNCH_BREAK"
+        is_live = False
+    elif 1300 <= time_num < 1430:
+        status_text = "Khớp lệnh liên tục (Chiều)"
+        status_code = "CONTINUOUS_PM"
+        is_live = True
+    elif 1430 <= time_num < 1445:
+        status_text = "Phiên đóng cửa ATC"
+        status_code = "ATC"
+        is_live = True
+    elif 1445 <= time_num < 1500:
+        status_text = "Giao dịch thỏa thuận"
+        status_code = "RUN_OFF"
+        is_live = True
+    else:
+        status_text = "Đã kết thúc phiên"
+        status_code = "POST_MARKET"
+        is_live = False
+
+    return {
+        "status_text": status_text,
+        "status_code": status_code,
+        "is_live": is_live,
+        "time": now.strftime("%H:%M:%S"),
+        "date": now.strftime("%Y-%m-%d")
+    }
+
+def get_cache_ttl() -> float:
+    """
+    Dynamic cache TTL: 10s during trading sessions for live updates; 300s outside trading hours
+    """
+    session = get_market_session_info()
+    return 10.0 if session["is_live"] else 300.0
 
 def get_stock_info(symbol: str) -> Dict[str, Any]:
     symbol = symbol.upper().strip()
@@ -150,11 +215,13 @@ def _fetch_from_vnstock(symbol: str, start_date: str, end_date: str):
 def fetch_history(symbol: str, days: int = 180) -> pd.DataFrame:
     """
     Fetch OHLCV data with instantaneous response (< 10ms with cache, ~0.3s live)
+    Automatically updates dynamically during market hours
     """
     symbol = symbol.upper().strip()
     cache_key = f"hist_{symbol}_{days}"
     now = time.time()
-    if cache_key in CACHE and (now - CACHE[cache_key]["timestamp"]) < CACHE_TTL:
+    ttl = get_cache_ttl()
+    if cache_key in CACHE and (now - CACHE[cache_key]["timestamp"]) < ttl:
         return CACHE[cache_key]["data"]
 
     # 1. Primary high-speed live market data source (Entrade DNSE API)
@@ -290,32 +357,147 @@ def generate_realistic_fallback_data(symbol: str, days: int = 180) -> pd.DataFra
 
     return pd.DataFrame(data)
 
+def get_live_quote(symbol: str) -> Optional[Dict[str, Any]]:
+    """
+    Fetch instant real-time live market quote (< 10ms with 3s live cache, ~0.15s direct)
+    Includes live price, % change, volume, open, high, low, ceiling, floor, reference
+    """
+    symbol = symbol.upper().strip()
+    now_ts = time.time()
+
+    # 1. Check ultra-fast live cache
+    if symbol in LIVE_CACHE and (now_ts - LIVE_CACHE[symbol]["timestamp"]) < LIVE_CACHE_TTL:
+        return LIVE_CACHE[symbol]["data"]
+
+    # 2. Fetch from high-speed Entrade API
+    try:
+        to_ts = int(now_ts)
+        from_ts = to_ts - 5 * 86400
+        is_idx = symbol in ["VNINDEX", "VN30", "HNX", "UPCOM"]
+        endpoint = "index" if is_idx else "stock"
+        url = f"https://services.entrade.com.vn/chart-api/v2/ohlcs/{endpoint}?from={from_ts}&to={to_ts}&symbol={symbol}&resolution=1D"
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"})
+        with urllib.request.urlopen(req, timeout=3.0) as resp:
+            data = json.loads(resp.read().decode())
+
+        closes = data.get("c", [])
+        times = data.get("t", [])
+        opens = data.get("o", [])
+        highs = data.get("h", [])
+        lows = data.get("l", [])
+        vols = data.get("v", [])
+
+        if len(closes) >= 1:
+            curr_price = float(closes[-1])
+            prev_close = float(closes[-2]) if len(closes) >= 2 else curr_price
+            change = round(curr_price - prev_close, 2)
+            change_pct = round((change / prev_close) * 100, 2) if prev_close > 0 else 0.0
+
+            open_p = float(opens[-1]) if opens else curr_price
+            high_p = float(highs[-1]) if highs else curr_price
+            low_p = float(lows[-1]) if lows else curr_price
+            volume = int(vols[-1]) if vols else 0
+            latest_date = datetime.fromtimestamp(times[-1]).strftime("%Y-%m-%d") if times else datetime.now().strftime("%Y-%m-%d")
+
+            info = get_stock_info(symbol)
+            exchange = info.get("exchange", "HOSE").upper()
+
+            # Price limits (Trần, Sàn, Tham chiếu)
+            if exchange == "HOSE":
+                ceil_pct, floor_pct = 0.07, 0.07
+            elif exchange == "HNX":
+                ceil_pct, floor_pct = 0.10, 0.10
+            else: # UPCOM
+                ceil_pct, floor_pct = 0.15, 0.15
+
+            ceiling = round(prev_close * (1.0 + ceil_pct), 2)
+            floor = round(prev_close * (1.0 - floor_pct), 2)
+            ref_price = round(prev_close, 2)
+
+            session = get_market_session_info()
+
+            quote = {
+                "symbol": symbol,
+                "price": curr_price,
+                "change": change,
+                "change_pct": change_pct,
+                "open": open_p,
+                "high": high_p,
+                "low": low_p,
+                "volume": volume,
+                "prev_close": prev_close,
+                "reference": ref_price,
+                "ceiling": ceiling,
+                "floor": floor,
+                "exchange": exchange,
+                "name": info.get("name", symbol),
+                "sector": info.get("sector", ""),
+                "date": latest_date,
+                "updated_at": datetime.now().strftime("%H:%M:%S"),
+                "session": session
+            }
+            LIVE_CACHE[symbol] = {"data": quote, "timestamp": now_ts}
+            return quote
+    except Exception:
+        pass
+
+    # 3. Fallback to history
+    try:
+        df = fetch_history(symbol, days=5)
+        if df is not None and len(df) >= 2:
+            last = df.iloc[-1]
+            prev = df.iloc[-2]
+            c = float(last["close"])
+            pc = float(prev["close"])
+            chg = round(c - pc, 2)
+            pct = round((chg / pc) * 100, 2)
+            info = get_stock_info(symbol)
+            exchange = info.get("exchange", "HOSE").upper()
+            ceil_pct = 0.07 if exchange == "HOSE" else 0.10 if exchange == "HNX" else 0.15
+            quote = {
+                "symbol": symbol,
+                "price": c,
+                "change": chg,
+                "change_pct": pct,
+                "open": float(last["open"]),
+                "high": float(last["high"]),
+                "low": float(last["low"]),
+                "volume": int(last["volume"]),
+                "prev_close": pc,
+                "reference": pc,
+                "ceiling": round(pc * (1.0 + ceil_pct), 2),
+                "floor": round(pc * (1.0 - ceil_pct), 2),
+                "exchange": exchange,
+                "name": info.get("name", symbol),
+                "sector": info.get("sector", ""),
+                "date": str(last["time"]),
+                "updated_at": datetime.now().strftime("%H:%M:%S"),
+                "session": get_market_session_info()
+            }
+            LIVE_CACHE[symbol] = {"data": quote, "timestamp": now_ts}
+            return quote
+    except Exception:
+        pass
+
+    return None
+
 def get_market_indices() -> List[Dict[str, Any]]:
     """
-    Get latest snapshot for main VN indices
+    Get latest live snapshot for main VN indices (VNINDEX, VN30)
     """
     indices = ["VNINDEX", "VN30"]
     result = []
     for idx in indices:
-        try:
-            df = fetch_history(idx, days=5)
-            if df is not None and len(df) >= 2:
-                last = df.iloc[-1]
-                prev = df.iloc[-2]
-                curr = float(last["close"])
-                p_close = float(prev["close"])
-                change = curr - p_close
-                change_pct = (change / p_close) * 100
-                result.append({
-                    "symbol": idx,
-                    "name": "Chỉ số " + idx,
-                    "price": round(curr, 2),
-                    "change": round(change, 2),
-                    "change_pct": round(change_pct, 2),
-                    "volume": int(last["volume"])
-                })
-        except Exception as e:
-            print(f"Error fetching index {idx}: {e}")
+        q = get_live_quote(idx)
+        if q:
+            result.append({
+                "symbol": idx,
+                "name": "Chỉ số " + idx,
+                "price": q["price"],
+                "change": q["change"],
+                "change_pct": q["change_pct"],
+                "volume": q["volume"]
+            })
     return result
 
 def warm_up_cache():

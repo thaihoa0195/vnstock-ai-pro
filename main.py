@@ -23,6 +23,7 @@ from app.data_service import (
 from app.analyzer import calculate_ai_analysis, compute_indicators
 from app.chat_service import generate_ai_chat_response
 from app.forecaster import predict_daily_path
+from app.screener import get_dynamic_top_picks, get_dynamic_smart_money, run_market_screener
 
 app = FastAPI(
     title="VN-Stock AI Pro - Phân Tích Đường Giá Chứng Khoán Việt Nam",
@@ -34,6 +35,10 @@ app = FastAPI(
 @app.on_event("startup")
 def on_startup():
     warm_up_cache()
+    try:
+        get_dynamic_top_picks(force_refresh=False)
+    except Exception as e:
+        print(f"Startup screener init: {e}")
 
 # Ensure static & templates directory exist
 os.makedirs("static", exist_ok=True)
@@ -264,37 +269,65 @@ def stock_forecast(symbol: str, days: int = 10, model: str = "ensemble"):
     return forecast
 
 @app.get("/api/top-picks")
-def get_top_picks(horizon: Optional[str] = Query(None)):
+def get_top_picks(horizon: Optional[str] = Query(None), refresh: bool = Query(False)):
     """
-    Return AI-Screened Top Stock Picks for each investment horizon (all, weekly, monthly, yearly)
+    Return AI-Screened Top Stock Picks for each investment horizon (all, weekly, monthly, yearly).
+    Auto-rescreens stale cache (> 30 mins) or if refresh=true.
+    Always returns real-time live prices.
     """
-    picks_path = "top_5_picks.json"
-    if os.path.exists(picks_path):
-        try:
-            with open(picks_path, "r", encoding="utf-8") as f:
-                data = json.load(f)
-            if isinstance(data, dict):
-                if horizon and horizon in data:
-                    return data[horizon]
-                return data
+    try:
+        data = get_dynamic_top_picks(force_refresh=refresh)
+        if isinstance(data, dict):
+            if horizon and horizon in data:
+                return data[horizon]
             return data
-        except Exception:
-            pass
-    return []
+        return data
+    except Exception as e:
+        print(f"Error serving top picks: {e}")
+        # fallback to file
+        picks_path = "top_5_picks.json"
+        if os.path.exists(picks_path):
+            try:
+                with open(picks_path, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                    if horizon and horizon in data:
+                        return data[horizon]
+                    return data
+            except Exception:
+                pass
+        return {}
 
 @app.get("/api/market/smart-money-radar")
-def get_smart_money_radar():
+def get_smart_money_radar(refresh: bool = Query(False)):
     """
-    Return Top 10 Stocks with Highest Smart Money Flow (VSA SOS, Absorption, No Supply Test)
+    Return Top 10 Stocks with Highest Smart Money Flow (VSA SOS, Absorption, No Supply Test).
+    Auto-refreshes with live quotes and periodic market rescreening.
     """
-    radar_path = "smart_money_top10.json"
-    if os.path.exists(radar_path):
-        try:
-            with open(radar_path, "r", encoding="utf-8") as f:
-                return json.load(f)
-        except Exception:
-            pass
-    return []
+    try:
+        radar = get_dynamic_smart_money(force_refresh=refresh)
+        return radar
+    except Exception as e:
+        print(f"Error serving smart money radar: {e}")
+        radar_path = "smart_money_top10.json"
+        if os.path.exists(radar_path):
+            try:
+                with open(radar_path, "r", encoding="utf-8") as f:
+                    return json.load(f)
+            except Exception:
+                pass
+        return []
+
+@app.post("/api/market/rescreen")
+def trigger_market_rescreen():
+    """
+    Trigger immediate on-demand market screening across all liquid stocks
+    """
+    res = run_market_screener()
+    return {
+        "status": "success",
+        "updated_at": res.get("top_picks", {}).get("updated_at"),
+        "scanned_stocks": res.get("top_picks", {}).get("scanned_stocks", 0)
+    }
 
 @app.get("/api/tunnel-status")
 def get_tunnel_status():

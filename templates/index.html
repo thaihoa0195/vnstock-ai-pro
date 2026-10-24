@@ -204,7 +204,12 @@
           </h2>
         </div>
         <!-- Horizon Filters -->
-        <div class="flex items-center space-x-1 text-xs">
+        <div class="flex items-center space-x-1 text-xs flex-wrap gap-y-1">
+          <span id="top-picks-timestamp" class="text-[10px] text-gray-400 mono bg-gray-900/80 px-2 py-0.5 rounded border border-gray-800 hidden sm:inline-block">Cập nhật: --:--</span>
+          <button onclick="refreshTopPicks()" id="btn-refresh-picks" class="flex items-center space-x-1 px-2.5 py-1 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-semibold transition" title="Quét lại toàn bộ thị trường và cập nhật danh mục mới nhất">
+            <i data-lucide="refresh-cw" id="icon-refresh-picks" class="w-3.5 h-3.5"></i>
+            <span class="hidden md:inline">Làm Mới</span>
+          </button>
           <button onclick="setTopPicksHorizon('all')" id="picks-tab-all" class="picks-tab-btn px-2.5 py-1 rounded-lg font-bold bg-emerald-500 text-black shadow-sm">⚡ Xem Cả 3 Bảng</button>
           <button onclick="setTopPicksHorizon('weekly')" id="picks-tab-weekly" class="picks-tab-btn px-2.5 py-1 rounded-lg font-medium text-gray-400 hover:text-white bg-gray-900 border border-gray-800">🗓️ Bảng Theo Tuần</button>
           <button onclick="setTopPicksHorizon('monthly')" id="picks-tab-monthly" class="picks-tab-btn px-2.5 py-1 rounded-lg font-medium text-gray-400 hover:text-white bg-gray-900 border border-gray-800">📅 Bảng Theo Tháng</button>
@@ -1006,9 +1011,15 @@
             <p class="text-xs text-gray-400">Phát hiện dấu chân tổ chức, cá mập gom hàng, bùng nổ khối lượng và kiểm định cạn cung VSA</p>
           </div>
         </div>
-        <button onclick="toggleSmartMoneyModal()" class="text-gray-400 hover:text-white p-1.5 rounded-lg hover:bg-gray-800 transition">
-          <i data-lucide="x" class="w-5 h-5"></i>
-        </button>
+        <div class="flex items-center space-x-2">
+          <button onclick="loadSmartMoneyRadar(true)" id="btn-refresh-radar" class="flex items-center space-x-1 px-2.5 py-1.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs font-semibold transition" title="Quét lại dòng tiền thị trường">
+            <i data-lucide="refresh-cw" id="icon-refresh-radar" class="w-3.5 h-3.5"></i>
+            <span class="hidden sm:inline">Quét Lại</span>
+          </button>
+          <button onclick="toggleSmartMoneyModal()" class="text-gray-400 hover:text-white p-1.5 rounded-lg hover:bg-gray-800 transition">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
       </div>
 
       <!-- Radar Content / Table -->
@@ -1078,17 +1089,36 @@
       // Periodically poll tunnel status until link is resolved
       setInterval(fetchTunnelStatus, 8000);
       setInterval(fetchIndices, 6000); // 6s live market indices refresh
+      setInterval(() => fetchTopPicks(false), 30000); // 30s background live price update for recommendations
     });
 
     // 0. Fetch & Filter Top 5 AI Picks (Sóng Elliott + Ichimoku Mochi + Deep Learning)
-    async function fetchTopPicks() {
+    async function fetchTopPicks(forceRefresh = false) {
+      const icon = document.getElementById('icon-refresh-picks');
+      if (forceRefresh && icon) {
+        icon.classList.add('animate-spin');
+      }
       try {
-        const res = await fetch('/api/top-picks');
+        const url = forceRefresh ? '/api/top-picks?refresh=true' : '/api/top-picks';
+        const res = await fetch(url);
         topPicksData = await res.json();
+        
+        const timeBadge = document.getElementById('top-picks-timestamp');
+        if (timeBadge && topPicksData && topPicksData.updated_at) {
+          timeBadge.innerText = `Cập nhật: ${topPicksData.updated_at}`;
+          timeBadge.classList.remove('hidden');
+        }
         renderTopPicksUI();
       } catch (e) {
         console.error('Error fetching top picks:', e);
+      } finally {
+        if (icon) icon.classList.remove('animate-spin');
+        if (typeof lucide !== 'undefined') lucide.createIcons();
       }
+    }
+
+    async function refreshTopPicks() {
+      await fetchTopPicks(true);
     }
 
     function setTopPicksHorizon(horizon) {
@@ -2375,11 +2405,14 @@
       }
     }
 
-    async function loadSmartMoneyRadar() {
+    async function loadSmartMoneyRadar(forceRefresh = false) {
       const container = document.getElementById('smart-money-radar-table-container');
+      const icon = document.getElementById('icon-refresh-radar');
       if (!container) return;
+      if (forceRefresh && icon) icon.classList.add('animate-spin');
       try {
-        const res = await fetch('/api/market/smart-money-radar');
+        const url = forceRefresh ? '/api/market/smart-money-radar?refresh=true' : '/api/market/smart-money-radar';
+        const res = await fetch(url);
         const list = await res.json();
         if (!list || list.length === 0) {
           container.innerHTML = '<div class="text-center py-8 text-gray-400 text-xs italic">Không tìm thấy dữ liệu dòng tiền lớn.</div>';
